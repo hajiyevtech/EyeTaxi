@@ -6,8 +6,16 @@
         xmlns:local="clr-namespace:EyeTaxi.Views"
         xmlns:gmap="clr-namespace:GMap.NET.WindowsPresentation;assembly=GMap.NET.WindowsPresentation"
         mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
         Title="MainView" Height="450" Width="800">
     <Grid>
-        <gmap:GMapControl Name="GMap"></gmap:GMapControl>
+        <Button Width="250" >Test</Button>
     </Grid>
 </Window>

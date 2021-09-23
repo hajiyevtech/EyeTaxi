@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using GMap.NET;
 using GMap.NET.MapProviders;
 
 namespace EyeTaxi.Views
@@ -18,21 +19,11 @@ namespace EyeTaxi.Views
     /// <summary>
     /// Interaction logic for MainView.xaml
     /// </summary>
-    public partial class MainView : Window
+    public partial class MainView
     {
         public MainView()
         {
             InitializeComponent();
-            GMapProviders.GoogleMap.ApiKey = "AIzaSyBp1BJjLc5VZbc4rloZtrikPZ5NbifPST0";
-            GMaps.Instance.Mode = AccessMode.ServerAndCache;
-
-            GMap.MapProvider = GMapProviders.GoogleMap;
-            GMap.MinZoom = 5;
-            GMap.DragButton = MouseButton.Left;
-            GMap.CanDragMap = true;
-            GMap.IgnoreMarkerOnMouseWheel = false;
-            GMap.Zoom--;
-            GMap.Zoom++;
         }
     }
 }
