@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using GMap.NET;
 using GMap.NET.MapProviders;
+using Esri.ArcGISRuntime.Geometry;
+using Esri.ArcGISRuntime.Mapping;
 
 namespace EyeTaxi.Views
 {
@@ -24,6 +26,8 @@ namespace EyeTaxi.Views
         public MainView()
         {
             InitializeComponent();
+            MapPoint mapCenterPoint = new MapPoint(-118.805, 34.027, SpatialReferences.Wgs84);
+            MainMapView.SetViewpoint(new Viewpoint(mapCenterPoint, 100000));
         }
     }
 }
