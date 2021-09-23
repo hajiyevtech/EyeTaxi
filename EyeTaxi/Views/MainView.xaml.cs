@@ -23,8 +23,16 @@ namespace EyeTaxi.Views
         public MainView()
         {
             InitializeComponent();
+            GMapProviders.GoogleMap.ApiKey = "AIzaSyBp1BJjLc5VZbc4rloZtrikPZ5NbifPST0";
+            GMaps.Instance.Mode = AccessMode.ServerAndCache;
+
             GMap.MapProvider = GMapProviders.GoogleMap;
             GMap.MinZoom = 5;
+            GMap.DragButton = MouseButton.Left;
+            GMap.CanDragMap = true;
+            GMap.IgnoreMarkerOnMouseWheel = false;
+            GMap.Zoom--;
+            GMap.Zoom++;
         }
     }
 }
