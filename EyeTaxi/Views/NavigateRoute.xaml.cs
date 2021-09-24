@@ -16,6 +16,7 @@ using Color = System.Drawing.Color;
 using System.Speech.Synthesis;
 using System.Windows.Input;
 using Point = System.Windows.Point;
+using Esri.ArcGISRuntime.Portal;
 
 namespace EyeTaxi.Views
 {
@@ -62,8 +63,20 @@ namespace EyeTaxi.Views
                 // Add event handler for when this sample is unloaded.
                 Unloaded += SampleUnloaded;
 
+                // Create a portal. If a URI is not specified, www.arcgis.com is used by default.
+                ArcGISPortal portal = await ArcGISPortal.CreateAsync();
+
+                // Get the portal item for a web map using its unique item id.
+                PortalItem mapItem = await PortalItem.CreateAsync(portal, "41281c51f9de45edaf1c8ed44bb10e30");
+
+                // Create the map from the item.
+                Map map = new Map(mapItem);
+
+                map.InitialViewpoint = new Viewpoint(40.409264, 49.867092, 100000);
+                map.Basemap = Basemap.CreateOpenStreetMap();
+
                 // Create the map view.
-                MyMapView.Map = new Map(BasemapStyle.ArcGISNavigation);
+                MyMapView.Map = map;
 
                 // Create the route task, using the online routing service.
                 RouteTask routeTask = await RouteTask.CreateAsync(_routingUri);
