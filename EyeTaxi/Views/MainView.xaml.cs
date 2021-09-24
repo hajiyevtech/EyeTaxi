@@ -51,7 +51,8 @@ namespace EyeTaxi.Views
             //MapPoint mapPoint = new MapPoint(mousePoint.X, mousePoint.Y);
             var pointo = MainMapView.ScreenToLocation(mousePoint);
             
-            MessageBox.Show(MainMapView.ScreenToLocation(mousePoint).ToString());
+
+            MessageBox.Show(MainMapView.ScreenToLocation(mousePoint).ToString(),"Hello",MessageBoxButton.YesNoCancel,MessageBoxImage.Stop);
 
         }
     }

@@ -14,6 +14,8 @@ using Esri.ArcGISRuntime.UI;
 using System.Drawing;
 using Color = System.Drawing.Color;
 using System.Speech.Synthesis;
+using System.Windows.Input;
+using Point = System.Windows.Point;
 
 namespace EyeTaxi.Views
 {
@@ -39,10 +41,10 @@ namespace EyeTaxi.Views
         private Graphic _routeTraveledGraphic;
 
         // firstPoint.
-        private readonly MapPoint _firstPoint = new MapPoint(50.08393079615436, 40.469956384954855, SpatialReferences.Wgs84);
+        private readonly MapPoint _firstPoint = new MapPoint(5571783.59037844, 4933881.61886646, SpatialReferences.WebMercator);
 
         // secondPoint.
-        private readonly MapPoint _secondPoint = new MapPoint(49.80956017763163, 40.378364607401394, SpatialReferences.Wgs84);
+        private readonly MapPoint _secondPoint = new MapPoint(5549603.62447322, 4924224.8532453, SpatialReferences.WebMercator);
 
         // Feature service for routing in World.
         private readonly Uri _routingUri = new Uri("https://route-api.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World");
@@ -73,7 +75,7 @@ namespace EyeTaxi.Views
                 routeParams.ReturnDirections = true;
                 routeParams.ReturnStops = true;
                 routeParams.ReturnRoutes = true;
-                routeParams.OutputSpatialReference = SpatialReferences.Wgs84;
+                routeParams.OutputSpatialReference = SpatialReferences.WebMercator;
 
                 // Create stops for each location.
                 Stop stop1 = new Stop(_firstPoint);
@@ -241,6 +243,18 @@ namespace EyeTaxi.Views
 
             // Stop the location data source.
             MyMapView.LocationDisplay?.DataSource?.StopAsync();
+        }
+
+        private void MyMapView_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            Point mousePoint = Mouse.GetPosition(MyMapView);
+            //MainMapView.ScreenToLocation(mousePoint);
+            //MapPoint mapPoint = new MapPoint(mousePoint.X, mousePoint.Y);
+            var pointo = MyMapView.ScreenToLocation(mousePoint);
+
+            //MessageBox.Show(MyMapView.ScreenToLocation(mousePoint).ToString(), "Hello", MessageBoxButton.YesNoCancel, MessageBoxImage.Stop);
+
+
         }
     }
 

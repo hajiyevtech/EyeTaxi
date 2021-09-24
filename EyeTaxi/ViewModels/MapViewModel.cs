@@ -68,13 +68,12 @@ namespace EyeTaxi.ViewModels
 
             // Get the portal item for a web map using its unique item id.
             PortalItem mapItem = await PortalItem.CreateAsync(portal, "41281c51f9de45edaf1c8ed44bb10e30");
-
+           
             // Create the map from the item.
             Map map = new Map(mapItem);
             //Map map = new Map(SpatialReference.Create(4326));
-            
 
-            
+
             map.InitialViewpoint = new Viewpoint(40.409264, 49.867092, 100000);
             map.Basemap = Basemap.CreateOpenStreetMap();
 

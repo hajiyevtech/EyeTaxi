@@ -7,7 +7,7 @@
              xmlns:esri="http://schemas.esri.com/arcgis/runtime/2013"
              mc:Ignorable="d">
     <Grid>
-        <esri:MapView x:Name="MyMapView" />
+        <esri:MapView x:Name="MyMapView" MouseLeftButtonDown="MyMapView_MouseLeftButtonDown" />
         <Border>
             <Grid>
                 <Grid.RowDefinitions>
