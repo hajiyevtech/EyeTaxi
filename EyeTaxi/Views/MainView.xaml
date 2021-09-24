@@ -20,8 +20,9 @@
     <Window.Resources>
         <viewModels:MapViewModel x:Key="MapViewModel" />
     </Window.Resources>
-    <Grid>
-        <esri:MapView x:Name="MainMapView"
-                      Map="{Binding Map, Source={StaticResource MapViewModel}}" />
+    <Grid Name="Mapo">
+        <Button Click="Button_Click">Click</Button>
+        <!--<esri:MapView x:Name="MainMapView"
+                      Map="{Binding Map, Source={StaticResource MapViewModel}}" />-->
     </Grid>
 </Window>

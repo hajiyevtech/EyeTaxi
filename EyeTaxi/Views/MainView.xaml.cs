@@ -27,7 +27,13 @@ namespace EyeTaxi.Views
         {
             InitializeComponent();
             MapPoint mapCenterPoint = new MapPoint(-118.805, 34.027, SpatialReferences.Wgs84);
-            MainMapView.SetViewpoint(new Viewpoint(mapCenterPoint, 100000));
+            //MainMapView.SetViewpoint(new Viewpoint(mapCenterPoint, 100000));
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            NavigateRoute navigateRoute= new NavigateRoute();
+            Mapo.Children.Add(navigateRoute);
         }
     }
 }
