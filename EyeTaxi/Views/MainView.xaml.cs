@@ -46,9 +46,11 @@ namespace EyeTaxi.Views
 
         private void MainMapView_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Point mousePoint = Mouse.GetPosition(this);
-            MainMapView.ScreenToLocation(mousePoint);
+            Point mousePoint = Mouse.GetPosition(MainMapView);
+            //MainMapView.ScreenToLocation(mousePoint);
             //MapPoint mapPoint = new MapPoint(mousePoint.X, mousePoint.Y);
+            var pointo = MainMapView.ScreenToLocation(mousePoint);
+            
             MessageBox.Show(MainMapView.ScreenToLocation(mousePoint).ToString());
 
         }

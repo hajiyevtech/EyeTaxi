@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using Esri.ArcGISRuntime.Portal;
 using Esri.ArcGISRuntime.Geometry;
 using System.Windows;
+using System;
 
 namespace EyeTaxi.ViewModels
 {
@@ -70,6 +71,10 @@ namespace EyeTaxi.ViewModels
 
             // Create the map from the item.
             Map map = new Map(mapItem);
+            //Map map = new Map(SpatialReference.Create(4326));
+            
+
+            
             map.InitialViewpoint = new Viewpoint(40.409264, 49.867092, 100000);
             map.Basemap = Basemap.CreateOpenStreetMap();
 
