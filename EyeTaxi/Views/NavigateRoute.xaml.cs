@@ -38,13 +38,13 @@ namespace EyeTaxi.Views
         private Graphic _routeAheadGraphic;
         private Graphic _routeTraveledGraphic;
 
-        // Aeroport.
-        private readonly MapPoint _airLine = new MapPoint(50.052230, 40.465113, SpatialReferences.Wgs84);
+        // firstPoint.
+        private readonly MapPoint _firstPoint = new MapPoint(50.08393079615436, 40.469956384954855, SpatialReferences.Wgs84);
 
-        // RH Fleet Aerospace Museum.
-        private readonly MapPoint _icheriSheher = new MapPoint(49.834995, 40.366240, SpatialReferences.Wgs84);
+        // secondPoint.
+        private readonly MapPoint _secondPoint = new MapPoint(49.80956017763163, 40.378364607401394, SpatialReferences.Wgs84);
 
-        // Feature service for routing in San Diego.
+        // Feature service for routing in World.
         private readonly Uri _routingUri = new Uri("https://route-api.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World");
 
         public NavigateRoute()
@@ -76,11 +76,11 @@ namespace EyeTaxi.Views
                 routeParams.OutputSpatialReference = SpatialReferences.Wgs84;
 
                 // Create stops for each location.
-                Stop stop1 = new Stop(_airLine) { Name = "GYD" };
-                Stop stop3 = new Stop(_icheriSheher) { Name = "Iceri Seher" };
+                Stop stop1 = new Stop(_firstPoint);
+                Stop stop2 = new Stop(_secondPoint);
 
                 // Assign the stops to the route parameters.
-                List<Stop> stopPoints = new List<Stop> { stop1, stop3 };
+                List<Stop> stopPoints = new List<Stop> { stop1, stop2 };
                 routeParams.SetStops(stopPoints);
 
                 // Get the route results.
@@ -91,9 +91,9 @@ namespace EyeTaxi.Views
                 MyMapView.GraphicsOverlays.Add(new GraphicsOverlay());
 
                 // Add graphics for the stops.
-                SimpleMarkerSymbol stopSymbol = new SimpleMarkerSymbol(SimpleMarkerSymbolStyle.Diamond, System.Drawing.Color.OrangeRed, 20);
-                MyMapView.GraphicsOverlays[0].Graphics.Add(new Graphic(_airLine, stopSymbol));
-                MyMapView.GraphicsOverlays[0].Graphics.Add(new Graphic(_icheriSheher, stopSymbol));
+                SimpleMarkerSymbol stopSymbol = new SimpleMarkerSymbol(SimpleMarkerSymbolStyle.Diamond, Color.OrangeRed, 20);
+                MyMapView.GraphicsOverlays[0].Graphics.Add(new Graphic(_firstPoint, stopSymbol));
+                MyMapView.GraphicsOverlays[0].Graphics.Add(new Graphic(_secondPoint, stopSymbol));
 
                 // Create a graphic (with a dashed line symbol) to represent the route.
                 _routeAheadGraphic = new Graphic(_route.RouteGeometry) { Symbol = new SimpleLineSymbol(SimpleLineSymbolStyle.Dash, Color.BlueViolet, 5) };
@@ -137,7 +137,7 @@ namespace EyeTaxi.Views
             MyMapView.LocationDisplay.AutoPanModeChanged += AutoPanModeChanged;
 
             // Add a data source for the location display.
-            var simulationParameters = new SimulationParameters(DateTimeOffset.Now, 200);
+            var simulationParameters = new SimulationParameters(DateTimeOffset.Now, 40);
             var simulatedDataSource = new SimulatedLocationDataSource();
             simulatedDataSource.SetLocationsWithPolyline(_route.RouteGeometry, simulationParameters);
             MyMapView.LocationDisplay.DataSource = new RouteTrackerDisplayLocationDataSource(simulatedDataSource, _tracker);
@@ -165,6 +165,7 @@ namespace EyeTaxi.Views
 
                 statusMessageBuilder.AppendLine("Time remaining: " +
                                                 status.RouteProgress.RemainingTime.ToString(@"hh\:mm\:ss"));
+
 
                 if (status.CurrentManeuverIndex + 1 < _directionsList.Count)
                 {

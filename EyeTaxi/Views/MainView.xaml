@@ -16,13 +16,12 @@
         TextOptions.TextRenderingMode="Auto"        
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="MainView" Height="450" Width="800">
+        Title="MainView" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <viewModels:MapViewModel x:Key="MapViewModel" />
     </Window.Resources>
     <Grid Name="Mapo">
-        <Button Click="Button_Click">Click</Button>
-        <!--<esri:MapView x:Name="MainMapView"
-                      Map="{Binding Map, Source={StaticResource MapViewModel}}" />-->
+        <!--<Button Width="150" Click="Button_Click">Click</Button>-->
+        <esri:MapView x:Name="MainMapView" Map="{Binding Map, Source={StaticResource MapViewModel}}" MouseLeftButtonDown="MainMapView_MouseLeftButtonDown"/>
     </Grid>
 </Window>
