@@ -54,5 +54,10 @@ namespace EyeTaxi.Views
             MessageBox.Show(MainMapView.ScreenToLocation(mousePoint).ToString(),"Hello",MessageBoxButton.YesNoCancel,MessageBoxImage.Stop);
 
         }
+
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

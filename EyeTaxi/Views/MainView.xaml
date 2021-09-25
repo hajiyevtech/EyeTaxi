@@ -6,6 +6,7 @@
         xmlns:esri="http://schemas.esri.com/arcgis/runtime/2013"
         xmlns:local="clr-namespace:EyeTaxi.Views"
         xmlns:gmap="clr-namespace:GMap.NET.WindowsPresentation;assembly=GMap.NET.WindowsPresentation"
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:viewModels="clr-namespace:EyeTaxi.ViewModels"
@@ -24,8 +25,14 @@
     <Window.Resources>
         <viewModels:MapViewModel x:Key="MapViewModel" />
     </Window.Resources>
-    <Grid>
-        <esri:MapView x:Name="MainMapView" Map="{Binding Map, Source={StaticResource MapViewModel}}" />
-        <Button Width="150" Command="{Binding NavigateCommand}">Start</Button>
+    <Grid Name="mestan">
+        <b:Interaction.Triggers>
+            <b:EventTrigger EventName="Loaded">
+                <b:InvokeCommandAction Command="{Binding GetMapGridCommand}" CommandParameter="{Binding ElementName=mestan}"/>
+            </b:EventTrigger>
+        </b:Interaction.Triggers>
+
+        <esri:MapView x:Name="MainMapView" Map="{Binding Map, Source={StaticResource MapViewModel}}"/>
+        <Button Width="150" Command="{Binding NavigateCommand}"></Button>
     </Grid>
 </Window>
