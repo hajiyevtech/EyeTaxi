@@ -36,11 +36,6 @@ namespace EyeTaxi.Views
             MainMapView.LocationDisplay.IsEnabled = true;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
 
 
         private void MainMapView_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -55,9 +50,5 @@ namespace EyeTaxi.Views
 
         }
 
-        private void Grid_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

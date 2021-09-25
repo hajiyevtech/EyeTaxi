@@ -7,13 +7,14 @@
              xmlns:esri="http://schemas.esri.com/arcgis/runtime/2013" xmlns:b="http://schemas.microsoft.com/xaml/behaviors" xmlns:viewModels="clr-namespace:EyeTaxi.ViewModels"
              mc:Ignorable="d">
     <UserControl.DataContext>
-        <viewModels:MainViewModel></viewModels:MainViewModel>
+        <viewModels:NavigateRouteViewModel>
+            </viewModels:NavigateRouteViewModel>
     </UserControl.DataContext>
     <Grid>
         <esri:MapView x:Name="MyMapView">
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="MouseLeftButtonDown">
-                    <b:InvokeCommandAction Command="{Binding LeftButtonCommand}" CommandParameter="{Binding ElementName=MyMapView}"/>
+                    <b:InvokeCommandAction Command="{Binding MapViewCommand}" CommandParameter="{Binding ElementName=MyMapView}"/>
                 </b:EventTrigger>
             </b:Interaction.Triggers>
         </esri:MapView>
@@ -30,22 +31,22 @@
                     </Grid.ColumnDefinitions>
                     <Button
                         x:Name="StartNavigationButton"
+                        IsEnabled="{Binding StartNavigationButtonIsEnabled,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                         Grid.Column="0"
                         Margin="5"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Center"
                         Click="StartNavigation"
-                        Content="Navigate route"
-                        IsEnabled="False" />
+                        Content="Navigate route"/>
                     <Button
+                        IsEnabled="{Binding RecenterButtonIsEnabled,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                         x:Name="RecenterButton"
                         Grid.Column="1"
                         Margin="5"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Center"
                         Click="RecenterButton_Click"
-                        Content="Recenter"
-                        IsEnabled="False" />
+                        Content="Recenter" />
                 </Grid>
                 <TextBlock
                     x:Name="MessagesTextBlock"
