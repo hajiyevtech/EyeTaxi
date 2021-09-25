@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using Esri.ArcGISRuntime.Geometry;
 using Esri.ArcGISRuntime.Location;
 using Esri.ArcGISRuntime.Mapping;
@@ -11,22 +10,28 @@ using Esri.ArcGISRuntime.Navigation;
 using Esri.ArcGISRuntime.Symbology;
 using Esri.ArcGISRuntime.Tasks.NetworkAnalysis;
 using Esri.ArcGISRuntime.UI;
-using System.Drawing;
 using Color = System.Drawing.Color;
 using System.Speech.Synthesis;
+using Esri.ArcGISRuntime.Portal;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using Esri.ArcGISRuntime.UI.Controls;
+using EyeTaxi.Command;
+using System.Windows.Threading;
 using System.Windows.Input;
 using Point = System.Windows.Point;
-using Esri.ArcGISRuntime.Portal;
-using Esri.ArcGISRuntime.UI.Controls;
-using System.Windows.Threading;
+using System.Drawing;
+using System.Windows.Media;
 
 namespace EyeTaxi.ViewModels
 {
-    public class NagivateRouteViewModel
+    class NavigateRouteViewModel : INotifyPropertyChanged
     {
 
-        // Variables for tracking the navigation route.
+
         private RouteTracker _tracker;
+
+
         private RouteResult _routeResult;
         private Route _route;
 
@@ -41,30 +46,66 @@ namespace EyeTaxi.ViewModels
         private Graphic _routeTraveledGraphic;
 
         // firstPoint.
-        private readonly MapPoint _firstPoint = new MapPoint(5571783.59037844, 4933881.61886646, SpatialReferences.WebMercator);
+        private MapPoint _firstPoint = new MapPoint(5571783.59037844, 4933881.61886646, SpatialReferences.WebMercator);
 
         // secondPoint.
-        private readonly MapPoint _secondPoint = new MapPoint(5549603.62447322, 4924224.8532453, SpatialReferences.WebMercator);
+        private MapPoint _secondPoint = new MapPoint(5549603.62447322, 4924224.8532453, SpatialReferences.WebMercator);
 
         // Feature service for routing in World.
         private readonly Uri _routingUri = new Uri("https://route-api.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World");
 
-        public Button StartNavigationButton { get; set; }
-        public MapView MyMapView { get; set; }
-        public NagivateRouteViewModel(MapView map,Button Start,Button ReCenter)
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyRaised([CallerMemberName] string propertyname = null)
         {
-
-            MyMapView = map;
-
-            StartNavigationButton=Start;
-
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyname));
+            }
         }
+        public MapView MyMapView { get; set; }
+
+        private bool _StartNavigationButtonIsEnabled;
+
+        public bool StartNavigationButtonIsEnabled
+        {
+            get { return _StartNavigationButtonIsEnabled; }
+            set { _StartNavigationButtonIsEnabled = value; OnPropertyRaised(); }
+        }
+
+        private bool _RecenterButtonIsEnabled;
+
+        public bool RecenterButtonIsEnabled
+        {
+            get { return _RecenterButtonIsEnabled; }
+            set { _RecenterButtonIsEnabled = value; OnPropertyRaised(); }
+        }
+
+        private string _MessagesTextBlockText;
+
+        public string MessagesTextBlockText
+        {
+            get { return _MessagesTextBlockText; }
+            set { _MessagesTextBlockText = value; OnPropertyRaised(); }
+        }
+
+
+        public RelayCommand MapViewCommand { get; set; }
+        public NavigateRouteViewModel()
+        {
+            MapViewCommand = new RelayCommand(s =>
+            {
+                MyMapView = s as MapView;
+            }, p => true);
+
+            Initialize();
+        }
+
         private async void Initialize()
         {
             try
             {
                 // Add event handler for when this sample is unloaded.
-                Unloaded += SampleUnloaded;
+                //Unloaded += SampleUnloaded;
 
                 // Create a portal. If a URI is not specified, www.arcgis.com is used by default.
                 ArcGISPortal portal = await ArcGISPortal.CreateAsync();
@@ -127,7 +168,7 @@ namespace EyeTaxi.ViewModels
                 await MyMapView.SetViewpointGeometryAsync(_route.RouteGeometry, 100);
 
                 // Enable the navigation button.
-                StartNavigationButton.IsEnabled = true;
+                StartNavigationButtonIsEnabled = true;
             }
             catch (Exception e)
             {
@@ -138,7 +179,7 @@ namespace EyeTaxi.ViewModels
         private void StartNavigation(object sender, RoutedEventArgs e)
         {
             // Disable the start navigation button.
-            StartNavigationButton.IsEnabled = false;
+            StartNavigationButtonIsEnabled = false;
 
             // Get the directions for the route.
             _directionsList = _route.DirectionManeuvers;
@@ -209,19 +250,19 @@ namespace EyeTaxi.ViewModels
                 }
                 else
                 {
-                    Dispatcher.BeginInvoke((Action)delegate ()
-                    {
-                        // Stop the simulated location data source.
-                        MyMapView.LocationDisplay.DataSource.StopAsync();
-                    });
+                    //Dispatcher.BeginInvoke((Action)delegate ()
+                    //{
+                    //    // Stop the simulated location data source.
+                    //    MyMapView.LocationDisplay.DataSource.StopAsync();
+                    //});
                 }
             }
 
-            Dispatcher.BeginInvoke((Action)delegate ()
-            {
-                // Show the status information in the UI.
-                MessagesTextBlock.Text = statusMessageBuilder.ToString();
-            });
+            //Dispatcher.BeginInvoke((Action)delegate ()
+            //{
+            //    // Show the status information in the UI.
+            //    MessagesTextBlockText = statusMessageBuilder.ToString();
+            //});
         }
 
         private void SpeakDirection(object sender, RouteTrackerNewVoiceGuidanceEventArgs e)
@@ -234,7 +275,7 @@ namespace EyeTaxi.ViewModels
         private void AutoPanModeChanged(object sender, LocationDisplayAutoPanMode e)
         {
             // Turn the recenter button on or off when the location display changes to or from navigation mode.
-            RecenterButton.IsEnabled = e != LocationDisplayAutoPanMode.Navigation;
+            RecenterButtonIsEnabled = e != LocationDisplayAutoPanMode.Navigation;
         }
 
         private void RecenterButton_Click(object sender, RoutedEventArgs e)
@@ -259,18 +300,6 @@ namespace EyeTaxi.ViewModels
 
             // Stop the location data source.
             MyMapView.LocationDisplay?.DataSource?.StopAsync();
-        }
-
-        private void MyMapView_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            Point mousePoint = Mouse.GetPosition(MyMapView);
-            //MainMapView.ScreenToLocation(mousePoint);
-            //MapPoint mapPoint = new MapPoint(mousePoint.X, mousePoint.Y);
-            var pointo = MyMapView.ScreenToLocation(mousePoint);
-
-            //MessageBox.Show(MyMapView.ScreenToLocation(mousePoint).ToString(), "Hello", MessageBoxButton.YesNoCancel, MessageBoxImage.Stop);
-
-
         }
     }
 
