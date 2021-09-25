@@ -73,6 +73,12 @@ namespace EyeTaxi.ViewModels
             Map map = new Map(mapItem);
             //Map map = new Map(SpatialReference.Create(4326));
 
+            var temp = new Map();
+
+            var st = "salam";
+
+
+            var sss = "new commit";
 
             map.InitialViewpoint = new Viewpoint(40.409264, 49.867092, 100000);
             map.Basemap = Basemap.CreateOpenStreetMap();
