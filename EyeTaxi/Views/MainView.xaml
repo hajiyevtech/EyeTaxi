@@ -22,6 +22,7 @@
     </Window.Resources>
     <Grid Name="Mapo">
         <esri:MapView x:Name="MainMapView" Map="{Binding Map, Source={StaticResource MapViewModel}}" />
-        <Button Width="150" Click="Button_Click">Click</Button>
+        <Button Width="150" Click="Button_Click">Start</Button>
+        <Button Width="150" HorizontalAlignment ="Left" Click="Button_Click">Salam</Button>
     </Grid>
 </Window>
