@@ -85,6 +85,8 @@ namespace EyeTaxi.ViewModels
 
 
         public RelayCommand MapViewCommand { get; set; }
+        public RelayCommand StartNavigationButtonCommand { get; set; }
+        public RelayCommand RecenterButtonCommand { get; set; }
         public NavigateRouteViewModel()
         {
             MapViewCommand = new RelayCommand(s =>
@@ -92,6 +94,11 @@ namespace EyeTaxi.ViewModels
                 MyMapView = s as MapView;
             }, p => true);
 
+            RecenterButtonCommand = new RelayCommand(s =>
+            {
+                MyMapView.LocationDisplay.AutoPanMode = LocationDisplayAutoPanMode.Navigation;
+            });
+            StartNavigationButtonCommand = new RelayCommand(StartNavigation);
             Initialize();
         }
 
@@ -171,7 +178,7 @@ namespace EyeTaxi.ViewModels
             }
         }
 
-        private void StartNavigation(object sender, RoutedEventArgs e)
+        private void StartNavigation(object sender)
         {
             // Disable the start navigation button.
             StartNavigationButtonIsEnabled = false;
@@ -245,19 +252,19 @@ namespace EyeTaxi.ViewModels
                 }
                 else
                 {
-                    //Dispatcher.BeginInvoke((Action)delegate ()
-                    //{
-                    //    // Stop the simulated location data source.
-                    //    MyMapView.LocationDisplay.DataSource.StopAsync();
-                    //});
+                    Dispatcher.BeginInvoke((Action)delegate ()
+                    {
+                        // Stop the simulated location data source.
+                        MyMapView.LocationDisplay.DataSource.StopAsync();
+                    });
                 }
             }
 
-            //Dispatcher.BeginInvoke((Action)delegate ()
-            //{
-            //    // Show the status information in the UI.
-            //    MessagesTextBlockText = statusMessageBuilder.ToString();
-            //});
+            Dispatcher.BeginInvoke((Action)delegate ()
+            {
+                // Show the status information in the UI.
+                MessagesTextBlockText = statusMessageBuilder.ToString();
+            });
         }
 
         private void SpeakDirection(object sender, RouteTrackerNewVoiceGuidanceEventArgs e)
@@ -273,12 +280,7 @@ namespace EyeTaxi.ViewModels
             RecenterButtonIsEnabled = e != LocationDisplayAutoPanMode.Navigation;
         }
 
-        private void RecenterButton_Click(object sender, RoutedEventArgs e)
-        {
-            // Change the mapview to use navigation mode.
-            MyMapView.LocationDisplay.AutoPanMode = LocationDisplayAutoPanMode.Navigation;
-        }
-
+      
         private void SampleUnloaded(object sender, RoutedEventArgs e)
         {
             // Stop the speech synthesizer.
