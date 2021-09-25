@@ -20,7 +20,7 @@ using EyeTaxi.Command;
 
 namespace EyeTaxi.ViewModels
 {
-    class NavigateRouteViewModel : INotifyPropertyChanged
+    public class NavigateRouteViewModel : INotifyPropertyChanged
     {
 
 
@@ -100,6 +100,15 @@ namespace EyeTaxi.ViewModels
             });
             StartNavigationButtonCommand = new RelayCommand(StartNavigation);
             Initialize();
+
+
+
+            Dispatcher.BeginInvoke((Action)delegate ()
+            {
+                // Stop the simulated location data source.
+                MyMapView.LocationDisplay.DataSource.StopAsync();
+            });
+
         }
 
         private async void Initialize()

@@ -26,6 +26,17 @@ namespace EyeTaxi.Views
         public MainView()
         {
             InitializeComponent();
+
+
+
+            
+            Dispatcher.BeginInvoke((Action)delegate ()
+            {
+                // Stop the simulated location data source.
+                MyMapView.LocationDisplay.DataSource.StopAsync();
+            });
+
+
             //MainMapView.SetViewpoint(new Viewpoint(40.409264, 49.867092, 100000));
             MainMapView.IsAttributionTextVisible = false;
             //MapPoint mapCenterPoint = new MapPoint(0, 0, SpatialReferences.Wgs84);
