@@ -17,11 +17,15 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         Title="MainView" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <viewModels:MainViewModel></viewModels:MainViewModel>
+    </Window.DataContext>
+
     <Window.Resources>
         <viewModels:MapViewModel x:Key="MapViewModel" />
     </Window.Resources>
-    <Grid Name="Mapo">
+    <Grid>
         <esri:MapView x:Name="MainMapView" Map="{Binding Map, Source={StaticResource MapViewModel}}" />
-        <Button Width="150" Click="Button_Click">Start</Button>
+        <Button Width="150" Command="{Binding NavigateCommand}">Start</Button>
     </Grid>
 </Window>

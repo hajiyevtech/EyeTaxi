@@ -38,8 +38,7 @@ namespace EyeTaxi.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            NavigateRoute navigateRoute = new NavigateRoute();
-            Mapo.Children.Add(navigateRoute);
+            
         }
 
 
