@@ -224,8 +224,8 @@ namespace EyeTaxi.Views
         private void SpeakDirection(object sender, RouteTrackerNewVoiceGuidanceEventArgs e)
         {
             // Say the direction using voice synthesis.
-            _speechSynthesizer.SpeakAsyncCancelAll();
-            _speechSynthesizer.SpeakAsync(e.VoiceGuidance.Text);
+           // _speechSynthesizer.SpeakAsyncCancelAll();
+           // _speechSynthesizer.SpeakAsync(e.VoiceGuidance.Text);
         }
 
         private void AutoPanModeChanged(object sender, LocationDisplayAutoPanMode e)
