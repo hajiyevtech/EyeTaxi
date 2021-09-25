@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EyeTaxi.Command;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace EyeTaxi.ViewModels
 {
     public class MainViewModel
     {
+
     }
 }

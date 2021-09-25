@@ -10,25 +10,26 @@ namespace EyeTaxi.Command
 
     public class RelayCommand : ICommand
     {
-        public event EventHandler CanExecuteChanged
+        private Action<object> _execute { get; set; }
+        private Predicate<object> _CanExecute { get; set; }
+
+        public RelayCommand(Action<object> execute, Predicate<object> CanExecute = null)
         {
-            add { CommandManager.RequerySuggested += value; }
-            remove { CommandManager.RequerySuggested += value; }
+
+            if (execute is null) throw new NullReferenceException("Exetcute Null");
+
+            _execute = execute;
+
+            _CanExecute = CanExecute;
+
         }
 
-        private Action<object> _execute;
-        private Predicate<object> _canExecute;
+        public event EventHandler CanExecuteChanged;
 
-
-        public RelayCommand(Action<object> execute, Predicate<object> canExecute = null)
-        {
-            _execute = execute ?? throw new NullReferenceException("Execute is null");
-            _canExecute = canExecute;
-
-        }
         public bool CanExecute(object parameter)
         {
-            return _canExecute == null ? true : _canExecute.Invoke(parameter);
+            return _CanExecute is null ? true : _CanExecute(parameter);
+
         }
 
         public void Execute(object parameter)
