@@ -9,6 +9,6 @@ namespace EyeTaxi.ViewModels
 {
     public class MainViewModel
     {
-
+        public RelayCommand TestCommand { get; set; }
     }
 }
