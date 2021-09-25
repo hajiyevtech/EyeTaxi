@@ -11,16 +11,12 @@ namespace EyeTaxi.Command
     public class RelayCommand : ICommand
     {
         private Action<object> _execute { get; set; }
-        private Predicate<object> _CanExecute { get; set; }
+        private Predicate<object> _canExecute { get; set; }
 
-        public RelayCommand(Action<object> execute, Predicate<object> CanExecute = null)
+        public RelayCommand(Action<object> execute, Predicate<object> canExecute = null)
         {
-
-            if (execute is null) throw new NullReferenceException("Exetcute Null");
-
-            _execute = execute;
-
-            _CanExecute = CanExecute;
+            _execute = execute ?? throw new NullReferenceException("Execute is null");
+            _canExecute = canExecute;
 
         }
 
@@ -28,8 +24,7 @@ namespace EyeTaxi.Command
 
         public bool CanExecute(object parameter)
         {
-            return _CanExecute is null ? true : _CanExecute(parameter);
-
+            return _canExecute is null || _canExecute(parameter);
         }
 
         public void Execute(object parameter)
