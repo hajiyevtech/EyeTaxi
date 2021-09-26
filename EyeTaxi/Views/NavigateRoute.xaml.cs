@@ -25,22 +25,27 @@ namespace EyeTaxi.Views
     public partial class NavigateRoute : UserControl
     {
         // Variables for tracking the navigation route.
-
+        public static bool IsNagivateStart { get; set; } = true;
         public NavigateRoute(MapPoint mapPoint)
         {
             InitializeComponent();
             NavigateRouteViewModel.CommandCreatedObject._firstPoint = mapPoint;
-                //new MapPoint(5549147.485435362, 4921203.933289913, SpatialReferences.WebMercator);
+            //new MapPoint(5549147.485435362, 4921203.933289913, SpatialReferences.WebMercator);
             //NavigateRouteViewModel.CommandCreatedObject._secondPoint = new MapPoint(5549603.62447322, 4924224.8532453, SpatialReferences.WebMercator);
 
         }
 
         private void MyMapView_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Point mousePoint = Mouse.GetPosition(this);
+            if (IsNagivateStart)
+            {
+                Point mousePoint = Mouse.GetPosition(this);
 
-            NavigateRouteViewModel.CommandCreatedObject._firstPoint = MyMapView.ScreenToLocation(mousePoint);
-            NavigateRouteViewModel.CommandCreatedObject.Initialize();
+                NavigateRouteViewModel.MyMapView.GraphicsOverlays.Clear();
+
+                NavigateRouteViewModel.CommandCreatedObject._firstPoint = MyMapView.ScreenToLocation(mousePoint);
+                NavigateRouteViewModel.CommandCreatedObject.Initialize();
+            }
         }
     }
 }

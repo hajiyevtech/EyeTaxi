@@ -196,6 +196,7 @@ namespace EyeTaxi.ViewModels
 
         private void StartNavigation(object sender)
         {
+            NavigateRoute.IsNagivateStart = false;
             // Disable the start navigation button.
             StartNavigationButtonIsEnabled = false;
 
@@ -256,7 +257,6 @@ namespace EyeTaxi.ViewModels
             else if (status.DestinationStatus == DestinationStatus.Reached)
             {
                 statusMessageBuilder.AppendLine("Destination reached.");
-
                 // Set the route geometries to reflect the completed route.
                 _routeAheadGraphic.Geometry = null;
                 _routeTraveledGraphic.Geometry = status.RouteResult.Routes[0].RouteGeometry;
