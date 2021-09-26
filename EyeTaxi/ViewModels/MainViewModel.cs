@@ -34,6 +34,13 @@ namespace EyeTaxi.ViewModels
             NavigateCommand = new RelayCommand(a =>
             {
                 NavigateRoute navigateRoute = new NavigateRoute();
+
+
+
+                //Burdan pramoy Kordinatlari vere bilirik!!Gorursen Mestan Dagidiram buralari
+                //NavigateRouteViewModel.CommandCreatedObject._firstPoint;
+                //NavigateRouteViewModel.CommandCreatedObject._secondPoint;
+
                 Mapo.Children.Add(navigateRoute);
             }, p => true);
 
