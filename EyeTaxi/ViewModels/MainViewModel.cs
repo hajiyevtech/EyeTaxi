@@ -10,7 +10,7 @@ using System.Windows.Controls;
 
 namespace EyeTaxi.ViewModels
 {
-    public class MainViewModel
+    public  class MainViewModel
     {
         public RelayCommand NavigateCommand { get; set; }
         public RelayCommand LeftButtonCommand { get; set; }
@@ -18,6 +18,13 @@ namespace EyeTaxi.ViewModels
         public Grid Mapo { get; set; }
         public MainViewModel()
         {
+
+            // ba burda error verire amma get View/MainView.xaml.cs e bax ordada qoymusam vermir
+            Dispatcher.BeginInvoke((Action)delegate ()
+            {
+                // Stop the simulated location data source.
+                //MyMapView.LocationDisplay.DataSource.StopAsync();
+            });
 
             GetMapGridCommand = new RelayCommand(s =>
             {
@@ -33,6 +40,8 @@ namespace EyeTaxi.ViewModels
             LeftButtonCommand = new RelayCommand(s => {
                 MessageBox.Show("salam Mestan");
             }, e => { return true; });
+
+
 
         }
     }

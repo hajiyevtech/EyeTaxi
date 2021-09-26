@@ -41,10 +41,10 @@ namespace EyeTaxi.ViewModels
         private Graphic _routeTraveledGraphic;
 
         // firstPoint.
-        private MapPoint _firstPoint = new MapPoint(5571783.59037844, 4933881.61886646, SpatialReferences.WebMercator);
+        public MapPoint _firstPoint = new MapPoint(5571783.59037844, 4933881.61886646, SpatialReferences.WebMercator);
 
         // secondPoint.
-        private MapPoint _secondPoint = new MapPoint(5549603.62447322, 4924224.8532453, SpatialReferences.WebMercator);
+        public MapPoint _secondPoint = new MapPoint(5549603.62447322, 4924224.8532453, SpatialReferences.WebMercator);
 
         // Feature service for routing in World.
         private readonly Uri _routingUri = new Uri("https://route-api.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World");
@@ -57,7 +57,7 @@ namespace EyeTaxi.ViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyname));
             }
         }
-        public MapView MyMapView { get; set; }
+        static public MapView MyMapView { get; set; }
 
         private bool _StartNavigationButtonIsEnabled;
 
@@ -83,6 +83,7 @@ namespace EyeTaxi.ViewModels
             set { _MessagesTextBlockText = value; OnPropertyRaised(); }
         }
 
+        static public NavigateRouteViewModel CommandCreatedObject { get; set; }
 
         public RelayCommand MapViewCommand { get; set; }
         public RelayCommand StartNavigationButtonCommand { get; set; }
@@ -92,22 +93,17 @@ namespace EyeTaxi.ViewModels
             MapViewCommand = new RelayCommand(s =>
             {
                 MyMapView = s as MapView;
-            }, p => true);
+                Initialize();
+            });
 
             RecenterButtonCommand = new RelayCommand(s =>
             {
                 MyMapView.LocationDisplay.AutoPanMode = LocationDisplayAutoPanMode.Navigation;
             });
             StartNavigationButtonCommand = new RelayCommand(StartNavigation);
-            Initialize();
 
 
-
-            Dispatcher.BeginInvoke((Action)delegate ()
-            {
-                // Stop the simulated location data source.
-                MyMapView.LocationDisplay.DataSource.StopAsync();
-            });
+            CommandCreatedObject = this;
 
         }
 
@@ -116,7 +112,7 @@ namespace EyeTaxi.ViewModels
             try
             {
                 // Add event handler for when this sample is unloaded.
-                //Unloaded += SampleUnloaded;
+                MyMapView.Unloaded += SampleUnloaded;
 
                 // Create a portal. If a URI is not specified, www.arcgis.com is used by default.
                 ArcGISPortal portal = await ArcGISPortal.CreateAsync();
@@ -261,19 +257,19 @@ namespace EyeTaxi.ViewModels
                 }
                 else
                 {
-                    Dispatcher.BeginInvoke((Action)delegate ()
-                    {
-                        // Stop the simulated location data source.
-                        MyMapView.LocationDisplay.DataSource.StopAsync();
-                    });
+                    //Dispatcher.BeginInvoke((Action)delegate ()
+                    //{
+                    //    // Stop the simulated location data source.
+                    //    MyMapView.LocationDisplay.DataSource.StopAsync();
+                    //});
                 }
             }
 
-            Dispatcher.BeginInvoke((Action)delegate ()
-            {
-                // Show the status information in the UI.
-                MessagesTextBlockText = statusMessageBuilder.ToString();
-            });
+            //Dispatcher.BeginInvoke((Action)delegate ()
+            //{
+            //    // Show the status information in the UI.
+            //    MessagesTextBlockText = statusMessageBuilder.ToString();
+            //});
         }
 
         private void SpeakDirection(object sender, RouteTrackerNewVoiceGuidanceEventArgs e)
@@ -289,7 +285,7 @@ namespace EyeTaxi.ViewModels
             RecenterButtonIsEnabled = e != LocationDisplayAutoPanMode.Navigation;
         }
 
-      
+
         private void SampleUnloaded(object sender, RoutedEventArgs e)
         {
             // Stop the speech synthesizer.

@@ -29,11 +29,12 @@ namespace EyeTaxi.Views
 
 
 
-            
+
+            // ba burda error vermire amma get ViewModel/MainViewModel.cs e bax ordada qoymusam verir
             Dispatcher.BeginInvoke((Action)delegate ()
             {
                 // Stop the simulated location data source.
-                MyMapView.LocationDisplay.DataSource.StopAsync();
+                //MyMapView.LocationDisplay.DataSource.StopAsync();
             });
 
 
@@ -49,17 +50,7 @@ namespace EyeTaxi.Views
 
 
 
-        private void MainMapView_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            Point mousePoint = Mouse.GetPosition(MainMapView);
-            //MainMapView.ScreenToLocation(mousePoint);
-            //MapPoint mapPoint = new MapPoint(mousePoint.X, mousePoint.Y);
-            var pointo = MainMapView.ScreenToLocation(mousePoint);
-            
-
-            MessageBox.Show(MainMapView.ScreenToLocation(mousePoint).ToString(),"Hello",MessageBoxButton.YesNoCancel,MessageBoxImage.Stop);
-
-        }
+       
 
     }
 }
