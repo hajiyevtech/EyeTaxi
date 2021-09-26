@@ -173,10 +173,10 @@ namespace EyeTaxi.ViewModels
                 MyMapView.GraphicsOverlays[0].Graphics.Add(new Graphic(_secondPoint, stopSymbol));
 
                 // Create a graphic (with a dashed line symbol) to represent the route.
-                _routeAheadGraphic = new Graphic(_route.RouteGeometry) { Symbol = new SimpleLineSymbol(SimpleLineSymbolStyle.Dash, Color.BlueViolet, 5) };
+                _routeAheadGraphic = new Graphic(_route.RouteGeometry) { Symbol = new SimpleLineSymbol(SimpleLineSymbolStyle.Solid, Color.FromArgb(71,96,243), 5) };
 
                 // Create a graphic (solid) to represent the route that's been traveled (initially empty).
-                _routeTraveledGraphic = new Graphic { Symbol = new SimpleLineSymbol(SimpleLineSymbolStyle.Solid, Color.LightBlue, 3) };
+                _routeTraveledGraphic = new Graphic { Symbol = new SimpleLineSymbol(SimpleLineSymbolStyle.Solid, Color.FromArgb(163,175,249),3) };
 
                 // Add the route graphics to the map view.
                 MyMapView.GraphicsOverlays[0].Graphics.Add(_routeAheadGraphic);
