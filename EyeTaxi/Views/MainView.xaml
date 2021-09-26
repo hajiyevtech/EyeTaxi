@@ -28,6 +28,7 @@
     <Window.Resources>
         <viewModels:MapViewModel x:Key="MapViewModel" />
     </Window.Resources>
+
     <Grid Name="mestan">
         <b:Interaction.Triggers>
             <b:EventTrigger EventName="Loaded">
@@ -35,7 +36,40 @@
             </b:EventTrigger>
         </b:Interaction.Triggers>
 
-        <esri:MapView x:Name="MainMapView" Map="{Binding Map, Source={StaticResource MapViewModel}}" />
-        <Button Width="150" Command="{Binding NavigateCommand}" />
+        <esri:MapView x:Name="MainMapView" Map="{Binding Map, Source={StaticResource MapViewModel}}" IsAttributionTextVisible="False"/>
+        <Border>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock
+                    Text="Click the map to add up to 5 stops. Click again to finish placing it. Route lines will be displayed on-the-fly."
+                    Grid.Row="0" Grid.Column="0"
+                    FontWeight="SemiBold" TextWrapping="Wrap" />
+                <ComboBox x:Name="TravelModesCombo"
+                          Grid.Row="1"
+                          Margin="0,5,0,5">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Button Content="Reset"
+                        Grid.Row="2"
+                        Click="ResetButton_Click" />
+                <TextBlock x:Name="ErrorTextBlock"
+                           Grid.Row="3"
+                           TextWrapping="Wrap"
+                           Foreground="Red" />
+            </Grid>
+        </Border>
+
+
+
+        <Button Width="150" Command="{Binding NavigateCommand}" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
     </Grid>
 </Window>

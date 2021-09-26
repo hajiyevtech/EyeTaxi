@@ -25,19 +25,6 @@ namespace EyeTaxi.Views
         public MainView()
         {
             InitializeComponent();
-
-
-
-
-
-
-            //MainMapView.SetViewpoint(new Viewpoint(40.409264, 49.867092, 100000));
-            MainMapView.IsAttributionTextVisible = false;
-            //MapPoint mapCenterPoint = new MapPoint(0, 0, SpatialReferences.Wgs84);
-            //MainMapView.SetViewpoint(new Viewpoint(mapCenterPoint, 100000));
-            //MainMapView.SetViewpoint(new Viewpoint(40.409264, 49.867092, 100000));
-            //MainMapView.LocationDisplay.AutoPanMode = Esri.ArcGISRuntime.UI.LocationDisplayAutoPanMode.Recenter;
-
             MainMapView.LocationDisplay.IsEnabled = true;
         }
 
