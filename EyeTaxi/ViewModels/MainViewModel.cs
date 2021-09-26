@@ -30,7 +30,7 @@ namespace EyeTaxi.ViewModels
 
             NavigateCommand = new RelayCommand(a =>
             {
-                NavigateRoute navigateRoute = new NavigateRoute();
+                NavigateRoute navigateRoute = new NavigateRoute(MainView.MainViewMapPoint);
 
 
 

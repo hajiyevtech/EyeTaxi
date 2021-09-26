@@ -17,7 +17,7 @@
         </viewModels:NavigateRouteViewModel>
     </UserControl.DataContext>
     <Grid>
-        <esri:MapView x:Name="MyMapView" IsAttributionTextVisible="False">
+        <esri:MapView x:Name="MyMapView" IsAttributionTextVisible="False" MouseRightButtonDown="MyMapView_MouseRightButtonDown" >
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="Loaded">
                     <b:InvokeCommandAction Command="{Binding MapViewCommand}" CommandParameter="{Binding ElementName=MyMapView}"/>

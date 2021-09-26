@@ -22,15 +22,19 @@ namespace EyeTaxi.Views
     /// </summary>
     public partial class MainView
     {
+        public static MapPoint MainViewMapPoint { get; set; }
+
         public MainView()
         {
             InitializeComponent();
             MainMapView.LocationDisplay.IsEnabled = true;
         }
 
-
-
-       
-
+        private void MainMapView_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Point mousePoint = Mouse.GetPosition(this);
+            //MapPoint mapPoint = new MapPoint(mousePoint.X, mousePoint.Y);
+            MainViewMapPoint = MainMapView.ScreenToLocation(mousePoint);
+        }
     }
 }
