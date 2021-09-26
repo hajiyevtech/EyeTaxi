@@ -15,6 +15,7 @@ using GMap.NET;
 using GMap.NET.MapProviders;
 using Esri.ArcGISRuntime.Geometry;
 using Esri.ArcGISRuntime.Mapping;
+using EyeTaxi.ViewModels;
 
 namespace EyeTaxi.Views
 {
@@ -30,12 +31,6 @@ namespace EyeTaxi.Views
 
 
 
-            // ba burda error vermire amma get ViewModel/MainViewModel.cs e bax ordada qoymusam verir
-            Dispatcher.BeginInvoke((Action)delegate ()
-            {
-                // Stop the simulated location data source.
-                //MyMapView.LocationDisplay.DataSource.StopAsync();
-            });
 
 
             //MainMapView.SetViewpoint(new Viewpoint(40.409264, 49.867092, 100000));

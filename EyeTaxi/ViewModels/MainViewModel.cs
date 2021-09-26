@@ -1,4 +1,5 @@
-﻿using EyeTaxi.Command;
+﻿using Esri.ArcGISRuntime.Geometry;
+using EyeTaxi.Command;
 using EyeTaxi.Views;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace EyeTaxi.ViewModels
 {
@@ -19,12 +21,7 @@ namespace EyeTaxi.ViewModels
         public MainViewModel()
         {
 
-            // ba burda error verire amma get View/MainView.xaml.cs e bax ordada qoymusam vermir
-            Dispatcher.BeginInvoke((Action)delegate ()
-            {
-                // Stop the simulated location data source.
-                //MyMapView.LocationDisplay.DataSource.StopAsync();
-            });
+
 
             GetMapGridCommand = new RelayCommand(s =>
             {

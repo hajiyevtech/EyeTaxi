@@ -17,6 +17,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Esri.ArcGISRuntime.UI.Controls;
 using EyeTaxi.Command;
+using EyeTaxi.Views;
 
 namespace EyeTaxi.ViewModels
 {
@@ -42,6 +43,8 @@ namespace EyeTaxi.ViewModels
 
         // firstPoint.
         public MapPoint _firstPoint = new MapPoint(5571783.59037844, 4933881.61886646, SpatialReferences.WebMercator);
+
+        public NavigateRoute View { get; set; }
 
         // secondPoint.
         public MapPoint _secondPoint = new MapPoint(5549603.62447322, 4924224.8532453, SpatialReferences.WebMercator);
@@ -88,6 +91,7 @@ namespace EyeTaxi.ViewModels
         public RelayCommand MapViewCommand { get; set; }
         public RelayCommand StartNavigationButtonCommand { get; set; }
         public RelayCommand RecenterButtonCommand { get; set; }
+        public RelayCommand ViewLoadCommand { get; set; }
         public NavigateRouteViewModel()
         {
             MapViewCommand = new RelayCommand(s =>
@@ -100,7 +104,13 @@ namespace EyeTaxi.ViewModels
             {
                 MyMapView.LocationDisplay.AutoPanMode = LocationDisplayAutoPanMode.Navigation;
             });
+
             StartNavigationButtonCommand = new RelayCommand(StartNavigation);
+
+            ViewLoadCommand = new RelayCommand(s =>
+            {
+                View = s as NavigateRoute;
+            });
 
 
             CommandCreatedObject = this;
@@ -257,19 +267,19 @@ namespace EyeTaxi.ViewModels
                 }
                 else
                 {
-                    //Dispatcher.BeginInvoke((Action)delegate ()
-                    //{
-                    //    // Stop the simulated location data source.
-                    //    MyMapView.LocationDisplay.DataSource.StopAsync();
-                    //});
+                    View.Dispatcher.BeginInvoke((Action)delegate ()
+                    {
+                        // Stop the simulated location data source.
+                        MyMapView.LocationDisplay.DataSource.StopAsync();
+                    });
                 }
             }
 
-            //Dispatcher.BeginInvoke((Action)delegate ()
-            //{
-            //    // Show the status information in the UI.
-            //    MessagesTextBlockText = statusMessageBuilder.ToString();
-            //});
+            View.Dispatcher.BeginInvoke((Action)delegate ()
+            {
+                // Show the status information in the UI.
+                MessagesTextBlockText = statusMessageBuilder.ToString();
+            });
         }
 
         private void SpeakDirection(object sender, RouteTrackerNewVoiceGuidanceEventArgs e)
