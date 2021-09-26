@@ -37,7 +37,10 @@ namespace EyeTaxi.Views
 
         private void MyMapView_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            
+            Point mousePoint = Mouse.GetPosition(this);
+
+            NavigateRouteViewModel.CommandCreatedObject._firstPoint = MyMapView.ScreenToLocation(mousePoint);
+            NavigateRouteViewModel.CommandCreatedObject.Initialize();
         }
     }
 }

@@ -60,6 +60,7 @@ namespace EyeTaxi.ViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyname));
             }
         }
+
         static public MapView MyMapView { get; set; }
 
         private bool _StartNavigationButtonIsEnabled;
@@ -117,7 +118,7 @@ namespace EyeTaxi.ViewModels
 
         }
 
-        private async void Initialize()
+        public async void Initialize()
         {
             try
             {
