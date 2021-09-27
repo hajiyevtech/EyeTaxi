@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace EyeTaxi.ViewModels
 {
@@ -40,7 +41,6 @@ namespace EyeTaxi.ViewModels
             set { regViewVisibility = value; OnPropertyRaised(); }
         }
 
-
         public RegistrationViewModel()
         {
 
@@ -57,6 +57,7 @@ namespace EyeTaxi.ViewModels
                 RegViewVisibility = Visibility.Visible;
                 LogViewVisibility = Visibility.Collapsed;
             });
+
         }
     }
 }

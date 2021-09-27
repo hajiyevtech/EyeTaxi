@@ -19,12 +19,16 @@ namespace EyeTaxi.Views
     /// </summary>
     public partial class RegistrationView : Window
     {
-        public RegistrationView View { get; set; }
         public RegistrationView()
         {
             InitializeComponent();
         }
 
-       
+        private void window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton== MouseButtonState.Pressed)
+                DragMove();
+            
+        }
     }
 }
