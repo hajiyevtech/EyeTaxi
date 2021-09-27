@@ -25,7 +25,7 @@ namespace EyeTaxi.ViewModels
             }
         }
 
-        private Visibility logViewVisibility;
+        private Visibility logViewVisibility= Visibility.Collapsed;
 
         public Visibility LogViewVisibility
         {
@@ -33,7 +33,7 @@ namespace EyeTaxi.ViewModels
             set { logViewVisibility = value; OnPropertyRaised(); }
         }
 
-        private Visibility regViewVisibility;
+        private Visibility regViewVisibility=Visibility.Visible;
 
         public Visibility RegViewVisibility
         {
@@ -43,10 +43,6 @@ namespace EyeTaxi.ViewModels
 
         public RegistrationViewModel()
         {
-
-            logViewVisibility = Visibility.Collapsed;
-            RegViewVisibility = Visibility.Visible;
-
             LogBtnClickCommand = new RelayCommand(s =>
             {
                 RegViewVisibility = Visibility.Collapsed;

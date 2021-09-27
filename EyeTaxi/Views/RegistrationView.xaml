@@ -66,7 +66,7 @@
             Background="White"
             UniformCornerRadius="5">
             <Grid>
-                <Grid Name="RegView" Visibility="Visible">
+                <Grid Name="RegView" Visibility="{Binding RegViewVisibility,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition />
@@ -155,7 +155,7 @@
                             Content="Register" />
                     </Grid>
                 </Grid>
-                <StackPanel Name="LoginView" Visibility="Collapsed">
+                <StackPanel Name="LoginView" Visibility="{Binding LogViewVisibility,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto" />
