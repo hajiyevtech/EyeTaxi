@@ -64,7 +64,7 @@
             materialDesign:ShadowAssist.ShadowDepth="Depth5"
             materialDesign:ShadowAssist.ShadowEdges="All"
             Background="White"
-            CornerRadius="5">
+            UniformCornerRadius="5">
             <Grid>
                 <Grid Name="RegView" Visibility="Visible">
                     <Grid>
