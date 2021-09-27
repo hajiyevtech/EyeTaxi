@@ -13,7 +13,7 @@
     Background="Transparent"
     FontFamily="{DynamicResource MaterialDesignFont}"
     ResizeMode="NoResize"
-    SizeToContent="Height"
+    SizeToContent="WidthAndHeight"
     TextElement.FontSize="13"
     TextElement.FontWeight="Regular"
     TextOptions.TextFormattingMode="Ideal"
@@ -53,13 +53,19 @@
         </Geometry>
     </Window.Resources>
     <hc:TransitioningContentControl TransitionMode="Top2Bottom">
-        <Border
+        <materialDesign:Card
             Name="Border"
             Width="350"
+            Margin="40"
+            materialDesign:ShadowAssist.ShadowDepth="Depth5"
+            materialDesign:ShadowAssist.ShadowEdges="All"
             Background="White"
-            CornerRadius="5">
-            <Grid>
-                <Grid Name="RegView" Visibility="Visible">
+            UniformCornerRadius="15">
+            <Grid Background="Transparent">
+                <Grid
+                    Name="RegView"
+                    Background="Transparent"
+                    Visibility="Visible">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition />
@@ -136,7 +142,10 @@
                             Content="Register" />
                     </Grid>
                 </Grid>
-                <StackPanel Name="LoginView" Visibility="Collapsed">
+                <StackPanel
+                    Name="LoginView"
+                    Background="Transparent"
+                    Visibility="Collapsed">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto" />
@@ -203,6 +212,6 @@
                     </Grid>
                 </StackPanel>
             </Grid>
-        </Border>
+        </materialDesign:Card>
     </hc:TransitioningContentControl>
 </Window>
