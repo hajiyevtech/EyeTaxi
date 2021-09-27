@@ -25,17 +25,6 @@ namespace EyeTaxi.Views
             InitializeComponent();
         }
 
-        private void LogBtn_Click(object sender, RoutedEventArgs e)
-        {
-            RegView.Visibility = Visibility.Collapsed;
-            LoginView.Visibility = Visibility.Visible;
-
-        }
-
-        private void RegBtn_Click(object sender, RoutedEventArgs e)
-        {
-            RegView.Visibility = Visibility.Visible;
-            LoginView.Visibility = Visibility.Collapsed;
-        }
+       
     }
 }
