@@ -262,7 +262,7 @@ namespace EyeTaxi.ViewModels
                         }
                         else
                             //throw Growly Notification WarningGlobal  HandyControl Username Or Password Is Wrong
-                            HandyControl.Controls.Growl.WarningGlobal("Username Or Password Is Wrong");
+                            HandyControl.Controls.Growl.WarningGlobal("User not found");
                     }
                     else
                         //throw Growly Notification WarningGlobal  HandyControl Password Is Empty 
