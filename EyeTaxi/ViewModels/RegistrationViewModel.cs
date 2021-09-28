@@ -257,6 +257,10 @@ namespace EyeTaxi.ViewModels
                                 var NewWindow = new MainView();
 
                                 MyView.Hide();
+
+                                LogUsernameText = "";
+                                LogPasswordBox.Password = "";
+
                                 NewWindow.ShowDialog();
                                 MyView.Show();
                             }
