@@ -88,8 +88,8 @@
                                 VerticalAlignment="Center"
                                 FontFamily="Product Sans"
                                 FontSize="30"
-                                FontWeight="Bold">
-                                Welcome
+                                FontWeight="Bold"
+                                Text="Welcome">
                             </TextBlock>
                             <Viewbox
                                 Grid.Column="1"
@@ -133,26 +133,55 @@
                             Grid.Row="2"
                             Margin="10"
                             materialDesign:HintAssist.Hint="Username"
-                            Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            Text="{Binding RegUsernameText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                         <PasswordBox
                             Grid.Row="3"
                             Margin="10"
+                            Name="RegPass"
                             materialDesign:HintAssist.Hint="Password"
-                            Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
+                            Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                            >
+                            <b:Interaction.Triggers>
+                                <b:EventTrigger EventName="PasswordChanged">
+                                    <b:InvokeCommandAction Command="{Binding RegPassChangedCommand}" CommandParameter="{Binding ElementName=RegPass}" />
+                                </b:EventTrigger>
+                                <b:EventTrigger EventName="Loaded">
+                                    <b:InvokeCommandAction Command="{Binding RegPasswordLoadedCommand}" CommandParameter="{Binding ElementName=RegPass}" />
+                                </b:EventTrigger>
+                            </b:Interaction.Triggers>
+                        </PasswordBox>
                         <PasswordBox
                             Grid.Row="4"
                             Margin="10"
+                            Name="RegConfirmPass"
                             materialDesign:HintAssist.Hint="Confirm Password"
-                            Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
+                            Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" >
+                            <b:Interaction.Triggers>
+                                <b:EventTrigger EventName="PasswordChanged">
+                                    <b:InvokeCommandAction Command="{Binding RegConfirmPassChangedCommand}" CommandParameter="{Binding ElementName=RegConfirmPass}" />
+                                </b:EventTrigger>
+                                <b:EventTrigger EventName="Loaded">
+                                    <b:InvokeCommandAction Command="{Binding RegConfirmPasswordLoadedCommand}" CommandParameter="{Binding ElementName=RegConfirmPass}" />
+                                </b:EventTrigger>
+                            </b:Interaction.Triggers>
+                        </PasswordBox>
                         <TextBox
                             Grid.Row="5"
                             Margin="10"
                             materialDesign:HintAssist.Hint="Email"
-                            Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            Text="{Binding EmailText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                         <Button
                             Grid.Row="6"
                             Margin="10,20,10,20"
-                            Content="Register" />
+                            Content="Register" >
+                            <b:Interaction.Triggers>
+                                <b:EventTrigger EventName="Click">
+                                    <b:InvokeCommandAction Command="{Binding RegisterButtonClickedCommand}" />
+                                </b:EventTrigger>
+                            </b:Interaction.Triggers>
+                        </Button>
                     </Grid>
                 </Grid>
                 <StackPanel Name="LoginView" Visibility="{Binding LogViewVisibility,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
