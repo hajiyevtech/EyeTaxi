@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using PasswordBox = HandyControl.Controls.PasswordBox;
 
 namespace EyeTaxi.ViewModels
 {
@@ -93,8 +94,8 @@ namespace EyeTaxi.ViewModels
             get { return _regConfirmPassText; }
             set { _regConfirmPassText = value; OnPropertyRaised(); }
         }
-        public PasswordBox RegPasswordBox { get; set; }
-        public PasswordBox RegConfirmPasswordBox { get; set; }
+        public HandyControl.Controls.PasswordBox RegPasswordBox { get; set; }
+        public HandyControl.Controls.PasswordBox RegConfirmPasswordBox { get; set; }
 
         #endregion Register Fields
 

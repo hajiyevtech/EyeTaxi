@@ -273,7 +273,6 @@
                                 Margin="10"
                                 HorizontalAlignment="Right"
                                 Content="Login">
-
                                 <b:Interaction.Triggers>
                                     <b:EventTrigger EventName="Click">
                                         <b:InvokeCommandAction Command="{Binding LogBtnClickCommand}" />
