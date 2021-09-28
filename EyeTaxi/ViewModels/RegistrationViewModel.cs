@@ -181,6 +181,8 @@ namespace EyeTaxi.ViewModels
                                     var TextJson = JsonSerializer.Serialize(Users, new JsonSerializerOptions() { WriteIndented = true });
                                     File.WriteAllText($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Json Files\Users.json", TextJson);
 
+                                    LogUsernameText = RegUsernameText;
+                                    LogPasswordBox.Password = "";
 
                                     RegUsernameText = "";
                                     RegPassText = "";
@@ -189,37 +191,35 @@ namespace EyeTaxi.ViewModels
                                     RegConfirmPasswordBox.Password = "";
                                     RegPasswordBox.Password = "";
 
+
                                     EmailText = "";
 
                                     LogViewVisibility = Visibility.Visible;
                                     RegViewVisibility = Visibility.Collapsed;
 
+
                                     //throw Growly Notification Succes  HandyControl Your Account Has Been Created
+                                    HandyControl.Controls.Growl.SuccessGlobal("Your Account Has Been Created");
                                 }
                                 else
-                                {
-                                    //throw Growly Notification Error HandyControl Your Username AlReady Have
-                                }
+                                    //throw Growly Notification WarningGlobal HandyControl Your Username AlReady Have
+                                    HandyControl.Controls.Growl.WarningGlobal("Your Username already Have");
                             }
                             else
-                            {
-                                //throw Growly Notification Error HandyControl Email Is Not Correct
-                            }
+                                //throw Growly Notification WarningGlobal HandyControl Email Is Not Correct
+                                HandyControl.Controls.Growl.WarningGlobal("Email Is Not Correct");
                         }
                         else
-                        {
-                            //throw Growly Notification Error HandyControl Passwords are not the same
-                        }
+                            //throw Growly Notification WarningGlobal HandyControl Passwords are not the same
+                            HandyControl.Controls.Growl.WarningGlobal("Passwords are not the same");
                     }
                     else
-                    {
-                        //throw Growly Notification Error HandyControl Your Password Length Must be Greater 5
-                    }
+                        //throw Growly Notification WarningGlobal HandyControl Your Password Length Must be Greater 5
+                        HandyControl.Controls.Growl.WarningGlobal("Your Password Length Must be Greater 5");
                 }
                 else
-                {
-                    //throw Growly Notification Error HandyControl Your Username Length Must be Greater 5
-                }
+                    //throw Growly Notification WarningGlobal HandyControl Your Username Length Must be Greater 5
+                    HandyControl.Controls.Growl.WarningGlobal("Your Username Length Must be Greater 5");
 
             });
             #endregion
@@ -230,6 +230,7 @@ namespace EyeTaxi.ViewModels
             });
             LoginBtnClickCommand = new RelayCommand(s =>
             {
+
                 if (!string.IsNullOrWhiteSpace(LogUsernameText))
                 {
 
@@ -247,8 +248,9 @@ namespace EyeTaxi.ViewModels
                         }
                         if (IndexHolder != -1)
                         {
-                            if (Users[IndexHolder].Password==LogPasswordBox.Password)
+                            if (Users[IndexHolder].Password == LogPasswordBox.Password)
                             {
+                                HandyControl.Controls.Growl.SuccessGlobal($"Welcome {Users[IndexHolder].Username}");
                                 //Create here New Window Example
                                 CurrentUserLoggedIn = Users[IndexHolder];
                                 var NewWindow = new MainView();
@@ -259,21 +261,16 @@ namespace EyeTaxi.ViewModels
                             }
                         }
                         else
-                        {
-                            //throw Growly Notification Error  HandyControl Username Or Password Is Wrong
-                        }
+                            //throw Growly Notification WarningGlobal  HandyControl Username Or Password Is Wrong
+                            HandyControl.Controls.Growl.WarningGlobal("Username Or Password Is Wrong");
                     }
                     else
-                    {
-                        //throw Growly Notification Error  HandyControl Password Is Empty 
-
-                    }
+                        //throw Growly Notification WarningGlobal  HandyControl Password Is Empty 
+                        HandyControl.Controls.Growl.WarningGlobal("Password Is Empty ");
                 }
                 else
-                {
-                    //throw Growly Notification Error  HandyControl Username Is Empty 
-                }
-
+                    //throw Growly Notification WarningGlobal  HandyControl Username Is Empty 
+                    HandyControl.Controls.Growl.WarningGlobal("Username Is Empty");
             });
 
         }

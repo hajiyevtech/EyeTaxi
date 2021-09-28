@@ -30,6 +30,7 @@ namespace EyeTaxi.Views
         {
             if (e.LeftButton== MouseButtonState.Pressed)
                 DragMove();
+
         }
     }
 }
