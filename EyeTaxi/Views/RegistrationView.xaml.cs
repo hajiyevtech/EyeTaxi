@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EyeTaxi.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,7 @@ namespace EyeTaxi.Views
         public RegistrationView()
         {
             InitializeComponent();
+            RegistrationViewModel.MyView = this;
         }
 
         private void window_MouseDown(object sender, MouseButtonEventArgs e)

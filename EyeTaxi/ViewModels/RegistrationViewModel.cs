@@ -1,5 +1,6 @@
 ﻿using EyeTaxi.Command;
 using EyeTaxi.Models;
+using EyeTaxi.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,12 +21,8 @@ namespace EyeTaxi.ViewModels
     public class RegistrationViewModel : INotifyPropertyChanged
     {
         public RelayCommand LogBtnClickCommand { get; set; }
-        public RelayCommand RegBtnClickCommand { get; set; }
-        public RelayCommand RegisterButtonClickedCommand { get; set; }
-        public RelayCommand RegPassChangedCommand { get; set; }
-        public RelayCommand RegConfirmPassChangedCommand { get; set; }
-        public RelayCommand RegPasswordLoadedCommand { get; set; }
-        public RelayCommand RegConfirmPasswordLoadedCommand { get; set; }
+        public RelayCommand LoginBtnClickCommand { get; set; }
+        public RelayCommand LogPassCommand { get; set; }
         public List<User> Users { get; set; } = JsonSerializer.Deserialize<List<User>>(File.ReadAllText($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Json Files\Users.json"));
 
 
@@ -46,6 +43,8 @@ namespace EyeTaxi.ViewModels
             set { logViewVisibility = value; OnPropertyRaised(); }
         }
 
+        #region Register Fields
+
         private Visibility regViewVisibility = Visibility.Visible;
 
         public Visibility RegViewVisibility
@@ -53,6 +52,14 @@ namespace EyeTaxi.ViewModels
             get { return regViewVisibility; }
             set { regViewVisibility = value; OnPropertyRaised(); }
         }
+
+        public RelayCommand RegBtnClickCommand { get; set; }
+        public RelayCommand RegisterButtonClickedCommand { get; set; }
+        public RelayCommand RegPassChangedCommand { get; set; }
+        public RelayCommand RegConfirmPassChangedCommand { get; set; }
+        public RelayCommand RegPasswordLoadedCommand { get; set; }
+        public RelayCommand RegConfirmPasswordLoadedCommand { get; set; }
+
 
         private string _emailText = "";
 
@@ -88,9 +95,26 @@ namespace EyeTaxi.ViewModels
         }
         public PasswordBox RegPasswordBox { get; set; }
         public PasswordBox RegConfirmPasswordBox { get; set; }
+
+        #endregion Register Fields
+
+        private string _logUsernameText = "";
+
+        public string LogUsernameText
+        {
+            get { return _logUsernameText; }
+            set { _logUsernameText = value; OnPropertyRaised(); }
+        }
+
+        public PasswordBox LogPasswordBox { get; set; }
+
+        public static User CurrentUserLoggedIn;
+
+        public static RegistrationView MyView { get; set; }
         public RegistrationViewModel()
         {
-            //Users = new List<User>();
+
+            #region Register 
 
             LogBtnClickCommand = new RelayCommand(s =>
             {
@@ -128,13 +152,10 @@ namespace EyeTaxi.ViewModels
 
             RegisterButtonClickedCommand = new RelayCommand(s =>
             {
-
-
                 if (RegUsernameText.Length > 5)
                 {
                     if (RegPassText.Length > 5)
                     {
-
                         if (RegConfirmPassText == RegPassText)
                         {
                             if (MailAddress(EmailText))
@@ -160,7 +181,6 @@ namespace EyeTaxi.ViewModels
                                     var TextJson = JsonSerializer.Serialize(Users, new JsonSerializerOptions() { WriteIndented = true });
                                     File.WriteAllText($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Json Files\Users.json", TextJson);
 
-                                    //throw Growly Notification Succes  HandyControl Your Account Has Been Created
 
                                     RegUsernameText = "";
                                     RegPassText = "";
@@ -170,6 +190,11 @@ namespace EyeTaxi.ViewModels
                                     RegPasswordBox.Password = "";
 
                                     EmailText = "";
+
+                                    LogViewVisibility = Visibility.Visible;
+                                    RegViewVisibility = Visibility.Collapsed;
+
+                                    //throw Growly Notification Succes  HandyControl Your Account Has Been Created
                                 }
                                 else
                                 {
@@ -197,20 +222,72 @@ namespace EyeTaxi.ViewModels
                 }
 
             });
+            #endregion
 
-            bool MailAddress(string mail)
+            LogPassCommand = new RelayCommand(s =>
             {
-                try
+                LogPasswordBox = s as PasswordBox;
+            });
+            LoginBtnClickCommand = new RelayCommand(s =>
+            {
+                if (!string.IsNullOrWhiteSpace(LogUsernameText))
                 {
-                    MailAddress mailAddress = new MailAddress(mail);
-                    return true;
-                }
-                catch
-                {
-                    return false;
-                }
-            }
 
+                    if (!string.IsNullOrWhiteSpace(LogPasswordBox.Password))
+                    {
+
+                        int IndexHolder = -1;
+                        for (int i = 0; i < Users.Count; i++)
+                        {
+                            if (Users[i].Username == LogUsernameText)
+                            {
+                                IndexHolder = i;
+                                break;
+                            }
+                        }
+                        if (IndexHolder != -1)
+                        {
+                            if (Users[IndexHolder].Password==LogPasswordBox.Password)
+                            {
+                                //Create here New Window Example
+                                CurrentUserLoggedIn = Users[IndexHolder];
+                                var NewWindow = new MainView();
+
+                                MyView.Hide();
+                                NewWindow.ShowDialog();
+                                MyView.Show();
+                            }
+                        }
+                        else
+                        {
+                            //throw Growly Notification Error  HandyControl Username Or Password Is Wrong
+                        }
+                    }
+                    else
+                    {
+                        //throw Growly Notification Error  HandyControl Password Is Empty 
+
+                    }
+                }
+                else
+                {
+                    //throw Growly Notification Error  HandyControl Username Is Empty 
+                }
+
+            });
+
+        }
+        bool MailAddress(string mail)
+        {
+            try
+            {
+                MailAddress mailAddress = new MailAddress(mail);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }
