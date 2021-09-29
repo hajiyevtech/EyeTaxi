@@ -13,6 +13,7 @@ namespace EyeTaxi.Command
         private Action<object> _execute { get; set; }
         private Predicate<object> _canExecute { get; set; }
 
+
         public RelayCommand(Action<object> execute, Predicate<object> canExecute = null)
         {
             _execute = execute ?? throw new NullReferenceException("Execute is null");
