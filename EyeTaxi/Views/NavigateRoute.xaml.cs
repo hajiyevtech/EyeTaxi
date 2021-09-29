@@ -29,7 +29,7 @@ namespace EyeTaxi.Views
         public NavigateRoute(MapPoint mapPoint)
         {
             InitializeComponent();
-            NavigateRouteViewModel.CommandCreatedObject._firstPoint = mapPoint;
+            NavigateRouteViewModel.CommandCreatedObject.PointTwo = mapPoint;
             //new MapPoint(5549147.485435362, 4921203.933289913, SpatialReferences.WebMercator);
             //NavigateRouteViewModel.CommandCreatedObject._secondPoint = new MapPoint(5549603.62447322, 4924224.8532453, SpatialReferences.WebMercator);
 
@@ -43,7 +43,7 @@ namespace EyeTaxi.Views
 
                 NavigateRouteViewModel.MyMapView.GraphicsOverlays.Clear();
 
-                NavigateRouteViewModel.CommandCreatedObject._firstPoint = MyMapView.ScreenToLocation(mousePoint);
+                NavigateRouteViewModel.CommandCreatedObject.PointTwo = MyMapView.ScreenToLocation(mousePoint);
                 NavigateRouteViewModel.CommandCreatedObject.Initialize();
             }
         }
