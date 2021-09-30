@@ -29,12 +29,14 @@
             <ListView Grid.Row="0">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Id" />
                         <GridViewColumn Header="Name" />
                         <GridViewColumn Header="Surname" />
-                        <GridViewColumn Header="Phone number" />
+                        <GridViewColumn Header="Phone" />
+                        <GridViewColumn Header="Car vendor" />
                         <GridViewColumn Header="Car model" />
-                        <GridViewColumn Header="Rating" />
+                        <GridViewColumn Header="Car number" />
+                        <GridViewColumn Header="Car color" />
+                        <GridViewColumn Header="Location" />
                     </GridView>
                 </ListView.View>
             </ListView>

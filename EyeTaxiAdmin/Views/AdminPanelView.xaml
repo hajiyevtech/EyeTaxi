@@ -9,11 +9,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="AdminPanelView"
     MinWidth="650"
-    MinHeight="150"
-    SizeToContent="WidthAndHeight"
+    MinHeight="550"
     AllowsTransparency="True"
     Background="Transparent"
-    FontFamily="{DynamicResource MaterialDesignFont}"
+    FontFamily="Product Sans"
+    ResizeMode="CanResizeWithGrip"
     TextElement.FontSize="13"
     TextElement.FontWeight="Regular"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -21,36 +21,76 @@
     TextOptions.TextRenderingMode="Auto"
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
-    mc:Ignorable="d"
-    ResizeMode="CanResizeWithGrip">
-    <materialDesign:Card
-        Background="White"
-        UniformCornerRadius="5">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition Height="auto" />
-            </Grid.RowDefinitions>
-            <ListView Grid.Row="0">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="Id" />
-                        <GridViewColumn Header="Name" />
-                        <GridViewColumn Header="Surname" />
-                        <GridViewColumn Header="Phone number" />
-                        <GridViewColumn Header="Car model" />
-                        <GridViewColumn Header="Rating" />
-                    </GridView>
-                </ListView.View>
-            </ListView>
-            <Grid Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Margin="10">Add</Button>
-                <Button Grid.Column="1" Margin="10">Delete</Button>
-            </Grid>
-        </Grid>
+    mc:Ignorable="d">
+    <materialDesign:Card Background="White" UniformCornerRadius="10">
+        <materialDesign:DrawerHost  IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}"
+            x:Name="DrawerHost"
+            OpenMode="Modal"
+            BorderBrush="{DynamicResource MaterialDesignDivider}"
+            BorderThickness="0"
+            BottomDrawerBackground="{DynamicResource SecondaryHueLightBrush}"
+            BottomDrawerCornerRadius="20 20 0 0">
+
+            <materialDesign:DrawerHost.LeftDrawerContent>
+                <DockPanel MinWidth="250">
+                    <ToggleButton 
+                        Style="{StaticResource MaterialDesignHamburgerToggleButton}" 
+                        DockPanel.Dock="Top"
+                        HorizontalAlignment="Right" 
+                        Margin="5"
+                        IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"/>
+                    <ListBox 
+                        Margin="0 5 0 5"
+                        SelectedIndex="{Binding SelectedIndex}"
+                        SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged}"
+                        ItemsSource="{Binding DemoItems}"
+                        Style="{StaticResource MaterialDesignNavigationPrimaryListBox}">
+                        <ListBox.Resources>
+                            <Style TargetType="ScrollBar" BasedOn="{StaticResource MaterialDesignScrollBarMinimal}"/>
+                        </ListBox.Resources>
+                    </ListBox>
+                </DockPanel>
+            </materialDesign:DrawerHost.LeftDrawerContent>
+            <DockPanel>
+                <materialDesign:ColorZone
+                    Padding="5"
+                    Mode="PrimaryMid"
+                    DockPanel.Dock="Top" >
+                    <DockPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <ToggleButton
+                                x:Name="MenuToggleButton"
+                                Style="{StaticResource MaterialDesignHamburgerToggleButton}"
+                                IsChecked="False"
+                                AutomationProperties.Name="HamburgerToggleButton"/>
+                        </StackPanel>
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="22"
+                            AutomationProperties.Name="Admin Panel"
+                            Text="Admin Panel"/>
+                    </DockPanel>
+                </materialDesign:ColorZone>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <ScrollViewer
+                        x:Name="MainScrollViewer"
+                        Grid.Row="1"
+                        materialDesign:ScrollViewerAssist.IsAutoHideEnabled="True"
+                        HorizontalScrollBarVisibility="{Binding SelectedItem.HorizontalScrollBarVisibilityRequirement, FallbackValue=Disabled}"
+                        VerticalScrollBarVisibility="{Binding SelectedItem.VerticalScrollBarVisibilityRequirement, FallbackValue=Disabled}" >
+                        <ContentControl
+                            DataContext="{Binding SelectedItem}"
+                            Margin="{Binding MarginRequirement, FallbackValue=5}"
+                            Content="{Binding Content, UpdateSourceTrigger=PropertyChanged, FallbackValue={x:Null}}"/>
+                    </ScrollViewer>
+                </Grid>
+            </DockPanel>
+        </materialDesign:DrawerHost>
     </materialDesign:Card>
 </Window>
