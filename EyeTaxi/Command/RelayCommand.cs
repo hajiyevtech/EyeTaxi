@@ -18,7 +18,6 @@ namespace EyeTaxi.Command
         {
             _execute = execute ?? throw new NullReferenceException("Execute is null");
             _canExecute = canExecute;
-
         }
 
         public event EventHandler CanExecuteChanged;
