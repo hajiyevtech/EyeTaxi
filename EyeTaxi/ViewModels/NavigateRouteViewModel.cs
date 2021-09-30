@@ -42,12 +42,14 @@ namespace EyeTaxi.ViewModels
         private Graphic _routeTraveledGraphic;
 
         // firstPoint.
-        public MapPoint _firstPoint = new MapPoint(5571783.59037844, 4933881.61886646, SpatialReferences.WebMercator);
+        public MapPoint PointOne = new MapPoint(5571783.59037844, 4933881.61886646, SpatialReferences.WebMercator);
+
+        public MapPoint PointTwo = new MapPoint(5571783.59037844, 4933881.61886646, SpatialReferences.WebMercator);
 
         public NavigateRoute View { get; set; }
 
         // secondPoint.
-        public MapPoint _secondPoint = new MapPoint(5549603.62447322, 4924224.8532453, SpatialReferences.WebMercator);
+        public MapPoint PointThree = new MapPoint(5549603.62447322, 4924224.8532453, SpatialReferences.WebMercator);
 
         // Feature service for routing in World.
         private readonly Uri _routingUri = new Uri("https://route-api.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World");
@@ -153,8 +155,8 @@ namespace EyeTaxi.ViewModels
                 routeParams.OutputSpatialReference = SpatialReferences.WebMercator;
 
                 // Create stops for each location.
-                Stop stop1 = new Stop(_firstPoint);
-                Stop stop2 = new Stop(_secondPoint);
+                Stop stop1 = new Stop(PointTwo);
+                Stop stop2 = new Stop(PointThree);
 
                 // Assign the stops to the route parameters.
                 List<Stop> stopPoints = new List<Stop> { stop1, stop2 };
@@ -169,8 +171,8 @@ namespace EyeTaxi.ViewModels
 
                 // Add graphics for the stops.
                 SimpleMarkerSymbol stopSymbol = new SimpleMarkerSymbol(SimpleMarkerSymbolStyle.Diamond, Color.OrangeRed, 20);
-                MyMapView.GraphicsOverlays[0].Graphics.Add(new Graphic(_firstPoint, stopSymbol));
-                MyMapView.GraphicsOverlays[0].Graphics.Add(new Graphic(_secondPoint, stopSymbol));
+                MyMapView.GraphicsOverlays[0].Graphics.Add(new Graphic(PointTwo, stopSymbol));
+                MyMapView.GraphicsOverlays[0].Graphics.Add(new Graphic(PointThree, stopSymbol));
 
                 // Create a graphic (with a dashed line symbol) to represent the route.
                 _routeAheadGraphic = new Graphic(_route.RouteGeometry) { Symbol = new SimpleLineSymbol(SimpleLineSymbolStyle.Solid, Color.FromArgb(71,96,243), 5) };
