@@ -1,5 +1,7 @@
-﻿using System;
+﻿using EyeTaxiAdmin.ViewModel;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +22,14 @@ namespace EyeTaxiAdmin.Views
     /// </summary>
     public partial class DriversListPage : Page
     {
+        public DriverListPageModel VM { get; set; }
         public DriversListPage()
         {
+
             InitializeComponent();
+
+
+
         }
     }
 }

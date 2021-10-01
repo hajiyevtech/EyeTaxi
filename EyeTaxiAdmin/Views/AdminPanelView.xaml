@@ -6,7 +6,8 @@
     xmlns:hc="https://handyorg.github.io/handycontrol"
     xmlns:local="clr-namespace:EyeTaxiAdmin.Views"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:ViewModel="clr-namespace:EyeTaxiAdmin.ViewModel"
     Title="AdminPanelView"
     MinWidth="650"
     MinHeight="550"
@@ -22,6 +23,9 @@
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
     mc:Ignorable="d">
+    <Window.DataContext>
+        <ViewModel:AdminPanelViewModel/>
+    </Window.DataContext>
     <materialDesign:Card Background="White" UniformCornerRadius="10">
         <materialDesign:DrawerHost  IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}"
             x:Name="DrawerHost"
@@ -30,7 +34,7 @@
             BorderThickness="0"
             BottomDrawerBackground="{DynamicResource SecondaryHueLightBrush}"
             BottomDrawerCornerRadius="20 20 0 0">
-            
+
 
             <materialDesign:DrawerHost.LeftDrawerContent>
                 <DockPanel MinWidth="250">
@@ -78,18 +82,17 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
+                    <Frame Grid.Row="1" Margin="10" Name="AdminPanelViewFrame">
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="Loaded">
+                                <b:InvokeCommandAction Command="{Binding AdminPanelViewFrameLoad}" CommandParameter="{Binding ElementName=AdminPanelViewFrame}" />
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
 
-                    <ScrollViewer
-                        x:Name="MainScrollViewer"
-                        Grid.Row="1"
-                        materialDesign:ScrollViewerAssist.IsAutoHideEnabled="True"
-                        HorizontalScrollBarVisibility="{Binding SelectedItem.HorizontalScrollBarVisibilityRequirement, FallbackValue=Disabled}"
-                        VerticalScrollBarVisibility="{Binding SelectedItem.VerticalScrollBarVisibilityRequirement, FallbackValue=Disabled}" >
-                        <ContentControl
-                            DataContext="{Binding SelectedItem}"
-                            Margin="{Binding MarginRequirement, FallbackValue=5}"
-                            Content="{Binding Content, UpdateSourceTrigger=PropertyChanged, FallbackValue={x:Null}}"/>
-                    </ScrollViewer>
+                    </Frame>
+
+
+
                 </Grid>
             </DockPanel>
         </materialDesign:DrawerHost>
