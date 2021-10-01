@@ -17,9 +17,9 @@ namespace EyeTaxiAdmin.Views
     /// <summary>
     /// Interaction logic for MainView.xaml
     /// </summary>
-    public partial class MainView : Window
+    public partial class AdminLoginView : Window
     {
-        public MainView()
+        public AdminLoginView()
         {
             InitializeComponent();
         }
