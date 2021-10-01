@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:EyeTaxiAdmin.Views"
-      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:ViewModel="clr-namespace:EyeTaxiAdmin.ViewModel"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="DriversListPage"
       ShowsNavigationUI="False"
@@ -18,6 +18,9 @@
       TextOptions.TextFormattingMode="Ideal"
       TextOptions.TextRenderingMode="Auto"
       mc:Ignorable="d">
+    <Page.DataContext>
+        <ViewModel:DriversListPageViewModel/>
+    </Page.DataContext>
     <materialDesign:Card
         Background="White"
         UniformCornerRadius="5">
@@ -26,7 +29,7 @@
                 <RowDefinition />
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
-            <ListView Grid.Row="0">
+            <ListView Grid.Row="0" ItemsSource="{Binding }" >
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Name" />

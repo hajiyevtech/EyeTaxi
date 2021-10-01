@@ -78,6 +78,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ViewModel\DriversListPageViewModel.cs" />
     <Compile Include="Views\AdminPanelView.xaml.cs">
       <DependentUpon>AdminPanelView.xaml</DependentUpon>
     </Compile>
@@ -118,9 +119,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Page Include="Views\AdminPanelView.xaml">
       <SubType>Designer</SubType>
