@@ -29,7 +29,7 @@
     <materialDesign:Card Background="White" UniformCornerRadius="10">
         <materialDesign:DrawerHost  IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}"
             x:Name="DrawerHost"
-            OpenMode="Modal"
+            OpenMode="Standard"
             BorderBrush="{DynamicResource MaterialDesignDivider}"
             BorderThickness="0"
             BottomDrawerBackground="{DynamicResource SecondaryHueLightBrush}"
@@ -38,12 +38,12 @@
 
             <materialDesign:DrawerHost.LeftDrawerContent>
                 <DockPanel MinWidth="250">
-                    <ToggleButton 
+                    <!--<ToggleButton 
                         Style="{StaticResource MaterialDesignHamburgerToggleButton}" 
                         DockPanel.Dock="Top"
                         HorizontalAlignment="Right" 
                         Margin="5"
-                        IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"/>
+                        IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"/>-->
                     <ListBox 
                         Margin="0 5 0 5"
                         SelectedIndex="{Binding SelectedIndex}"
