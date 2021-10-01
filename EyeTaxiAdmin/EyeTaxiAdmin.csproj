@@ -110,6 +110,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ViewModel\AdminLoginViewModel.cs" />
     <Compile Include="ViewModel\AdminPanelViewModel.cs" />
     <Compile Include="ViewModel\DriverListPageModel.cs" />
     <Compile Include="Views\AdminPanelView.xaml.cs">
