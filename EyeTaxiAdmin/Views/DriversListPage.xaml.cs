@@ -22,14 +22,10 @@ namespace EyeTaxiAdmin.Views
     /// </summary>
     public partial class DriversListPage : Page
     {
-        public DriverListPageModel VM { get; set; }
+        //public DriverListPageModel VM { get; set; }
         public DriversListPage()
         {
-
             InitializeComponent();
-
-
-
         }
     }
 }

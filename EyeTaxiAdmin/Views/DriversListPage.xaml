@@ -18,6 +18,9 @@
       TextOptions.TextFormattingMode="Ideal"
       TextOptions.TextRenderingMode="Auto"
       mc:Ignorable="d">
+    <Page.DataContext>
+        <ViewModel:DriverListPageModel/>
+    </Page.DataContext>
     <materialDesign:Card
         Background="White"
         UniformCornerRadius="5">
@@ -26,17 +29,16 @@
                 <RowDefinition />
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
-            <ListView Grid.Row="0" ItemsSource="{Binding VM.Drivers,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" >
+            <ListView Grid.Row="0" ItemsSource="{Binding Drivers,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" >
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Name" />
-                        <GridViewColumn Header="Surname" />
-                        <GridViewColumn Header="Phone" />
-                        <GridViewColumn Header="Car vendor" />
-                        <GridViewColumn Header="Car model" />
-                        <GridViewColumn Header="Car number" />
-                        <GridViewColumn Header="Car color" />
-                        <GridViewColumn Header="Location" />
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
+                        <GridViewColumn Header="Surname" DisplayMemberBinding="{Binding Surname}" />
+                        <GridViewColumn Header="Phone"  DisplayMemberBinding="{Binding Phone}"/>
+                        <GridViewColumn Header="Car vendor"  DisplayMemberBinding="{Binding CarVendor}"/>
+                        <GridViewColumn Header="Car model" DisplayMemberBinding="{Binding CarModel}"/>
+                        <GridViewColumn Header="Car number" DisplayMemberBinding="{Binding CarNumber}"/>
+                        <GridViewColumn Header="Car color" DisplayMemberBinding="{Binding CarColor}"/>
                     </GridView>
                 </ListView.View>
             </ListView>
