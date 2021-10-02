@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EyeTaxiAdmin.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,12 @@ namespace EyeTaxiAdmin.Views
         public AdminLoginView()
         {
             InitializeComponent();
+            AdminLoginViewModel.MyView = this;
+        }
+        private void window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+                DragMove();
         }
     }
 }

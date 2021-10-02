@@ -62,6 +62,7 @@
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Device" />
     <Reference Include="System.Drawing" />
@@ -113,6 +114,7 @@
     <Compile Include="ViewModel\AdminLoginViewModel.cs" />
     <Compile Include="ViewModel\AdminPanelViewModel.cs" />
     <Compile Include="ViewModel\DriverListPageModel.cs" />
+    <Compile Include="ViewModel\DriversEditViewModel.cs" />
     <Compile Include="Views\AdminPanelView.xaml.cs">
       <DependentUpon>AdminPanelView.xaml</DependentUpon>
     </Compile>
@@ -153,7 +155,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Page Include="Views\AdminPanelView.xaml">
       <SubType>Designer</SubType>
