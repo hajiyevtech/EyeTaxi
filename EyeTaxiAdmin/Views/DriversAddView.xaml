@@ -5,14 +5,17 @@
     xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:converters="clr-namespace:EyeTaxiAdmin.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:esri="http://schemas.esri.com/arcgis/runtime/2013"
     xmlns:hc="https://handyorg.github.io/handycontrol"
     xmlns:local="clr-namespace:EyeTaxiAdmin.Views"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Name="window"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
+    xmlns:viewModels="clr-namespace:EyeTaxi.ViewModels;assembly=EyeTaxi"
+    Name="addWindow"
     Title="DriversAddView"
     Width="450"
-    Height="750"
+    Height="850"
     AllowsTransparency="True"
     Background="Transparent"
     FontFamily="Product Sans"
@@ -27,6 +30,7 @@
     mc:Ignorable="d">
     <Window.Resources>
         <converters:ColorToBrushConverter x:Key="ColorToBrushConverter" />
+        <viewModels:MapViewModel x:Key="MapViewModel" />
     </Window.Resources>
     <materialDesign:Card
         Name="Border"
@@ -66,7 +70,7 @@
                     Style="{StaticResource ButtonCustom}">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="PreviewMouseLeftButtonDown">
-                            <b:InvokeCommandAction Command="{Binding CloseButtonClickCommand}" CommandParameter="{Binding ElementName=Window}" />
+                            <b:InvokeCommandAction Command="{Binding CloseButtonClickCommand}" CommandParameter="{Binding ElementName=addWindow}" />
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                     <materialDesign:PackIcon
@@ -136,9 +140,33 @@
                         Height="150"
                         ToolTip="{Binding Color, ElementName=ColorPicker, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
-
             </materialDesign:Card>
 
+            <materialDesign:Card
+                Height="150"
+                Margin="10"
+                materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                UniformCornerRadius="10">
+                <StackPanel>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Foreground="#BDBDBD" Text="Location" />
+                        <esri:MapView
+                            x:Name="MainMapView"
+                            Grid.Row="1"
+                            IsAttributionTextVisible="False"
+                            Map="{Binding Map, Source={StaticResource MapViewModel}}">
+                            <esri:MapView.DataContext>
+                                <viewModels:MapViewModel />
+                            </esri:MapView.DataContext>
+                        </esri:MapView>
+                    </Grid>
+                </StackPanel>
+
+            </materialDesign:Card>
         </StackPanel>
     </materialDesign:Card>
 </Window>

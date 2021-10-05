@@ -22,7 +22,7 @@
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Window.DataContext>
-        <viewModels:MainViewModel />
+        <viewModels:MainViewModel/>
     </Window.DataContext>
 
     <Window.Resources>
