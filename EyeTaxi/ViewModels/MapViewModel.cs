@@ -74,7 +74,7 @@ namespace EyeTaxi.ViewModels
             //Map map = new Map(SpatialReference.Create(4326));
 
 
-            map.InitialViewpoint = new Viewpoint(40.409264, 49.867092, 100000);
+            map.InitialViewpoint = new Viewpoint(40.409264, 49.867092, 1000000);
             map.Basemap = Basemap.CreateOpenStreetMap();
 
             // To display the map, set the MapViewModel.Map property, which is bound to the map view.
