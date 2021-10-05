@@ -1,0 +1,144 @@
+﻿<Window
+    x:Class="EyeTaxiAdmin.Views.DriversAddView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:converters="clr-namespace:EyeTaxiAdmin.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:hc="https://handyorg.github.io/handycontrol"
+    xmlns:local="clr-namespace:EyeTaxiAdmin.Views"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Name="window"
+    Title="DriversAddView"
+    Width="450"
+    Height="750"
+    AllowsTransparency="True"
+    Background="Transparent"
+    FontFamily="Product Sans"
+    ResizeMode="NoResize"
+    SizeToContent="WidthAndHeight"
+    TextElement.FontSize="13"
+    TextElement.FontWeight="Regular"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <converters:ColorToBrushConverter x:Key="ColorToBrushConverter" />
+    </Window.Resources>
+    <materialDesign:Card
+        Name="Border"
+        Width="350"
+        Margin="40"
+        materialDesign:ShadowAssist.ShadowDepth="Depth5"
+        materialDesign:ShadowAssist.ShadowEdges="All"
+        Background="White"
+        UniformCornerRadius="5">
+        <StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock
+                    Grid.Column="0"
+                    Margin="10,0,0,0"
+                    VerticalAlignment="Center"
+                    FontFamily="Product Sans"
+                    FontSize="40"
+                    FontWeight="Bold"
+                    Text="Add driver" />
+                <Button
+                    Grid.Column="1"
+                    Width="25"
+                    Height="25"
+                    Margin="0,0,10,0"
+                    Padding="7"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    hc:BackgroundSwitchElement.MouseDownBackground="PaleVioletRed"
+                    hc:BackgroundSwitchElement.MouseHoverBackground="Red"
+                    hc:BorderElement.CornerRadius="25"
+                    hc:IconElement.Geometry="{StaticResource DeleteGeometry}"
+                    Background="#4760F3"
+                    Style="{StaticResource ButtonCustom}">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                            <b:InvokeCommandAction Command="{Binding CloseButtonClickCommand}" CommandParameter="{Binding ElementName=Window}" />
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                    <materialDesign:PackIcon
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Foreground="White"
+                        Kind="Close" />
+                </Button>
+            </Grid>
+            <hc:TextBox
+                Height="40"
+                Margin="10"
+                hc:InfoElement.Necessary="True"
+                hc:InfoElement.Placeholder="Name"
+                Text="{Binding NameText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <hc:TextBox
+                Height="40"
+                Margin="10"
+                hc:InfoElement.Necessary="True"
+                hc:InfoElement.Placeholder="Surname"
+                Text="{Binding SurnameText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <hc:TextBox
+                Height="40"
+                Margin="10"
+                hc:InfoElement.Necessary="True"
+                hc:InfoElement.Placeholder="Phone number"
+                Text="{Binding PhoneText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                TextType="Digits" />
+            <hc:TextBox
+                Height="40"
+                Margin="10"
+                hc:InfoElement.Necessary="True"
+                hc:InfoElement.Placeholder="Car vendor"
+                Text="{Binding CarVendorText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <hc:TextBox
+                Height="40"
+                Margin="10"
+                hc:InfoElement.Necessary="True"
+                hc:InfoElement.Placeholder="Car model"
+                Text="{Binding CarModelText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <hc:TextBox
+                Height="40"
+                Margin="10"
+                hc:InfoElement.Necessary="True"
+                hc:InfoElement.Placeholder="Car plate number"
+                Text="{Binding CarPlateText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <materialDesign:Card
+                Margin="10"
+                materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                UniformCornerRadius="10">
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Foreground="#BDBDBD" Text="Car color" />
+                        <TextBlock
+                            Grid.Column="1"
+                            HorizontalAlignment="Right"
+                            Background="{Binding Color, ElementName=ColorPicker, Converter={StaticResource ColorToBrushConverter}}"
+                            Foreground="#BDBDBD"
+                            Text="{Binding Color, ElementName=ColorPicker, UpdateSourceTrigger=PropertyChanged}" />
+                    </Grid>
+                    <materialDesign:ColorPicker
+                        Name="ColorPicker"
+                        Height="150"
+                        ToolTip="{Binding Color, ElementName=ColorPicker, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+
+            </materialDesign:Card>
+
+        </StackPanel>
+    </materialDesign:Card>
+</Window>

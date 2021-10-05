@@ -111,12 +111,16 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Converters\ColorToBrushConverter.cs" />
     <Compile Include="ViewModel\AdminLoginViewModel.cs" />
     <Compile Include="ViewModel\AdminPanelViewModel.cs" />
     <Compile Include="ViewModel\DriverListPageModel.cs" />
     <Compile Include="ViewModel\DriversEditViewModel.cs" />
     <Compile Include="Views\AdminPanelView.xaml.cs">
       <DependentUpon>AdminPanelView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DriversAddView.xaml.cs">
+      <DependentUpon>DriversAddView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DriversEditView.xaml.cs">
       <DependentUpon>DriversEditView.xaml</DependentUpon>
@@ -160,6 +164,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\DriversAddView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\DriversEditView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -179,6 +187,7 @@
       <Name>EyeTaxi</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Esri.ArcGISRuntime.runtimes.win.100.12.0\build\net461\Esri.ArcGISRuntime.runtimes.win.targets" Condition="Exists('..\packages\Esri.ArcGISRuntime.runtimes.win.100.12.0\build\net461\Esri.ArcGISRuntime.runtimes.win.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

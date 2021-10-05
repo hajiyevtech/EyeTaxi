@@ -81,12 +81,10 @@
             <hc:TextBox
                 Height="40"
                 Margin="10"
-
                 hc:InfoElement.Placeholder="Username"
                 Text="{Binding UsernameText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <hc:PasswordBox
                 Height="40"
-
                 Name="LogPass"
                 Margin="10"
                 hc:InfoElement.Placeholder="Password"
