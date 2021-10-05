@@ -34,7 +34,7 @@
         materialDesign:ShadowAssist.ShadowEdges="All"
         Background="White"
         UniformCornerRadius="5">
-        <StackPanel  Name="LoginView" Visibility="{Binding LogViewVisibility, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+        <StackPanel  Name="LoginView">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
