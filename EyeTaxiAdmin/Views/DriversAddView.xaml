@@ -11,7 +11,7 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:system="clr-namespace:System;assembly=mscorlib"
-    xmlns:viewModels="clr-namespace:EyeTaxi.ViewModels;assembly=EyeTaxi"
+    xmlns:viewModels="clr-namespace:EyeTaxi.ViewModels;assembly=EyeTaxi" xmlns:ViewModel="clr-namespace:EyeTaxiAdmin.ViewModel"
     Name="addWindow"
     Title="DriversAddView"
     Width="450"
@@ -27,7 +27,11 @@
     TextOptions.TextRenderingMode="Auto"
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    MouseDown="window_MouseDown">
+    <Window.DataContext>
+        <ViewModel:DriversAddViewModel/>
+    </Window.DataContext>
     <Window.Resources>
         <converters:ColorToBrushConverter x:Key="ColorToBrushConverter" />
         <viewModels:MapViewModel x:Key="MapViewModel" />
@@ -40,6 +44,7 @@
         materialDesign:ShadowAssist.ShadowEdges="All"
         Background="White"
         UniformCornerRadius="5">
+
         <StackPanel>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -147,25 +152,22 @@
                 Margin="10"
                 materialDesign:ShadowAssist.ShadowDepth="Depth0"
                 UniformCornerRadius="10">
-                <StackPanel>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
-                        <TextBlock Foreground="#BDBDBD" Text="Location" />
-                        <esri:MapView
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock  Foreground="#BDBDBD" Text="Location" />
+                    <esri:MapView
+                        Grid.Row="1"
                             x:Name="MainMapView"
-                            Grid.Row="1"
                             IsAttributionTextVisible="False"
                             Map="{Binding Map, Source={StaticResource MapViewModel}}">
-                            <esri:MapView.DataContext>
-                                <viewModels:MapViewModel />
-                            </esri:MapView.DataContext>
-                        </esri:MapView>
-                    </Grid>
-                </StackPanel>
-
+                        <esri:MapView.DataContext>
+                            <viewModels:MapViewModel />
+                        </esri:MapView.DataContext>
+                    </esri:MapView>
+                </Grid>
             </materialDesign:Card>
         </StackPanel>
     </materialDesign:Card>

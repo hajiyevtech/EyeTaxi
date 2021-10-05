@@ -23,7 +23,11 @@ namespace EyeTaxiAdmin.Views
         {
             InitializeComponent();
         }
-
+        private void window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+                DragMove();
+        }
         /*private void ColorPicker_MouseMove(object sender, MouseEventArgs e)
         {
             var converter = new System.Windows.Media.BrushConverter();

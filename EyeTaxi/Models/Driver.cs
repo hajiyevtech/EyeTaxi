@@ -32,6 +32,8 @@ namespace EyeTaxi.Models
         public string CarColor { get; set; }
         public MapPoint Location { get; set; }
 
+
+
         public double Balance { get; set; }
         public double Rating { get; set; }
         public int CountTravel { get; set; }
