@@ -72,7 +72,7 @@ namespace EyeTaxiAdmin.ViewModel
                             //throw Growly Notification SuccessGlobal  HandyControl Entered
                             HandyControl.Controls.Growl.SuccessGlobal("Success Entered Admin Panel");
 
-                            usernameText = "";
+                            UsernameText = "";
                             PasswordBoxText.Password = "";
 
                             MyView.Hide();

@@ -26,6 +26,8 @@ namespace EyeTaxiAdmin.Views
         
         public DriversListPage()
         {
+
+
             InitializeComponent();
         }
     }
