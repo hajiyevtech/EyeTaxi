@@ -23,6 +23,7 @@ namespace EyeTaxiAdmin.Views
         public DriversAddView()
         {
             InitializeComponent();
+
         }
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {

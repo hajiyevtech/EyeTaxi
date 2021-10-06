@@ -179,6 +179,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <Resource Include="Assets\ProductSans-Bold.ttf" />
+    <None Include="Json Files\Drivers.json" />
     <None Include="Json Files\Users.json" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

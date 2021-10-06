@@ -4,8 +4,10 @@ using Esri.ArcGISRuntime.UI;
 using Esri.ArcGISRuntime.UI.Controls;
 using EyeTaxi.Command;
 using EyeTaxi.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -91,8 +93,8 @@ namespace EyeTaxiAdmin.ViewModel
         }
         public static Point TaxiPoint { get; set; } = new Point(-1, -1);
         public MapView MyMap { get; set; }
-        public List<Driver> Drivers { get; set; } = new List<Driver>();
-        //= JsonSerializer.Deserialize<List<Driver>>(File.ReadAllText($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Json Files\Drivers.json"));
+        public ObservableCollection<Driver> Drivers { get; set; }
+            //= JsonConvert.DeserializeObject<ObservableCollection<Driver>>(File.ReadAllText($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Json Files\Drivers.json"));
 
         public DriversAddViewModel()
         {
@@ -133,11 +135,13 @@ namespace EyeTaxiAdmin.ViewModel
                                         {
                                             MapPoint PointTwo = new MapPoint(5571783.59037844, 4933881.61886646, SpatialReferences.WebMercator);
 
+
                                             var NewDriver = new Driver(NameText, SurnameText, PhoneText, CarModelText, CarVendorText, CarPlateText, CarColor, PointTwo);
+
 
                                             Drivers.Add(NewDriver);
                                             //Json Serialize
-                                            var TextJson = JsonSerializer.Serialize(Drivers);
+                                            var TextJson = JsonConvert.SerializeObject(Drivers, Formatting.Indented, new JsonSerializerSettings { FloatFormatHandling = FloatFormatHandling.DefaultValue, });
                                             File.WriteAllText($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Json Files\Drivers.json", TextJson);
 
                                         }
