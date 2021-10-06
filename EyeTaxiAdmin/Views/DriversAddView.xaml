@@ -144,6 +144,7 @@
                     <materialDesign:ColorPicker
                         Name="ColorPicker"
                         Height="150"
+                        Color="{Binding CarColor,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                         ToolTip="{Binding Color, ElementName=ColorPicker, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
             </materialDesign:Card>
@@ -157,19 +158,33 @@
                         <RowDefinition Height="auto" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    <TextBlock Foreground="#BDBDBD" Text="Location" />
+                    <TextBlock Margin="2" Foreground="#BDBDBD" Text="Location" />
                     <esri:MapView
-                        x:Name="MainMapView"
-                        Grid.Row="1"
+                        x:Name="MyMap"
+                        Grid.Row="1" PreviewMouseRightButtonDown="MyMap_PreviewMouseRightButtonDown"
                         IsAttributionTextVisible="False"
-                        Map="{Binding Map, Source={StaticResource MapViewModel}}">
+                        Map="{Binding Map, Source={StaticResource MapViewModel}}" >
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="MouseRightButtonDown">
+                                <b:InvokeCommandAction Command="{Binding MapRightClickCommand}" CommandParameter="{Binding ElementName=MyMap}"/>
+                            </b:EventTrigger>
+                            <b:EventTrigger EventName="Loaded">
+                                <b:InvokeCommandAction Command="{Binding MapLoadedCommand}" CommandParameter="{Binding ElementName=MyMap}"/>
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
                         <esri:MapView.DataContext>
                             <viewModels:MapViewModel />
                         </esri:MapView.DataContext>
                     </esri:MapView>
                 </Grid>
             </materialDesign:Card>
-            <Button Margin="10" Content="Add" />
+            <Button Margin="10" Content="Add" >
+                <b:Interaction.Triggers>
+                    <b:EventTrigger EventName="Click">
+                        <b:InvokeCommandAction Command="{Binding AddButtonClickCommand}"/>
+                    </b:EventTrigger>
+                </b:Interaction.Triggers>
+            </Button>
         </StackPanel>
     </materialDesign:Card>
 </Window>

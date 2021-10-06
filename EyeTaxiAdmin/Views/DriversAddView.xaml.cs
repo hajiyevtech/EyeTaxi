@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EyeTaxiAdmin.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,12 +29,18 @@ namespace EyeTaxiAdmin.Views
             if (e.LeftButton == MouseButtonState.Pressed)
                 DragMove();
         }
-        /*private void ColorPicker_MouseMove(object sender, MouseEventArgs e)
-        {
-            var converter = new System.Windows.Media.BrushConverter();
-            var brush = (Brush)converter.ConvertFromString(ColorPicker.Color.ToString());
 
-            Border.Background = brush;
-        }*/
+        private void MyMap_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DriversAddViewModel.TaxiPoint = Mouse.GetPosition(this);
+            //= MyMapView.ScreenToLocation(mousePoint);
+        }
+        /*private void ColorPicker_MouseMove(object sender, MouseEventArgs e)
+{
+   var converter = new System.Windows.Media.BrushConverter();
+   var brush = (Brush)converter.ConvertFromString(ColorPicker.Color.ToString());
+
+   Border.Background = brush;
+}*/
     }
 }
