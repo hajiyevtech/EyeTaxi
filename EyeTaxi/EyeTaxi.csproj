@@ -151,6 +151,9 @@
     <Compile Include="ViewModels\MapViewModel.cs" />
     <Compile Include="ViewModels\NavigateRouteViewModel.cs" />
     <Compile Include="ViewModels\RegistrationViewModel.cs" />
+    <Compile Include="Views\FindAddress.xaml.cs">
+      <DependentUpon>FindAddress.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
@@ -193,6 +196,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Page Include="Views\FindAddress.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
