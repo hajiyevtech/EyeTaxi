@@ -162,19 +162,19 @@
                     <esri:MapView
                         x:Name="MyMap"
                         Grid.Row="1" PreviewMouseRightButtonDown="MyMap_PreviewMouseRightButtonDown"
-                        IsAttributionTextVisible="False"
-                        Map="{Binding Map, Source={StaticResource MapViewModel}}" >
+                        IsAttributionTextVisible="False" 
+                        Map="{Binding Map,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" >
                         <b:Interaction.Triggers>
-                            <b:EventTrigger EventName="MouseRightButtonDown">
+                            <b:EventTrigger EventName="PreviewMouseRightButtonDown">
                                 <b:InvokeCommandAction Command="{Binding MapRightClickCommand}" CommandParameter="{Binding ElementName=MyMap}"/>
                             </b:EventTrigger>
                             <b:EventTrigger EventName="Loaded">
                                 <b:InvokeCommandAction Command="{Binding MapLoadedCommand}" CommandParameter="{Binding ElementName=MyMap}"/>
                             </b:EventTrigger>
                         </b:Interaction.Triggers>
-                        <esri:MapView.DataContext>
+                        <!--<esri:MapView.DataContext>
                             <viewModels:MapViewModel />
-                        </esri:MapView.DataContext>
+                        </esri:MapView.DataContext>-->
                     </esri:MapView>
                 </Grid>
             </materialDesign:Card>

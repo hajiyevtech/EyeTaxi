@@ -1,65 +1,36 @@
 [
   {
-    "Name": "Meska",
-    "Surname": "Hajiyev",
-    "Phone": "123123",
-    "CarModel": "123qw",
-    "CarVendor": "qeweqwe",
-    "CarNumber": "qwe1",
-    "CarColor": "#FF190101",
+    "Name": "qwe",
+    "Surname": "qwe",
+    "Phone": "124131",
+    "CarModel": "e60",
+    "CarVendor": "qweqwe",
+    "CarNumber": "125213",
+    "CarColor": "#FFB46464",
     "Location": {
-      "GeometryType": 1,
-      "Dimension": 0,
-      "X": 5571783.59037844,
-      "Y": 4933881.61886646,
-      "Z": 0.0,
-      "M": 0.0,
-      "HasZ": false,
-      "HasM": false,
-      "IsEmpty": false,
-      "Extent": "5571783.59037844,4933881.61886646,5571783.59037844,4933881.61886646,PROJCS[\"WGS_1984_Web_Mercator_Auxiliary_Sphere\",GEOGCS[\"GCS_WGS_1984\",DATUM[\"D_WGS_1984\",SPHEROID[\"WGS_1984\",6378137.0,298.257223563]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]],PROJECTION[\"Mercator_Auxiliary_Sphere\"],PARAMETER[\"False_Easting\",0.0],PARAMETER[\"False_Northing\",0.0],PARAMETER[\"Central_Meridian\",0.0],PARAMETER[\"Standard_Parallel_1\",0.0],PARAMETER[\"Auxiliary_Sphere_Type\",0.0],UNIT[\"Meter\",1.0]]",
-      "HasCurves": false,
-      "SpatialReference": {
-        "IsGeographic": false,
-        "IsPannable": true,
-        "IsProjected": true,
-        "Extent": "-20037508.3427892,-30240971.9583861,20037508.3427892,30240971.9583861,PROJCS[\"WGS_1984_Web_Mercator_Auxiliary_Sphere\",GEOGCS[\"GCS_WGS_1984\",DATUM[\"D_WGS_1984\",SPHEROID[\"WGS_1984\",6378137.0,298.257223563]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]],PROJECTION[\"Mercator_Auxiliary_Sphere\"],PARAMETER[\"False_Easting\",0.0],PARAMETER[\"False_Northing\",0.0],PARAMETER[\"Central_Meridian\",0.0],PARAMETER[\"Standard_Parallel_1\",0.0],PARAMETER[\"Auxiliary_Sphere_Type\",0.0],UNIT[\"Meter\",1.0]]",
-        "BaseGeographic": {
-          "IsGeographic": true,
-          "IsPannable": true,
-          "IsProjected": false,
-          "Extent": "-180,-90,180,90,GEOGCS[\"GCS_WGS_1984\",DATUM[\"D_WGS_1984\",SPHEROID[\"WGS_1984\",6378137.0,298.257223563]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]]",
-          "BaseGeographic": null,
-          "Unit": {
-            "UnitType": 1,
-            "UnitId": 9102,
-            "Name": "Degrees",
-            "Abbreviation": "deg",
-            "DisplayName": "Degree",
-            "PluralDisplayName": "Degrees"
-          },
-          "Wkid": 4326,
-          "VerticalWkid": 0,
-          "WkText": "GEOGCS[\"GCS_WGS_1984\",DATUM[\"D_WGS_1984\",SPHEROID[\"WGS_1984\",6378137.0,298.257223563]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]]",
-          "HasVertical": false
-        },
-        "Unit": {
-          "UnitType": 0,
-          "UnitId": 9001,
-          "Name": "Meters",
-          "Abbreviation": "m",
-          "DisplayName": "Meter",
-          "PluralDisplayName": "Meters"
-        },
-        "Wkid": 3857,
-        "VerticalWkid": 0,
-        "WkText": "PROJCS[\"WGS_1984_Web_Mercator_Auxiliary_Sphere\",GEOGCS[\"GCS_WGS_1984\",DATUM[\"D_WGS_1984\",SPHEROID[\"WGS_1984\",6378137.0,298.257223563]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]],PROJECTION[\"Mercator_Auxiliary_Sphere\"],PARAMETER[\"False_Easting\",0.0],PARAMETER[\"False_Northing\",0.0],PARAMETER[\"Central_Meridian\",0.0],PARAMETER[\"Standard_Parallel_1\",0.0],PARAMETER[\"Auxiliary_Sphere_Type\",0.0],UNIT[\"Meter\",1.0]]",
-        "HasVertical": false
-      }
+      "X": 0,
+      "Y": 0
     },
-    "Balance": 0.0,
-    "Rating": 0.0,
+    "Balance": 0,
+    "Rating": 0,
     "CountTravel": 0,
-    "TotalRating": 0.0
+    "TotalRating": 0
+  },
+  {
+    "Name": "qweqwe",
+    "Surname": "qweqwe",
+    "Phone": "124123",
+    "CarModel": "qwe",
+    "CarVendor": "qwewqeeqw",
+    "CarNumber": "qweqwe",
+    "CarColor": "#FFBFA8A8",
+    "Location": {
+      "X": 0,
+      "Y": 0
+    },
+    "Balance": 0,
+    "Rating": 0,
+    "CountTravel": 0,
+    "TotalRating": 0
   }
 ]

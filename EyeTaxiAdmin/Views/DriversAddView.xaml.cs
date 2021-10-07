@@ -33,7 +33,7 @@ namespace EyeTaxiAdmin.Views
 
         private void MyMap_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            DriversAddViewModel.TaxiPoint = Mouse.GetPosition(this);
+            DriversAddViewModel.TaxiPoint = Mouse.GetPosition(MyMap);
             //= MyMapView.ScreenToLocation(mousePoint);
         }
         /*private void ColorPicker_MouseMove(object sender, MouseEventArgs e)

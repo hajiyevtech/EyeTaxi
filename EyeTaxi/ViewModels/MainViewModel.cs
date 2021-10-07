@@ -23,6 +23,8 @@ namespace EyeTaxi.ViewModels
 
 
 
+
+
             GetMapGridCommand = new RelayCommand(s =>
             {
                 Mapo = s as Grid;

@@ -1,10 +1,12 @@
 ﻿using Esri.ArcGISRuntime.Geometry;
+using Esri.ArcGISRuntime.Mapping;
+using Esri.ArcGISRuntime.Portal;
 using Esri.ArcGISRuntime.Symbology;
 using Esri.ArcGISRuntime.UI;
 using Esri.ArcGISRuntime.UI.Controls;
 using EyeTaxi.Command;
 using EyeTaxi.Models;
-using Newtonsoft.Json;
+using HandyControl.Controls;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -31,6 +33,37 @@ namespace EyeTaxiAdmin.ViewModel
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyname));
             }
         }
+
+        private Map _map;
+        public Map Map
+        {
+            get => _map;
+            set
+            {
+                _map = value;
+                OnPropertyRaised();
+            }
+        }
+        private async Task SetupMap()
+        {
+            // Create a portal. If a URI is not specified, www.arcgis.com is used by default.
+            ArcGISPortal portal = await ArcGISPortal.CreateAsync();
+
+            // Get the portal item for a web map using its unique item id.
+            PortalItem mapItem = await PortalItem.CreateAsync(portal, "41281c51f9de45edaf1c8ed44bb10e30");
+
+            // Create the map from the item.
+            Map map = new Map(mapItem);
+            //Map map = new Map(SpatialReference.Create(4326));
+
+
+            map.InitialViewpoint = new Viewpoint(40.409264, 49.867092, 1000000);
+            map.Basemap = Basemap.CreateOpenStreetMap();
+
+            // To display the map, set the MapViewModel.Map property, which is bound to the map view.
+            this.Map = map;
+        }
+
         public RelayCommand CloseButtonClickCommand { get; set; }
         public RelayCommand AddButtonClickCommand { get; set; }
         public RelayCommand MapRightClickCommand { get; set; }
@@ -93,11 +126,11 @@ namespace EyeTaxiAdmin.ViewModel
         }
         public static Point TaxiPoint { get; set; } = new Point(-1, -1);
         public MapView MyMap { get; set; }
-        public ObservableCollection<Driver> Drivers { get; set; }
-            //= JsonConvert.DeserializeObject<ObservableCollection<Driver>>(File.ReadAllText($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Json Files\Drivers.json"));
+        public ObservableCollection<Driver> Drivers { get; set; } = JsonSerializer.Deserialize<ObservableCollection<Driver>>(File.ReadAllText($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Json Files\Drivers.json"));
 
         public DriversAddViewModel()
         {
+            _ = SetupMap();
             CloseButtonClickCommand = new RelayCommand(s =>
             {
                 if (s is Window window)
@@ -106,19 +139,18 @@ namespace EyeTaxiAdmin.ViewModel
                 }
             });
 
+
             MapLoadedCommand = new RelayCommand(s =>
             {
                 MyMap = s as MapView;
             });
             MapRightClickCommand = new RelayCommand(s =>
             {
-
-                if (TaxiPoint == new Point(-1, -1))
-                    MyMap.GraphicsOverlays.Clear();
+                MyMap.GraphicsOverlays.Clear();
                 SimpleMarkerSymbol stopSymbol = new SimpleMarkerSymbol(SimpleMarkerSymbolStyle.Diamond, Color.OrangeRed, 20);
 
                 MyMap.GraphicsOverlays.Add(new GraphicsOverlay());
-
+                var a = MyMap.ScreenToLocation(TaxiPoint).SpatialReference;
                 MyMap.GraphicsOverlays[0].Graphics.Add(new Graphic(MyMap.ScreenToLocation(TaxiPoint), stopSymbol));
             });
 
@@ -131,24 +163,33 @@ namespace EyeTaxiAdmin.ViewModel
                                 if (!string.IsNullOrWhiteSpace(CarModelText))
                                     if (!string.IsNullOrWhiteSpace(CarPlateText))
                                     {
-                                        //if (TaxiPoint != new Point(-1, -1))
+                                        if (TaxiPoint != new Point(-1, -1))
                                         {
-                                            MapPoint PointTwo = new MapPoint(5571783.59037844, 4933881.61886646, SpatialReferences.WebMercator);
+                                            //MapPoint PointTwo = new MapPoint(5571783.59037844, 4933881.61886646, SpatialReferences.WebMercator);
 
 
-                                            var NewDriver = new Driver(NameText, SurnameText, PhoneText, CarModelText, CarVendorText, CarPlateText, CarColor, PointTwo);
+                                            var NewDriver = new Driver(NameText, SurnameText, PhoneText, CarModelText, CarVendorText, CarPlateText, CarColor, TaxiPoint);
 
 
                                             Drivers.Add(NewDriver);
                                             //Json Serialize
-                                            var TextJson = JsonConvert.SerializeObject(Drivers, Formatting.Indented, new JsonSerializerSettings { FloatFormatHandling = FloatFormatHandling.DefaultValue, });
+                                            var TextJson=JsonSerializer.Serialize(Drivers, new JsonSerializerOptions { WriteIndented = true });
                                             File.WriteAllText($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Json Files\Drivers.json", TextJson);
 
+                                            NameText = "";
+                                            SurnameText = "";
+                                            PhoneText = "";
+                                            CarVendorText = "";
+                                            CarModelText = "";
+                                            CarPlateText = "";
+                                            MyMap.GraphicsOverlays.Clear();
+                                            TaxiPoint = new Point(-1, -1);
+
+                                            Growl.SuccessGlobal("Driver Added Success");
                                         }
-                                        //else
-                                        {
+                                        else
                                             //throw handy control global warning right click the map select location
-                                        }
+                                            Growl.WarningGlobal("Right click the map select location");
                                     }
             });
         }

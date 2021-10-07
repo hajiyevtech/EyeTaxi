@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace EyeTaxi.Models
 {
@@ -11,7 +12,7 @@ namespace EyeTaxi.Models
     {
         public Driver(string name, string surname, string phone,
             string carModel, string carVendor, string carNumber,
-            string carColor, MapPoint location)
+            string carColor, Point location)
         {
             Name = name;
             Surname = surname;
@@ -22,7 +23,10 @@ namespace EyeTaxi.Models
             CarColor = carColor;
             Location = location;
         }
+        public Driver()
+        {
 
+        }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Phone { get; set; }
@@ -30,7 +34,7 @@ namespace EyeTaxi.Models
         public string CarVendor { get; set; }
         public string CarNumber { get; set; }
         public string CarColor { get; set; }
-        public MapPoint Location { get; set; }
+        public Point Location { get; set; }
 
 
 

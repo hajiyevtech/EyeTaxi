@@ -32,35 +32,6 @@ namespace EyeTaxi.ViewModels
                 OnPropertyChanged();
             }
         }
-
-        /*private async Task SetupMap()
-        {
-            // Create a portal. If a URI is not specified, www.arcgis.com is used by default.
-            ArcGISPortal portal = await ArcGISPortal.CreateAsync();
-
-            // Get the portal item for a web map using its unique item id.
-            PortalItem mapItem = await PortalItem.CreateAsync(portal, "41281c51f9de45edaf1c8ed44bb10e30");
-
-            // Create the map from the item.
-            Map map = new Map(mapItem)
-            {
-
-                //MapPoint mapCenterPoint = new MapPoint(0, 0, SpatialReferences.Wgs84);
-
-                Basemap = Basemap.CreateDarkGrayCanvasVector()
-
-                //InitialViewpoint = new Viewpoint(40.4093, 49.8671, 200000) //40.4093° N, 49.8671° E
-            };
-
-
-            // To display the map, set the MapViewModel.Map property, which is bound to the map view.
-            Map = map;
-
-        }*/
-
-
-
-
         private async Task SetupMap()
         {
             // Create a portal. If a URI is not specified, www.arcgis.com is used by default.
