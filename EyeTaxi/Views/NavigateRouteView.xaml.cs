@@ -30,7 +30,7 @@ namespace EyeTaxi.Views
         {
             InitializeComponent();
             NavigateRouteViewModel.CommandCreatedObject.PointTwo = mapPoint;
-            NavigateRouteViewModel.CommandCreatedObject.View = this;
+            //NavigateRouteViewModel.CommandCreatedObject.View = this;
             //new MapPoint(5549147.485435362, 4921203.933289913, SpatialReferences.WebMercator);
             //NavigateRouteViewModel.CommandCreatedObject._secondPoint = new MapPoint(5549603.62447322, 4924224.8532453, SpatialReferences.WebMercator);
 

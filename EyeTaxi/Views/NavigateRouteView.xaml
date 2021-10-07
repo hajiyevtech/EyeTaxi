@@ -9,6 +9,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:EyeTaxi.ViewModels"
     Title="NavigateRouteView"
+    Name="Screen"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
@@ -36,7 +37,7 @@
                 <RowDefinition />
                 <RowDefinition Height="100" />
             </Grid.RowDefinitions>
-            
+
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -77,7 +78,7 @@
                     VerticalAlignment="Stretch"
                     Text="{Binding MessagesTextBlockText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     TextWrapping="Wrap" />
-            
+
         </Grid>
     </Grid>
 </Page>
