@@ -27,14 +27,14 @@ namespace EyeTaxi.Views
         public MainView()
         {
             InitializeComponent();
-            MainMapView.LocationDisplay.IsEnabled = true;
+            //MainMapView.LocationDisplay.IsEnabled = true;
         }
 
         private void MainMapView_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Point mousePoint = Mouse.GetPosition(this);
+            //Point mousePoint = Mouse.GetPosition(this);
             //MapPoint mapPoint = new MapPoint(mousePoint.X, mousePoint.Y);
-            MainViewMapPoint = MainMapView.ScreenToLocation(mousePoint);
+            //MainViewMapPoint = MainMapView.ScreenToLocation(mousePoint);
         }
     }
 }

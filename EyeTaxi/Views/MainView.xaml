@@ -35,14 +35,14 @@
                 <b:InvokeCommandAction Command="{Binding GetMapGridCommand}" CommandParameter="{Binding ElementName=mestan}" />
             </b:EventTrigger>
         </b:Interaction.Triggers>
-        <Frame Name="MapFrame">
+        <Frame Name="MapFrame" Panel.ZIndex="5">
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="Loaded">
                     <b:InvokeCommandAction Command="{Binding GetMapGridFrameCommand}" CommandParameter="{Binding ElementName=MapFrame}" />
                 </b:EventTrigger>
             </b:Interaction.Triggers>
         </Frame>
-        <esri:MapView x:Name="MainMapView" Map="{Binding Map, Source={StaticResource MapViewModel}}" IsAttributionTextVisible="False" MouseRightButtonDown="MainMapView_MouseRightButtonDown"/>
+        <!--<esri:MapView Panel.ZIndex="0" x:Name="MainMapView" Map="{Binding Map, Source={StaticResource MapViewModel}}" IsAttributionTextVisible="False" MouseRightButtonDown="MainMapView_MouseRightButtonDown"/>-->
         <Button Width="150" Command="{Binding NavigateCommand}" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
     </Grid>
 </Window>
