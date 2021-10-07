@@ -31,37 +31,45 @@
                 </b:EventTrigger>
             </b:Interaction.Triggers>
         </esri:MapView>
-        <Border>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="100" />
+            </Grid.RowDefinitions>
+            
             <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition Height="100" />
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <Button
-                        x:Name="StartNavigationButton"
+                <Button x:Name="StartNavigationButton"
                         Grid.Column="0"
+                        Grid.Row="1"
                         Margin="5"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Center"
                         Command="{Binding StartNavigationButtonCommand}"
                         Content="Navigate route"
                         IsEnabled="{Binding StartNavigationButtonIsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                    <Button
-                        x:Name="RecenterButton"
+                <Button x:Name="RecenterButton"
                         Grid.Column="1"
+                        Grid.Row="1"
                         Margin="5"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Center"
                         Command="{Binding RecenterButtonCommand}"
                         Content="Recenter"
                         IsEnabled="{Binding RecenterButtonIsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                </Grid>
-                <TextBlock
+
+                <TextBox Grid.Column="0" Grid.Row="0" Height="50" Margin="20" />
+                <TextBox Grid.Column="1" Grid.Row="0" Height="50" Margin="20" />
+
+            </Grid>
+            <TextBlock
                     x:Name="MessagesTextBlock"
                     Grid.Row="3"
                     Margin="5"
@@ -69,7 +77,7 @@
                     VerticalAlignment="Stretch"
                     Text="{Binding MessagesTextBlockText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     TextWrapping="Wrap" />
-            </Grid>
-        </Border>
+            
+        </Grid>
     </Grid>
 </Page>
