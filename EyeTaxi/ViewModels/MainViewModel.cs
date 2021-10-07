@@ -17,7 +17,9 @@ namespace EyeTaxi.ViewModels
         public RelayCommand NavigateCommand { get; set; }
         public RelayCommand LeftButtonCommand { get; set; }
         public RelayCommand GetMapGridCommand { get; set; }
+        public RelayCommand GetMapGridFrameCommand { get; set; }
         public Grid Mapo { get; set; }
+        public Frame Frame { get; set; }
         public MainViewModel()
         {
 
@@ -30,9 +32,15 @@ namespace EyeTaxi.ViewModels
                 Mapo = s as Grid;
             }, e => { return true; });
 
+
+            GetMapGridFrameCommand = new RelayCommand(s =>
+            {
+                Frame = s as Frame;
+            }, e => { return true; });
+
             NavigateCommand = new RelayCommand(a =>
             {
-                NavigateRoute navigateRoute = new NavigateRoute(MainView.MainViewMapPoint);
+                NavigateRouteView navigateRoute = new NavigateRouteView(MainView.MainViewMapPoint);
 
 
 
@@ -40,7 +48,8 @@ namespace EyeTaxi.ViewModels
                 //NavigateRouteViewModel.CommandCreatedObject._firstPoint;
                 //NavigateRouteViewModel.CommandCreatedObject._secondPoint;
 
-                Mapo.Children.Add(navigateRoute);
+                //Mapo.Children.Add(navigateRoute);
+                Frame.Content = navigateRoute;
             }, p => true);
 
             LeftButtonCommand = new RelayCommand(s => {

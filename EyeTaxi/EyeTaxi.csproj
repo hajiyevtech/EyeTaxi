@@ -154,8 +154,8 @@
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\NavigateRoute.xaml.cs">
-      <DependentUpon>NavigateRoute.xaml</DependentUpon>
+    <Compile Include="Views\NavigateRouteView.xaml.cs">
+      <DependentUpon>NavigateRouteView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RegistrationView.xaml.cs">
       <DependentUpon>RegistrationView.xaml</DependentUpon>
@@ -197,7 +197,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\NavigateRoute.xaml">
+    <Page Include="Views\NavigateRouteView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

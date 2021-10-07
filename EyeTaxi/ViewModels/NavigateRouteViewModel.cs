@@ -46,7 +46,7 @@ namespace EyeTaxi.ViewModels
 
         public MapPoint PointTwo = new MapPoint(5571783.59037844, 4933881.61886646, SpatialReferences.WebMercator);
 
-        public NavigateRoute View { get; set; }
+        public NavigateRouteView View { get; set; }
 
         // secondPoint.
         public MapPoint PointThree = new MapPoint(5549603.62447322, 4924224.8532453, SpatialReferences.WebMercator);
@@ -112,7 +112,7 @@ namespace EyeTaxi.ViewModels
 
             ViewLoadCommand = new RelayCommand(s =>
             {
-                View = s as NavigateRoute;
+                View = s as NavigateRouteView;
             });
 
 
@@ -198,7 +198,7 @@ namespace EyeTaxi.ViewModels
 
         private void StartNavigation(object sender)
         {
-            NavigateRoute.IsNagivateStart = false;
+            NavigateRouteView.IsNagivateStart = false;
             // Disable the start navigation button.
             StartNavigationButtonIsEnabled = false;
 
