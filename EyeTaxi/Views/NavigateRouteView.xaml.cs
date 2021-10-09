@@ -29,7 +29,7 @@ namespace EyeTaxi.Views
         public NavigateRouteView()
         {
             InitializeComponent();
-            
+            MyMapView.LocationDisplay.IsEnabled = true;
 
             //NavigateRouteViewModel.CommandCreatedObject.PointTwo = mapPoint;
             //NavigateRouteViewModel.CommandCreatedObject.View = this;
