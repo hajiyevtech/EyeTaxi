@@ -124,6 +124,7 @@ namespace EyeTaxi.ViewModels
         public RelayCommand StartNavigationButtonCommand { get; set; }
         public RelayCommand RecenterButtonCommand { get; set; }
         public RelayCommand ViewLoadCommand { get; set; }
+
         private LocatorTask _geocoder;
         public NavigateRouteViewModel()
         {

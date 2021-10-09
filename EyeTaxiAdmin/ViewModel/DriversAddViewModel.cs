@@ -184,7 +184,6 @@ namespace EyeTaxiAdmin.ViewModel
 
                                             var NewDriver = new Driver(NameText, SurnameText, PhoneText, CarModelText, CarVendorText, CarPlateText, CarColor, ConvertWGS84);
 
-
                                             Drivers.Add(NewDriver);
                                             //Json Serialize
                                             var TextJson = JsonSerializer.Serialize(Drivers, new JsonSerializerOptions { WriteIndented = true });
@@ -200,6 +199,8 @@ namespace EyeTaxiAdmin.ViewModel
                                             TaxiPoint = new Point(-1, -1);
 
                                             Growl.SuccessGlobal("Driver Added Success");
+                                            var CloseWindow = s as Window;
+                                            CloseWindow.Close();
                                         }
                                         else
                                             //throw handy control global warning right click the map select location
