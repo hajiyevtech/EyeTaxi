@@ -31,6 +31,7 @@ using Esri.ArcGISRuntime.UI;
 using Esri.ArcGISRuntime.UI.Controls;
 using System.Collections.ObjectModel;
 using System.Text.Json;
+using System.Windows.Media.Imaging;
 using EyeTaxi.Models;
 
 namespace EyeTaxi.ViewModels
@@ -130,14 +131,27 @@ namespace EyeTaxi.ViewModels
         public ObservableCollection<Driver> Drivers { get; set; } = JsonSerializer.Deserialize<ObservableCollection<Driver>>(File.ReadAllText($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Json Files\Drivers.json"));
 
         private LocatorTask _geocoder;
-        public void InitTaxies()
+        public async void InitTaxies()
         {
             SimpleMarkerSymbol TaxiSymbol = new SimpleMarkerSymbol(SimpleMarkerSymbolStyle.X, Color.Yellow, 20);
-            MyMapView.GraphicsOverlays.Add(new GraphicsOverlay());
 
-            for (int i = 0; i < Drivers.Count - 1; i++)
+            Assembly currentAssembly = GetType().GetTypeInfo().Assembly;
+
+            var uri = new System.Uri($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Assets\cab.png");
+            var converted = uri.AbsoluteUri;
+
+
+            PictureMarkerSymbol CabSymbol = new PictureMarkerSymbol(new Uri(converted));
+            if (MyMapView.GraphicsOverlays == null) return;
+            MyMapView.GraphicsOverlays.Add(new GraphicsOverlay());
+            CabSymbol.Width = 65;
+            CabSymbol.Height = 65;
+
+            foreach (var d in Drivers)
             {
-                MyMapView.GraphicsOverlays[0].Graphics.Add(new Graphic(new MapPoint(Drivers[i].Location.X, Drivers[i].Location.Y, SpatialReferences.Wgs84), TaxiSymbol));
+                MyMapView.GraphicsOverlays[0].Graphics.Add(new Graphic(
+                    new MapPoint(d.Location.X, d.Location.Y, SpatialReferences.Wgs84),
+                    CabSymbol));
             }
         }
         public NavigateRouteViewModel()
@@ -177,6 +191,8 @@ namespace EyeTaxi.ViewModels
         {
             try
             {
+                RouteTracker routeTracker = new RouteTracker(_routeResult, 0, true);
+
                 MyMapView.GraphicsOverlays.Clear();
                 Uri Link = new Uri("https://geocode-api.arcgis.com/arcgis/rest/services/World/GeocodeServer");
                 _geocoder = await LocatorTask.CreateAsync(Link);
@@ -196,7 +212,6 @@ namespace EyeTaxi.ViewModels
 
                 PointTwo = mapPointOne;
                 PointThree = mapPointTwo;
-
 
                 //Taxi Locations This
                 //PointOne = new MapPoint(P1.X, P1.Y, SpatialReferences.WebMercator);
@@ -325,6 +340,8 @@ namespace EyeTaxi.ViewModels
         {
             TrackingStatus status = e.TrackingStatus;
 
+
+
             // Start building a status message for the UI.
             System.Text.StringBuilder statusMessageBuilder = new System.Text.StringBuilder("Route Status:\n");
 
@@ -389,7 +406,6 @@ namespace EyeTaxi.ViewModels
             // Turn the recenter button on or off when the location display changes to or from navigation mode.
             RecenterButtonIsEnabled = e != LocationDisplayAutoPanMode.Navigation;
         }
-
 
         private void SampleUnloaded(object sender, RoutedEventArgs e)
         {
