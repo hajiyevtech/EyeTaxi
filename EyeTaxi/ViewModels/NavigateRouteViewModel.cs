@@ -52,15 +52,15 @@ namespace EyeTaxi.ViewModels
         private Graphic _routeAheadGraphic;
         private Graphic _routeTraveledGraphic;
 
-        // firstPoint.
+        // Taxi Point
         public MapPoint PointOne = new MapPoint(5571783.59037844, 4933881.61886646, SpatialReferences.WebMercator);
 
+        //Point One
         public MapPoint PointTwo = new MapPoint(5571783.59037844, 4933881.61886646, SpatialReferences.WebMercator);
 
-        public NavigateRouteView View { get; set; }
-
-        // secondPoint.
+        // Point Two.
         public MapPoint PointThree = new MapPoint(5549603.62447322, 4924224.8532453, SpatialReferences.WebMercator);
+        public NavigateRouteView View { get; set; }
 
         // Feature service for routing in World.
         private readonly Uri _routingUri = new Uri("https://route-api.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World");
@@ -149,17 +149,7 @@ namespace EyeTaxi.ViewModels
             {
                 if (!(MyMapView is null))
                 {
-                    Temp();
-
-                    //string enteredText = SearchBox.Text;
-                    //var suggestions = await _geocoder.SuggestAsync(enteredText);
-                    //SuggestResult firstSuggestion = suggestions.First();
-                    //var addresses = await _geocoder.GeocodeAsync(firstSuggestion.Label);
-                    //var a = addresses.First().DisplayLocation;
-                    //var temp = LatLonToMeters(a.X, a.Y);
-
-
-
+                    Temp(); //calculate 2 difrent location route
                 }
             });
 
@@ -183,8 +173,6 @@ namespace EyeTaxi.ViewModels
             var mapPointOne = addressesOne.First().DisplayLocation;
             var mapPointTwo = addressesTwo.First().DisplayLocation;
 
-            var P1 = LatLonToMeters(mapPointOne.X, mapPointOne.Y);
-            var P2 = LatLonToMeters(mapPointTwo.X, mapPointTwo.Y);
 
             PointTwo = mapPointOne;
             PointThree = mapPointTwo;
@@ -192,20 +180,13 @@ namespace EyeTaxi.ViewModels
 
             //Taxi Locations This
             //PointOne = new MapPoint(P1.X, P1.Y, SpatialReferences.WebMercator);
+
+
             //PointTwo = new MapPoint(P1.X, P1.Y, SpatialReferences.WebMercator);
             //PointThree = new MapPoint(P2.X, P2.Y, SpatialReferences.WebMercator);
             Initialize();
         }
-        public static Point LatLonToMeters(double lat, double lon)
-        {
-            var OriginShift = 2 * Math.PI * 6378137 / 2;
-
-            var p = new Point();
-            p.X = lon * OriginShift / 180;
-            p.Y = Math.Log(Math.Tan((90 + lat) * Math.PI / 360)) / (Math.PI / 180);
-            p.Y = p.Y * OriginShift / 180;
-            return p;
-        }
+    
         public async void Initialize()
         {
             try

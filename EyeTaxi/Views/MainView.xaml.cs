@@ -22,7 +22,6 @@ namespace EyeTaxi.Views
     /// </summary>
     public partial class MainView
     {
-        public static MapPoint MainViewMapPoint { get; set; }
 
         public MainView()
         {

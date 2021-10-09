@@ -1,49 +1,15 @@
 [
   {
-    "Name": "qwe",
-    "Surname": "qwe",
-    "Phone": "124131",
-    "CarModel": "e60",
-    "CarVendor": "qweqwe",
-    "CarNumber": "125213",
-    "CarColor": "#FFB46464",
+    "Name": "Nejat",
+    "Surname": "Jafarli",
+    "Phone": "\u002B994558448831",
+    "CarModel": "E60",
+    "CarVendor": "BMW",
+    "CarNumber": "50-CX-810",
+    "CarColor": "#FF8C2727",
     "Location": {
-      "X": 0,
-      "Y": 0
-    },
-    "Balance": 0,
-    "Rating": 0,
-    "CountTravel": 0,
-    "TotalRating": 0
-  },
-  {
-    "Name": "qweqwe",
-    "Surname": "qweqwe",
-    "Phone": "124123",
-    "CarModel": "qwe",
-    "CarVendor": "qwewqeeqw",
-    "CarNumber": "qweqwe",
-    "CarColor": "#FFBFA8A8",
-    "Location": {
-      "X": 0,
-      "Y": 0
-    },
-    "Balance": 0,
-    "Rating": 0,
-    "CountTravel": 0,
-    "TotalRating": 0
-  },
-  {
-    "Name": "dfsd",
-    "Surname": "fsdfsdfs",
-    "Phone": "324242",
-    "CarModel": "sdfsdf",
-    "CarVendor": "desfsdf",
-    "CarNumber": "sdfsf",
-    "CarColor": "#FF03FFE5",
-    "Location": {
-      "X": 147,
-      "Y": 85.940000000000055
+      "X": 49.808723974503124,
+      "Y": 40.404108671896743
     },
     "Balance": 0,
     "Rating": 0,

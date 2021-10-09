@@ -128,7 +128,15 @@ namespace EyeTaxiAdmin.ViewModel
         public static Point TaxiPoint { get; set; } = new Point(-1, -1);
         public MapView MyMap { get; set; }
         public ObservableCollection<Driver> Drivers { get; set; } = JsonSerializer.Deserialize<ObservableCollection<Driver>>(File.ReadAllText($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Json Files\Drivers.json"));
-
+        public static Point MetersToLatLon(Point m)
+        {
+            var OriginShift = 2 * Math.PI * 6378137 / 2;
+            var ll = new Point();
+            ll.X = (m.X / OriginShift) * 180;
+            ll.Y = (m.Y / OriginShift) * 180;
+            ll.Y = 180 / Math.PI * (2 * Math.Atan(Math.Exp(ll.Y * Math.PI / 180)) - Math.PI / 2);
+            return ll;
+        }
         public DriversAddViewModel()
         {
             _ = SetupMap();
@@ -151,8 +159,11 @@ namespace EyeTaxiAdmin.ViewModel
                 SimpleMarkerSymbol stopSymbol = new SimpleMarkerSymbol(SimpleMarkerSymbolStyle.Diamond, Color.OrangeRed, 20);
 
                 MyMap.GraphicsOverlays.Add(new GraphicsOverlay());
-                var a = MyMap.ScreenToLocation(TaxiPoint).SpatialReference;
-                MyMap.GraphicsOverlays[0].Graphics.Add(new Graphic(MyMap.ScreenToLocation(TaxiPoint), stopSymbol));
+                var temp = MyMap.ScreenToLocation(TaxiPoint);
+
+               var ConvertWGS84= MetersToLatLon(new Point(temp.X,temp.Y));
+
+                MyMap.GraphicsOverlays[0].Graphics.Add(new Graphic(new MapPoint(ConvertWGS84.X,ConvertWGS84.Y,SpatialReferences.Wgs84), stopSymbol));
             });
 
             AddButtonClickCommand = new RelayCommand(s =>
@@ -168,13 +179,15 @@ namespace EyeTaxiAdmin.ViewModel
                                         {
                                             //MapPoint PointTwo = new MapPoint(5571783.59037844, 4933881.61886646, SpatialReferences.WebMercator);
 
+                                            var temp = MyMap.ScreenToLocation(TaxiPoint);
+                                            var ConvertWGS84 = MetersToLatLon(new Point(temp.X, temp.Y));
 
-                                            var NewDriver = new Driver(NameText, SurnameText, PhoneText, CarModelText, CarVendorText, CarPlateText, CarColor, TaxiPoint);
+                                            var NewDriver = new Driver(NameText, SurnameText, PhoneText, CarModelText, CarVendorText, CarPlateText, CarColor, ConvertWGS84);
 
 
                                             Drivers.Add(NewDriver);
                                             //Json Serialize
-                                            var TextJson=JsonSerializer.Serialize(Drivers, new JsonSerializerOptions { WriteIndented = true });
+                                            var TextJson = JsonSerializer.Serialize(Drivers, new JsonSerializerOptions { WriteIndented = true });
                                             File.WriteAllText($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Json Files\Drivers.json", TextJson);
 
                                             NameText = "";

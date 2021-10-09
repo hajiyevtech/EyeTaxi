@@ -40,7 +40,7 @@ namespace EyeTaxi.ViewModels
 
             NavigateCommand = new RelayCommand(a =>
             {
-                NavigateRouteView navigateRoute = new NavigateRouteView(MainView.MainViewMapPoint);
+                NavigateRouteView navigateRoute = new NavigateRouteView();
 
 
 
@@ -51,10 +51,6 @@ namespace EyeTaxi.ViewModels
                 //Mapo.Children.Add(navigateRoute);
                 Frame.Content = navigateRoute;
             }, p => true);
-
-            LeftButtonCommand = new RelayCommand(s => {
-                MessageBox.Show("salam Mestan");
-            }, e => { return true; });
 
 
 
