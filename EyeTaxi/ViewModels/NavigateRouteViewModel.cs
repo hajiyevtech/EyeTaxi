@@ -18,6 +18,17 @@ using System.Runtime.CompilerServices;
 using Esri.ArcGISRuntime.UI.Controls;
 using EyeTaxi.Command;
 using EyeTaxi.Views;
+using Esri.ArcGISRuntime.Tasks.Geocoding;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using Esri.ArcGISRuntime.Data;
+using Esri.ArcGISRuntime.Geometry;
+using Esri.ArcGISRuntime.Mapping;
+using Esri.ArcGISRuntime.Symbology;
+using Esri.ArcGISRuntime.Tasks.Geocoding;
+using Esri.ArcGISRuntime.UI;
+using Esri.ArcGISRuntime.UI.Controls;
 
 namespace EyeTaxi.ViewModels
 {
@@ -89,12 +100,31 @@ namespace EyeTaxi.ViewModels
             set { _MessagesTextBlockText = value; OnPropertyRaised(); }
         }
 
+        private string pointOneText;
+
+        public string PointOneText
+        {
+            get { return pointOneText; }
+            set { pointOneText = value; OnPropertyRaised(); }
+        }
+
+        private string pointTwoText;
+
+        public string PointTwoText
+        {
+            get { return pointTwoText; }
+            set { pointTwoText = value; OnPropertyRaised(); }
+        }
+
+
         static public NavigateRouteViewModel CommandCreatedObject { get; set; }
 
         public RelayCommand MapViewCommand { get; set; }
+        public RelayCommand SearchBtnClickCommand { get; set; }
         public RelayCommand StartNavigationButtonCommand { get; set; }
         public RelayCommand RecenterButtonCommand { get; set; }
         public RelayCommand ViewLoadCommand { get; set; }
+        private LocatorTask _geocoder;
         public NavigateRouteViewModel()
         {
             MapViewCommand = new RelayCommand(s =>
@@ -115,11 +145,67 @@ namespace EyeTaxi.ViewModels
                 View = s as NavigateRouteView;
             });
 
+            SearchBtnClickCommand = new RelayCommand(s =>
+            {
+                if (!(MyMapView is null))
+                {
+                    Temp();
+
+                    //string enteredText = SearchBox.Text;
+                    //var suggestions = await _geocoder.SuggestAsync(enteredText);
+                    //SuggestResult firstSuggestion = suggestions.First();
+                    //var addresses = await _geocoder.GeocodeAsync(firstSuggestion.Label);
+                    //var a = addresses.First().DisplayLocation;
+                    //var temp = LatLonToMeters(a.X, a.Y);
+
+
+
+                }
+            });
 
             CommandCreatedObject = this;
 
         }
+        public async void Temp()
+        {
+            Uri Link = new Uri("https://geocode-api.arcgis.com/arcgis/rest/services/World/GeocodeServer");
+            _geocoder = await LocatorTask.CreateAsync(Link);
 
+            IReadOnlyList<SuggestResult> suggestionsOne = await _geocoder.SuggestAsync(PointOneText);
+            IReadOnlyList<SuggestResult> suggestionsTwo = await _geocoder.SuggestAsync(PointTwoText);
+
+            SuggestResult firstSuggestion = suggestionsOne.First();
+            SuggestResult SecondSuggestion = suggestionsTwo.First();
+
+            var addressesOne = await _geocoder.GeocodeAsync(firstSuggestion.Label);
+            var addressesTwo = await _geocoder.GeocodeAsync(SecondSuggestion.Label);
+
+            var mapPointOne = addressesOne.First().DisplayLocation;
+            var mapPointTwo = addressesTwo.First().DisplayLocation;
+
+            var P1 = LatLonToMeters(mapPointOne.X, mapPointOne.Y);
+            var P2 = LatLonToMeters(mapPointTwo.X, mapPointTwo.Y);
+
+            PointTwo = mapPointOne;
+            PointThree = mapPointTwo;
+
+
+            //Taxi Locations This
+            //PointOne = new MapPoint(P1.X, P1.Y, SpatialReferences.WebMercator);
+            //PointTwo = new MapPoint(P1.X, P1.Y, SpatialReferences.WebMercator);
+            //PointThree = new MapPoint(P2.X, P2.Y, SpatialReferences.WebMercator);
+            Initialize();
+        }
+        public static Point LatLonToMeters(double lat, double lon)
+        {
+            var OriginShift = 2 * Math.PI * 6378137 / 2;
+
+            var p = new Point();
+            p.X = lon * OriginShift / 180;
+            p.Y = Math.Log(Math.Tan((90 + lat) * Math.PI / 360)) / (Math.PI / 180);
+            p.Y = p.Y * OriginShift / 180;
+            return p;
+        }
         public async void Initialize()
         {
             try
@@ -152,7 +238,7 @@ namespace EyeTaxi.ViewModels
                 routeParams.ReturnDirections = true;
                 routeParams.ReturnStops = true;
                 routeParams.ReturnRoutes = true;
-                routeParams.OutputSpatialReference = SpatialReferences.WebMercator;
+                routeParams.OutputSpatialReference = SpatialReferences.Wgs84;
 
                 // Create stops for each location.
                 Stop stop1 = new Stop(PointTwo);
@@ -175,10 +261,10 @@ namespace EyeTaxi.ViewModels
                 MyMapView.GraphicsOverlays[0].Graphics.Add(new Graphic(PointThree, stopSymbol));
 
                 // Create a graphic (with a dashed line symbol) to represent the route.
-                _routeAheadGraphic = new Graphic(_route.RouteGeometry) { Symbol = new SimpleLineSymbol(SimpleLineSymbolStyle.Solid, Color.FromArgb(71,96,243), 5) };
+                _routeAheadGraphic = new Graphic(_route.RouteGeometry) { Symbol = new SimpleLineSymbol(SimpleLineSymbolStyle.Solid, Color.FromArgb(71, 96, 243), 5) };
 
                 // Create a graphic (solid) to represent the route that's been traveled (initially empty).
-                _routeTraveledGraphic = new Graphic { Symbol = new SimpleLineSymbol(SimpleLineSymbolStyle.Solid, Color.FromArgb(163,175,249),3) };
+                _routeTraveledGraphic = new Graphic { Symbol = new SimpleLineSymbol(SimpleLineSymbolStyle.Solid, Color.FromArgb(163, 175, 249), 3) };
 
                 // Add the route graphics to the map view.
                 MyMapView.GraphicsOverlays[0].Graphics.Add(_routeAheadGraphic);
