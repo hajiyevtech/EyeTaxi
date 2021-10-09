@@ -5,14 +5,14 @@
     xmlns:hc="https://handyorg.github.io/handycontrol"
     xmlns:local="clr-namespace:EyeTaxi"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-    StartupUri="Views/MainView.xaml">
+    StartupUri="Views/NavigateRouteView.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/SkinDefault.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml" />
                 <materialDesign:BundledTheme
-                    BaseTheme="Dark"
+                    BaseTheme="Light"
                     PrimaryColor="LightGreen"
                     SecondaryColor="Lime" />
                 <hc:Theme AccentColor="#4760F3" />
