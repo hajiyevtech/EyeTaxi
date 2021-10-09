@@ -29,6 +29,9 @@ using Esri.ArcGISRuntime.Symbology;
 using Esri.ArcGISRuntime.Tasks.Geocoding;
 using Esri.ArcGISRuntime.UI;
 using Esri.ArcGISRuntime.UI.Controls;
+using System.Collections.ObjectModel;
+using System.Text.Json;
+using EyeTaxi.Models;
 
 namespace EyeTaxi.ViewModels
 {
@@ -53,13 +56,13 @@ namespace EyeTaxi.ViewModels
         private Graphic _routeTraveledGraphic;
 
         // Taxi Point
-        public MapPoint PointOne = new MapPoint(5571783.59037844, 4933881.61886646, SpatialReferences.WebMercator);
+        public MapPoint PointOne = new MapPoint(5571783.59037844, 4933881.61886646, SpatialReferences.Wgs84);
 
         //Point One
-        public MapPoint PointTwo = new MapPoint(5571783.59037844, 4933881.61886646, SpatialReferences.WebMercator);
+        public MapPoint PointTwo = new MapPoint(49.848390, 40.376800, SpatialReferences.Wgs84);
 
         // Point Two.
-        public MapPoint PointThree = new MapPoint(5549603.62447322, 4924224.8532453, SpatialReferences.WebMercator);
+        public MapPoint PointThree = new MapPoint(49.811980, 40.412180, SpatialReferences.Wgs84);
         public NavigateRouteView View { get; set; }
 
         // Feature service for routing in World.
@@ -124,14 +127,26 @@ namespace EyeTaxi.ViewModels
         public RelayCommand StartNavigationButtonCommand { get; set; }
         public RelayCommand RecenterButtonCommand { get; set; }
         public RelayCommand ViewLoadCommand { get; set; }
+        public ObservableCollection<Driver> Drivers { get; set; } = JsonSerializer.Deserialize<ObservableCollection<Driver>>(File.ReadAllText($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Json Files\Drivers.json"));
 
         private LocatorTask _geocoder;
+        public void InitTaxies()
+        {
+            SimpleMarkerSymbol TaxiSymbol = new SimpleMarkerSymbol(SimpleMarkerSymbolStyle.X, Color.Yellow, 20);
+            MyMapView.GraphicsOverlays.Add(new GraphicsOverlay());
+
+            for (int i = 0; i < Drivers.Count - 1; i++)
+            {
+                MyMapView.GraphicsOverlays[0].Graphics.Add(new Graphic(new MapPoint(Drivers[i].Location.X, Drivers[i].Location.Y, SpatialReferences.Wgs84), TaxiSymbol));
+            }
+        }
         public NavigateRouteViewModel()
         {
             MapViewCommand = new RelayCommand(s =>
             {
                 MyMapView = s as MapView;
                 Initialize();
+                InitTaxies();
             });
 
             RecenterButtonCommand = new RelayCommand(s =>
@@ -151,6 +166,7 @@ namespace EyeTaxi.ViewModels
                 if (!(MyMapView is null))
                 {
                     Temp(); //calculate 2 difrent location route
+                    InitTaxies();
                 }
             });
 
@@ -159,35 +175,43 @@ namespace EyeTaxi.ViewModels
         }
         public async void Temp()
         {
-            Uri Link = new Uri("https://geocode-api.arcgis.com/arcgis/rest/services/World/GeocodeServer");
-            _geocoder = await LocatorTask.CreateAsync(Link);
+            try
+            {
+                MyMapView.GraphicsOverlays.Clear();
+                Uri Link = new Uri("https://geocode-api.arcgis.com/arcgis/rest/services/World/GeocodeServer");
+                _geocoder = await LocatorTask.CreateAsync(Link);
 
-            IReadOnlyList<SuggestResult> suggestionsOne = await _geocoder.SuggestAsync(PointOneText);
-            IReadOnlyList<SuggestResult> suggestionsTwo = await _geocoder.SuggestAsync(PointTwoText);
+                IReadOnlyList<SuggestResult> suggestionsOne = await _geocoder.SuggestAsync(PointOneText);
+                IReadOnlyList<SuggestResult> suggestionsTwo = await _geocoder.SuggestAsync(PointTwoText);
 
-            SuggestResult firstSuggestion = suggestionsOne.First();
-            SuggestResult SecondSuggestion = suggestionsTwo.First();
+                SuggestResult firstSuggestion = suggestionsOne.First();
+                SuggestResult SecondSuggestion = suggestionsTwo.First();
 
-            var addressesOne = await _geocoder.GeocodeAsync(firstSuggestion.Label);
-            var addressesTwo = await _geocoder.GeocodeAsync(SecondSuggestion.Label);
+                var addressesOne = await _geocoder.GeocodeAsync(firstSuggestion.Label);
+                var addressesTwo = await _geocoder.GeocodeAsync(SecondSuggestion.Label);
 
-            var mapPointOne = addressesOne.First().DisplayLocation;
-            var mapPointTwo = addressesTwo.First().DisplayLocation;
-
-
-            PointTwo = mapPointOne;
-            PointThree = mapPointTwo;
-
-
-            //Taxi Locations This
-            //PointOne = new MapPoint(P1.X, P1.Y, SpatialReferences.WebMercator);
+                var mapPointOne = addressesOne.First().DisplayLocation;
+                var mapPointTwo = addressesTwo.First().DisplayLocation;
 
 
-            //PointTwo = new MapPoint(P1.X, P1.Y, SpatialReferences.WebMercator);
-            //PointThree = new MapPoint(P2.X, P2.Y, SpatialReferences.WebMercator);
-            Initialize();
+                PointTwo = mapPointOne;
+                PointThree = mapPointTwo;
+
+
+                //Taxi Locations This
+                //PointOne = new MapPoint(P1.X, P1.Y, SpatialReferences.WebMercator);
+
+
+                //PointTwo = new MapPoint(P1.X, P1.Y, SpatialReferences.WebMercator);
+                //PointThree = new MapPoint(P2.X, P2.Y, SpatialReferences.WebMercator);
+                Initialize();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
-    
+
         public async void Initialize()
         {
             try

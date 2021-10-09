@@ -45,8 +45,9 @@ namespace EyeTaxiAdmin.ViewModel
             {
                 var temp = new DriversAddView();
                 temp.ShowDialog();
-
-                Drivers = JsonSerializer.Deserialize<ObservableCollection<Driver>>(File.ReadAllText($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Json Files\Drivers.json"));
+                var Drivers = JsonSerializer.Deserialize<ObservableCollection<Driver>>(File.ReadAllText($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Json Files\Drivers.json"));
+                this.Drivers.Clear();
+                for (int i = 0; i < Drivers.Count; i++)this.Drivers.Add(Drivers[i]);
             });
 
             DeleteBtnClickCommand = new RelayCommand(s =>
