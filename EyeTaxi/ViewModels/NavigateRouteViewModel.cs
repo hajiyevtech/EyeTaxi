@@ -39,6 +39,7 @@ namespace EyeTaxi.ViewModels
     public class NavigateRouteViewModel : INotifyPropertyChanged
     {
 
+        private TrackingDistance _distance;
 
         private RouteTracker _tracker;
 
@@ -272,6 +273,7 @@ namespace EyeTaxi.ViewModels
                 // Get the route results.
                 _routeResult = await routeTask.SolveRouteAsync(routeParams);
                 _route = _routeResult.Routes[0];
+                var distance = _route.TotalLength / 1000;
 
                 // Add a graphics overlay for the route graphics.
                 MyMapView.GraphicsOverlays.Add(new GraphicsOverlay());
@@ -339,8 +341,6 @@ namespace EyeTaxi.ViewModels
         private void TrackingStatusUpdated(object sender, RouteTrackerTrackingStatusChangedEventArgs e)
         {
             TrackingStatus status = e.TrackingStatus;
-
-
 
             // Start building a status message for the UI.
             System.Text.StringBuilder statusMessageBuilder = new System.Text.StringBuilder("Route Status:\n");
