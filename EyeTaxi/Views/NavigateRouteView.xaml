@@ -80,7 +80,7 @@ Text="{Binding PointTwoText,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                     Width="90"
                     Margin="5"
                     HorizontalAlignment="Left"
-                    Content="Route">
+                    Content="Search">
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="Click">
                             <b:InvokeCommandAction Command="{Binding SearchBtnClickCommand}" />
@@ -94,7 +94,7 @@ Text="{Binding PointTwoText,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                     Margin="5"
                     HorizontalAlignment="Left"
                     Command="{Binding StartNavigationButtonCommand}"
-                    Content="Navigate"
+                    Content="Start"
                     IsEnabled="{Binding StartNavigationButtonIsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             </Grid>
             <Grid Grid.Row="1" Background="Transparent">

@@ -135,9 +135,6 @@
     <Compile Include="Views\AdminLoginView.xaml.cs">
       <DependentUpon>AdminLoginView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Test.xaml.cs">
-      <DependentUpon>Test.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -184,10 +181,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AdminLoginView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Test.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

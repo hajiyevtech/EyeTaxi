@@ -204,7 +204,7 @@ namespace EyeTaxi.ViewModels
                 MessageBox.Show(e.ToString(), "Error");
             }
         }
-
+        public Driver SelectedDriver { get; set; };
         public async void Temp()
         {
             try
@@ -234,6 +234,46 @@ namespace EyeTaxi.ViewModels
                     PointTwo = mapPointOne;
                     PointThree = mapPointTwo;
 
+                    List<double> driversdistance = new List<double>(); 
+                    for (int i = 0; i < Drivers.Count; i++)
+                    {
+                        RouteTask routeTask = await RouteTask.CreateAsync(_routingUri);
+
+                        // Get the default route parameters.
+                        RouteParameters routeParams = await routeTask.CreateDefaultParametersAsync();
+
+                        // Explicitly set values for parameters.
+                        routeParams.ReturnDirections = true;
+                        routeParams.ReturnStops = true;
+                        routeParams.ReturnRoutes = true;
+                        routeParams.OutputSpatialReference = SpatialReferences.Wgs84;
+
+                        // Create stops for each location.
+                        Stop stop1 = new Stop(new MapPoint(Drivers[i].Location.X, Drivers[i].Location.Y,SpatialReferences.Wgs84));
+                        Stop stop2 = new Stop(PointTwo);
+
+                        // Assign the stops to the route parameters.
+                        List<Stop> stopPoints = new List<Stop> { stop1, stop2 };
+                        routeParams.SetStops(stopPoints);
+
+                        // Get the route results.
+                        RouteResult result = await routeTask.SolveRouteAsync(routeParams);
+                        Route route = result.Routes[0];
+
+                        driversdistance.Add(route.TotalLength / 1000);
+                    }
+
+                    var Max = driversdistance[0];
+
+                    for (int i = 0; i < driversdistance.Count; i++)
+                    {
+                        if (driversdistance[i]>Max)
+                        {
+                            Max = driversdistance[i];
+                            SelectedDriver = Drivers[i];
+                        }
+                    }
+                    PointOne= new MapPoint(SelectedDriver.Location.X,SelectedDriver.Location.Y,SpatialReferences.Wgs84);
                     //Taxi Locations This
                     //PointOne = new MapPoint(P1.X, P1.Y, SpatialReferences.WebMercator);
 
@@ -284,11 +324,12 @@ namespace EyeTaxi.ViewModels
                 routeParams.OutputSpatialReference = SpatialReferences.Wgs84;
 
                 // Create stops for each location.
+                Stop stop = new Stop(PointOne);
                 Stop stop1 = new Stop(PointTwo);
                 Stop stop2 = new Stop(PointThree);
 
                 // Assign the stops to the route parameters.
-                List<Stop> stopPoints = new List<Stop> { stop1, stop2 };
+                List<Stop> stopPoints = new List<Stop> { stop,stop1, stop2 };
                 routeParams.SetStops(stopPoints);
 
                 // Get the route results.
