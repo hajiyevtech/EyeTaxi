@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using Esri.ArcGISRuntime.Geometry;
 using Esri.ArcGISRuntime.Location;
 using Esri.ArcGISRuntime.Mapping;
@@ -22,16 +21,8 @@ using Esri.ArcGISRuntime.Tasks.Geocoding;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Esri.ArcGISRuntime.Data;
-using Esri.ArcGISRuntime.Geometry;
-using Esri.ArcGISRuntime.Mapping;
-using Esri.ArcGISRuntime.Symbology;
-using Esri.ArcGISRuntime.Tasks.Geocoding;
-using Esri.ArcGISRuntime.UI;
-using Esri.ArcGISRuntime.UI.Controls;
 using System.Collections.ObjectModel;
 using System.Text.Json;
-using System.Windows.Media.Imaging;
 using EyeTaxi.Models;
 
 namespace EyeTaxi.ViewModels
@@ -39,7 +30,6 @@ namespace EyeTaxi.ViewModels
     public class NavigateRouteViewModel : INotifyPropertyChanged
     {
 
-        private TrackingDistance _distance;
 
         private RouteTracker _tracker;
 
@@ -134,7 +124,6 @@ namespace EyeTaxi.ViewModels
         private LocatorTask _geocoder;
         public async void InitTaxies()
         {
-            SimpleMarkerSymbol TaxiSymbol = new SimpleMarkerSymbol(SimpleMarkerSymbolStyle.X, Color.Yellow, 20);
 
             Assembly currentAssembly = GetType().GetTypeInfo().Assembly;
 
@@ -155,6 +144,7 @@ namespace EyeTaxi.ViewModels
                     CabSymbol));
             }
         }
+        public double Distance { get; set; }
         public NavigateRouteViewModel()
         {
             MapViewCommand = new RelayCommand(s =>
@@ -162,6 +152,14 @@ namespace EyeTaxi.ViewModels
                 MyMapView = s as MapView;
                 Initialize();
                 InitTaxies();
+                //MyMapView.LocationDisplay.IsEnabled = true;
+                //PointTwo = MyMapView.LocationDisplay.;
+
+
+                //POINT TWO ya Current Lokasya verilmelidir!!!
+
+
+                GetCurrentPointAddressName();
             });
 
             RecenterButtonCommand = new RelayCommand(s =>
@@ -180,6 +178,8 @@ namespace EyeTaxi.ViewModels
             {
                 if (!(MyMapView is null))
                 {
+                    StartNavigationButtonIsEnabled = false;
+
                     Temp(); //calculate 2 difrent location route
                     InitTaxies();
                 }
@@ -188,39 +188,60 @@ namespace EyeTaxi.ViewModels
             CommandCreatedObject = this;
 
         }
+        public async void GetCurrentPointAddressName()
+        {
+            Uri Link = new Uri("https://geocode-api.arcgis.com/arcgis/rest/services/World/GeocodeServer");
+            try
+            {
+                _geocoder = await LocatorTask.CreateAsync(Link);
+
+                IReadOnlyList<GeocodeResult> addresses = await _geocoder.ReverseGeocodeAsync(PointTwo);
+                GeocodeResult address = addresses.First();
+                PointOneText = address.Attributes["Address"].ToString();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString(), "Error");
+            }
+        }
+
         public async void Temp()
         {
             try
             {
-                RouteTracker routeTracker = new RouteTracker(_routeResult, 0, true);
+                if (!string.IsNullOrWhiteSpace(PointOneText) && !string.IsNullOrWhiteSpace(PointTwoText))
+                {
 
-                MyMapView.GraphicsOverlays.Clear();
-                Uri Link = new Uri("https://geocode-api.arcgis.com/arcgis/rest/services/World/GeocodeServer");
-                _geocoder = await LocatorTask.CreateAsync(Link);
+                    RouteTracker routeTracker = new RouteTracker(_routeResult, 0, true);
 
-                IReadOnlyList<SuggestResult> suggestionsOne = await _geocoder.SuggestAsync(PointOneText);
-                IReadOnlyList<SuggestResult> suggestionsTwo = await _geocoder.SuggestAsync(PointTwoText);
+                    MyMapView.GraphicsOverlays.Clear();
+                    Uri Link = new Uri("https://geocode-api.arcgis.com/arcgis/rest/services/World/GeocodeServer");
+                    _geocoder = await LocatorTask.CreateAsync(Link);
 
-                SuggestResult firstSuggestion = suggestionsOne.First();
-                SuggestResult SecondSuggestion = suggestionsTwo.First();
+                    IReadOnlyList<SuggestResult> suggestionsOne = await _geocoder.SuggestAsync(PointOneText);
+                    IReadOnlyList<SuggestResult> suggestionsTwo = await _geocoder.SuggestAsync(PointTwoText);
 
-                var addressesOne = await _geocoder.GeocodeAsync(firstSuggestion.Label);
-                var addressesTwo = await _geocoder.GeocodeAsync(SecondSuggestion.Label);
+                    SuggestResult firstSuggestion = suggestionsOne.First();
+                    SuggestResult SecondSuggestion = suggestionsTwo.First();
 
-                var mapPointOne = addressesOne.First().DisplayLocation;
-                var mapPointTwo = addressesTwo.First().DisplayLocation;
+                    var addressesOne = await _geocoder.GeocodeAsync(firstSuggestion.Label);
+                    var addressesTwo = await _geocoder.GeocodeAsync(SecondSuggestion.Label);
 
-
-                PointTwo = mapPointOne;
-                PointThree = mapPointTwo;
-
-                //Taxi Locations This
-                //PointOne = new MapPoint(P1.X, P1.Y, SpatialReferences.WebMercator);
+                    var mapPointOne = addressesOne.First().DisplayLocation;
+                    var mapPointTwo = addressesTwo.First().DisplayLocation;
 
 
-                //PointTwo = new MapPoint(P1.X, P1.Y, SpatialReferences.WebMercator);
-                //PointThree = new MapPoint(P2.X, P2.Y, SpatialReferences.WebMercator);
-                Initialize();
+                    PointTwo = mapPointOne;
+                    PointThree = mapPointTwo;
+
+                    //Taxi Locations This
+                    //PointOne = new MapPoint(P1.X, P1.Y, SpatialReferences.WebMercator);
+
+
+                    //PointTwo = new MapPoint(P1.X, P1.Y, SpatialReferences.WebMercator);
+                    //PointThree = new MapPoint(P2.X, P2.Y, SpatialReferences.WebMercator);
+                    Initialize();
+                }
             }
             catch (Exception ex)
             {
@@ -273,7 +294,9 @@ namespace EyeTaxi.ViewModels
                 // Get the route results.
                 _routeResult = await routeTask.SolveRouteAsync(routeParams);
                 _route = _routeResult.Routes[0];
-                var distance = _route.TotalLength / 1000;
+
+                Distance = _route.TotalLength / 1000;
+
 
                 // Add a graphics overlay for the route graphics.
                 MyMapView.GraphicsOverlays.Add(new GraphicsOverlay());
@@ -301,7 +324,8 @@ namespace EyeTaxi.ViewModels
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "Error");
+                if (e.Message != "Value cannot be null.\r\nParameter name: point")
+                    MessageBox.Show(e.Message, "Error");
             }
         }
 

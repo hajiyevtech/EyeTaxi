@@ -57,6 +57,7 @@
                 <hc:TextBox
                     Grid.Row="0"
                     Grid.Column="0"
+Text="{Binding PointOneText,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                     Width="250"
                     Height="20"
                     Margin="5"
@@ -68,6 +69,7 @@
                     Grid.Column="0"
                     Width="250"
                     Height="20"
+Text="{Binding PointTwoText,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                     Margin="5"
                     HorizontalAlignment="Left"
                     hc:InfoElement.Placeholder="Location B"
