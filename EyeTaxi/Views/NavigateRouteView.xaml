@@ -100,6 +100,8 @@ Text="{Binding PointTwoText,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
             <Grid Grid.Row="1" Background="Transparent">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
                     <ColumnDefinition Width="auto" />
                 </Grid.ColumnDefinitions>
                 <TextBlock
@@ -110,8 +112,9 @@ Text="{Binding PointTwoText,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                     VerticalAlignment="Stretch"
                     Text="{Binding MessagesTextBlockText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     TextWrapping="Wrap" />
+                <TextBlock Grid.Column="1" Text="Salam" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="20"></TextBlock>
                 <Button
-                    Grid.Column="1"
+                    Grid.Column="3"
                     Width="50"
                     Height="50"
                     Margin="10"
