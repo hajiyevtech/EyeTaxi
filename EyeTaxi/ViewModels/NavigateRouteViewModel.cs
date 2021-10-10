@@ -194,6 +194,8 @@ namespace EyeTaxi.ViewModels
             try
             {
                 _geocoder = await LocatorTask.CreateAsync(Link);
+                PointTwo = new MapPoint(MyMapView.LocationDisplay.Location.Position.X, MyMapView.LocationDisplay.Location.Position.Y, SpatialReferences.Wgs84);
+                //var a = MyMapView.LocationDisplay.Location;
 
                 IReadOnlyList<GeocodeResult> addresses = await _geocoder.ReverseGeocodeAsync(PointTwo);
                 GeocodeResult address = addresses.First();
@@ -337,6 +339,11 @@ namespace EyeTaxi.ViewModels
                 _route = _routeResult.Routes[0];
 
                 Distance = _route.TotalLength / 1000;
+
+                var loc = MyMapView.LocationDisplay.Location;
+                var loc2 = MyMapView.LocationDisplay.ShowLocation;
+                var loc3 = MyMapView.LocationDisplay.MapLocation;
+
 
 
                 // Add a graphics overlay for the route graphics.
