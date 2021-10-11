@@ -48,13 +48,24 @@
                         IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"/>-->
                     <ListBox 
                         Margin="0 5 0 5"
-                        SelectedIndex="{Binding SelectedIndex}"
-                        SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged}"
-                        ItemsSource="{Binding DemoItems}"
                         Style="{StaticResource MaterialDesignNavigationPrimaryListBox}">
                         <ListBox.Resources>
                             <Style TargetType="ScrollBar" BasedOn="{StaticResource MaterialDesignScrollBarMinimal}"/>
                         </ListBox.Resources>
+                        <Button Content="Drivers">
+                            <b:Interaction.Triggers>
+                                <b:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                    <b:InvokeCommandAction Command="{Binding DriversListPageButtonClickCommand}" CommandParameter="{Binding ElementName=AdminPanelViewFrame}" />
+                                </b:EventTrigger>
+                            </b:Interaction.Triggers>
+                        </Button>
+                        <Button Content="Price">
+                            <b:Interaction.Triggers>
+                                <b:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                    <b:InvokeCommandAction Command="{Binding PricePageButtonClickCommand}"  CommandParameter="{Binding ElementName=AdminPanelViewFrame}" />
+                                </b:EventTrigger>
+                            </b:Interaction.Triggers>
+                        </Button>
                     </ListBox>
                 </DockPanel>
             </materialDesign:DrawerHost.LeftDrawerContent>

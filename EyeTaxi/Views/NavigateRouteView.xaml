@@ -75,6 +75,7 @@ Text="{Binding PointTwoText,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                     hc:InfoElement.Placeholder="Location B"
                     ShowClearButton="True" />
                 <Button
+IsEnabled="{Binding SearchNavigationButtonIsEnabled,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                     Grid.Row="0"
                     Grid.Column="1"
                     Width="90"
@@ -112,7 +113,7 @@ Text="{Binding PointTwoText,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                     VerticalAlignment="Stretch"
                     Text="{Binding MessagesTextBlockText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     TextWrapping="Wrap" />
-                <TextBlock Grid.Column="1" Text="Salam" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="20"></TextBlock>
+                <TextBlock  Grid.Column="1" Text="Salam" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="20"></TextBlock>
                 <Button
                     Grid.Column="3"
                     Width="50"

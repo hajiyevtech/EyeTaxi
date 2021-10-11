@@ -120,6 +120,7 @@
     <Compile Include="ViewModel\DriverListPageModel.cs" />
     <Compile Include="ViewModel\DriversAddViewModel.cs" />
     <Compile Include="ViewModel\DriversEditViewModel.cs" />
+    <Compile Include="ViewModel\PricePageViewModel.cs" />
     <Compile Include="Views\AdminPanelView.xaml.cs">
       <DependentUpon>AdminPanelView.xaml</DependentUpon>
     </Compile>
@@ -134,6 +135,9 @@
     </Compile>
     <Compile Include="Views\AdminLoginView.xaml.cs">
       <DependentUpon>AdminLoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PricePage.xaml.cs">
+      <DependentUpon>PricePage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -181,6 +185,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AdminLoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PricePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
