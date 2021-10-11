@@ -123,7 +123,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Frame Grid.Row="1" Margin="10" Name="AdminPanelViewFrame">
+                    <Frame Grid.Row="1" Margin="10" Name="AdminPanelViewFrame" NavigationUIVisibility="Hidden">
                         <b:Interaction.Triggers>
                             <b:EventTrigger EventName="Loaded">
                                 <b:InvokeCommandAction Command="{Binding AdminPanelViewFrameLoad}" CommandParameter="{Binding ElementName=AdminPanelViewFrame}" />
