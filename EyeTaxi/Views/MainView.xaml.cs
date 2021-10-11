@@ -11,29 +11,17 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Esri.ArcGISRuntime.Geometry;
-using Esri.ArcGISRuntime.Mapping;
-using EyeTaxi.ViewModels;
 
 namespace EyeTaxi.Views
 {
     /// <summary>
     /// Interaction logic for MainView.xaml
     /// </summary>
-    public partial class MainView
+    public partial class MainView : Window
     {
-
         public MainView()
         {
             InitializeComponent();
-            //MainMapView.LocationDisplay.IsEnabled = true;
-        }
-
-        private void MainMapView_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            //Point mousePoint = Mouse.GetPosition(this);
-            //MapPoint mapPoint = new MapPoint(mousePoint.X, mousePoint.Y);
-            //MainViewMapPoint = MainMapView.ScreenToLocation(mousePoint);
         }
     }
 }

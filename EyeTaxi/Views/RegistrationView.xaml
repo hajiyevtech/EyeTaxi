@@ -92,7 +92,7 @@
                             <Viewbox
                                 Grid.Column="1"
                                 Width="50"
-                                Margin="0,5,10,5"
+                                Margin="0,5,50,5"
                                 HorizontalAlignment="Right">
                                 <hc:AnimationPath
                                     VerticalAlignment="Center"
@@ -102,6 +102,33 @@
                                     StrokeThickness="20"
                                     Duration="00:00:3" />
                             </Viewbox>
+                            <Button
+                                Grid.Column="1"
+VerticalAlignment="Center"
+                    Width="25"
+                    Height="25"
+                    Margin="0,0,10,10"
+                    Padding="7"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+HorizontalAlignment="Right"
+                    hc:BackgroundSwitchElement.MouseDownBackground="PaleVioletRed"
+                    hc:BackgroundSwitchElement.MouseHoverBackground="Red"
+                    hc:BorderElement.CornerRadius="25"
+                    hc:IconElement.Geometry="{StaticResource DeleteGeometry}"
+                    Background="#4760F3"
+                    Style="{StaticResource ButtonCustom}">
+                                <b:Interaction.Triggers>
+                                    <b:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                        <b:InvokeCommandAction Command="{Binding CloseButtonClickCommand}" CommandParameter="{Binding ElementName=window}" />
+                                    </b:EventTrigger>
+                                </b:Interaction.Triggers>
+                                <materialDesign:PackIcon
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Foreground="White"
+                        Kind="Close" />
+                            </Button>
                         </Grid>
                         <Grid Grid.Row="1" Margin="0,0,0,10">
                             <Button
@@ -244,7 +271,7 @@
                             <Viewbox
                                 Grid.Column="1"
                                 Width="50"
-                                Margin="0,5,10,5"
+                                Margin="0,5,45,5"
                                 HorizontalAlignment="Right">
                                 <hc:AnimationPath
                                     VerticalAlignment="Center"
@@ -254,6 +281,33 @@
                                     StrokeThickness="20"
                                     Duration="00:00:3" />
                             </Viewbox>
+                            <Button
+                                Grid.Column="1"
+VerticalAlignment="Center"
+                    Width="25"
+                    Height="25"
+                    Margin="0,0,10,10"
+                    Padding="7"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+HorizontalAlignment="Right"
+                    hc:BackgroundSwitchElement.MouseDownBackground="PaleVioletRed"
+                    hc:BackgroundSwitchElement.MouseHoverBackground="Red"
+                    hc:BorderElement.CornerRadius="25"
+                    hc:IconElement.Geometry="{StaticResource DeleteGeometry}"
+                    Background="#4760F3"
+                    Style="{StaticResource ButtonCustom}">
+                                <b:Interaction.Triggers>
+                                    <b:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                        <b:InvokeCommandAction Command="{Binding CloseButtonClickCommand}" CommandParameter="{Binding ElementName=window}" />
+                                    </b:EventTrigger>
+                                </b:Interaction.Triggers>
+                                <materialDesign:PackIcon
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Foreground="White"
+                        Kind="Close" />
+                            </Button>
                         </Grid>
                         <Grid Grid.Row="1" Margin="0,0,0,10">
                             <Button

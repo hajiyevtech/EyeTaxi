@@ -23,6 +23,7 @@ namespace EyeTaxi.ViewModels
     {
         public RelayCommand LogBtnClickCommand { get; set; }
         public RelayCommand LoginBtnClickCommand { get; set; }
+        public RelayCommand CloseButtonClickCommand { get; set; }
         public RelayCommand LogPassCommand { get; set; }
         public List<User> Users { get; set; } = JsonSerializer.Deserialize<List<User>>(File.ReadAllText($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Json Files\Users.json"));
 
@@ -36,7 +37,7 @@ namespace EyeTaxi.ViewModels
             }
         }
 
-        private Visibility logViewVisibility = Visibility.Collapsed;
+        private Visibility logViewVisibility = Visibility.Visible;
 
         public Visibility LogViewVisibility
         {
@@ -46,7 +47,7 @@ namespace EyeTaxi.ViewModels
 
         #region Register Fields
 
-        private Visibility regViewVisibility = Visibility.Visible;
+        private Visibility regViewVisibility = Visibility.Collapsed;
 
         public Visibility RegViewVisibility
         {
@@ -115,6 +116,13 @@ namespace EyeTaxi.ViewModels
         public RegistrationViewModel()
         {
 
+            CloseButtonClickCommand = new RelayCommand(s =>
+            {
+                if (s is Window window)
+                {
+                    window.Close();
+                }
+            });
             #region Register 
 
             LogBtnClickCommand = new RelayCommand(s =>
@@ -254,7 +262,7 @@ namespace EyeTaxi.ViewModels
                                 HandyControl.Controls.Growl.SuccessGlobal($"Welcome {Users[IndexHolder].Username}");
                                 //Create here New Window Example
                                 CurrentUserLoggedIn = Users[IndexHolder];
-                                var NewWindow = new MainView();
+                                var NewWindow = new NavigateRouteView();
 
                                 MyView.Hide();
 

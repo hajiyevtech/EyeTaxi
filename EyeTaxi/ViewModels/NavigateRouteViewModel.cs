@@ -122,7 +122,7 @@ namespace EyeTaxi.ViewModels
         public string PriceText
         {
             get { return _priceText; }
-            set { _priceText = value; }
+            set { _priceText = value; OnPropertyRaised(); }
         }
 
 
@@ -133,7 +133,6 @@ namespace EyeTaxi.ViewModels
         public RelayCommand StartNavigationButtonCommand { get; set; }
         public RelayCommand RecenterButtonCommand { get; set; }
         public RelayCommand ViewLoadCommand { get; set; }
-        public RelayCommand baris { get; set; }
         public ObservableCollection<Driver> Drivers { get; set; } = JsonSerializer.Deserialize<ObservableCollection<Driver>>(File.ReadAllText($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Json Files\Drivers.json"));
 
         private LocatorTask _geocoder;
@@ -167,9 +166,9 @@ namespace EyeTaxi.ViewModels
             MapViewCommand = new RelayCommand(s =>
             {
                 MyMapView = s as MapView;
-                PointTwo = new MapPoint(MyMapView.LocationDisplay.Location.Position.X, MyMapView.LocationDisplay.Location.Position.Y, SpatialReferences.Wgs84);
                 Initialize();
                 InitTaxies();
+                PointTwo = new MapPoint(MyMapView.LocationDisplay.Location.Position.X, MyMapView.LocationDisplay.Location.Position.Y, SpatialReferences.Wgs84);
                 //MyMapView.LocationDisplay.IsEnabled = true;
                 //PointTwo = MyMapView.LocationDisplay.;
 
@@ -198,6 +197,7 @@ namespace EyeTaxi.ViewModels
                 if (!(MyMapView is null))
                 {
                     StartNavigationButtonIsEnabled = false;
+                    PriceText = "";
                     MyMapView.GraphicsOverlays.Clear();
                     Temp(); //calculate 2 difrent location route
                     InitTaxies();
@@ -318,27 +318,27 @@ namespace EyeTaxi.ViewModels
                     List<double> driversdistance = new List<double>();
                     for (int i = 0; i < Drivers.Count; i++)
                     {
-                        RouteTask routeTask = await RouteTask.CreateAsync(new Uri("https://route-api.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World"));
+                        RouteTask routeTaskk = await RouteTask.CreateAsync(new Uri("https://route-api.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World"));
 
                         // Get the default route parameters.
-                        RouteParameters routeParams = await routeTask.CreateDefaultParametersAsync();
+                        RouteParameters routeParamss = await routeTaskk.CreateDefaultParametersAsync();
 
                         // Explicitly set values for parameters.
-                        routeParams.ReturnDirections = true;
-                        routeParams.ReturnStops = true;
-                        routeParams.ReturnRoutes = true;
-                        routeParams.OutputSpatialReference = SpatialReferences.Wgs84;
+                        routeParamss.ReturnDirections = true;
+                        routeParamss.ReturnStops = true;
+                        routeParamss.ReturnRoutes = true;
+                        routeParamss.OutputSpatialReference = SpatialReferences.Wgs84;
 
                         // Create stops for each location.
-                        Stop stop1 = new Stop(new MapPoint(Drivers[i].Location.X, Drivers[i].Location.Y, SpatialReferences.Wgs84));
-                        Stop stop2 = new Stop(PointTwo);
+                        Stop stopp1 = new Stop(new MapPoint(Drivers[i].Location.X, Drivers[i].Location.Y, SpatialReferences.Wgs84));
+                        Stop stopp2 = new Stop(PointTwo);
 
                         // Assign the stops to the route parameters.
-                        List<Stop> stopPoints = new List<Stop> { stop1, stop2 };
-                        routeParams.SetStops(stopPoints);
+                        List<Stop> stopPointss = new List<Stop> { stopp1, stopp2 };
+                        routeParamss.SetStops(stopPointss);
 
                         // Get the route results.
-                        RouteResult result = await routeTask.SolveRouteAsync(routeParams);
+                        RouteResult result = await routeTaskk.SolveRouteAsync(routeParamss);
                         Route route = result.Routes[0];
 
                         driversdistance.Add(route.TotalLength / 1000);
@@ -360,8 +360,75 @@ namespace EyeTaxi.ViewModels
 
                     //PointTwo = new MapPoint(P1.X, P1.Y, SpatialReferences.WebMercator);
                     //PointThree = new MapPoint(P2.X, P2.Y, SpatialReferences.WebMercator);
-                    CalculateRoute();
-                    PriceText = $"{Distance * double.Parse(File.ReadAllText($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Json Files\PricePer-KM.json"))}Manat Tuttu baslamaq Ucun Start basin";
+                    //CalculateRoute();
+
+
+                    // Create the route task, using the online routing service.
+                    RouteTask routeTask = await RouteTask.CreateAsync(_routingUri);
+
+                    // Get the default route parameters.
+                    RouteParameters routeParams = await routeTask.CreateDefaultParametersAsync();
+
+                    // Explicitly set values for parameters.
+                    routeParams.ReturnDirections = true;
+                    routeParams.ReturnStops = true;
+                    routeParams.ReturnRoutes = true;
+                    routeParams.OutputSpatialReference = SpatialReferences.Wgs84;
+
+                    // Create stops for each location.
+                    Stop stops = new Stop(PointOne);
+                    Stop stops1 = new Stop(PointTwo);
+                    Stop stops2 = new Stop(PointThree);
+
+                    // Assign the stops to the route parameters.
+                    List<Stop> stopPoints = new List<Stop> { stops, stops1, stops2 };
+                    routeParams.SetStops(stopPoints);
+
+                    // Get the route results.
+                    _routeResult = await routeTask.SolveRouteAsync(routeParams);
+                    _route = _routeResult.Routes[0];
+
+                    Distance = _route.TotalLength / 1000;
+
+
+                    // Add a graphics overlay for the route graphics.
+                    MyMapView.GraphicsOverlays.Add(new GraphicsOverlay());
+
+                    // Add graphics for the stops.
+                    SimpleMarkerSymbol stopSymbol = new SimpleMarkerSymbol(SimpleMarkerSymbolStyle.Diamond, Color.OrangeRed, 20);
+                    MyMapView.GraphicsOverlays[0].Graphics.Add(new Graphic(PointTwo, stopSymbol));
+                    MyMapView.GraphicsOverlays[0].Graphics.Add(new Graphic(PointThree, stopSymbol));
+
+                    // Create a graphic (with a dashed line symbol) to represent the route.
+                    _routeAheadGraphic = new Graphic(_route.RouteGeometry) { Symbol = new SimpleLineSymbol(SimpleLineSymbolStyle.Solid, Color.FromArgb(71, 96, 243), 5) };
+
+                    // Create a graphic (solid) to represent the route that's been traveled (initially empty).
+                    _routeTraveledGraphic = new Graphic { Symbol = new SimpleLineSymbol(SimpleLineSymbolStyle.Solid, Color.FromArgb(163, 175, 249), 3) };
+
+                    // Add the route graphics to the map view.
+                    MyMapView.GraphicsOverlays[0].Graphics.Add(_routeAheadGraphic);
+                    MyMapView.GraphicsOverlays[0].Graphics.Add(_routeTraveledGraphic);
+
+                    // Set the map viewpoint to show the entire route.
+                    await MyMapView.SetViewpointGeometryAsync(_route.RouteGeometry, 100);
+
+                    // Enable the navigation button.
+                    StartNavigationButtonIsEnabled = true;
+
+
+                    //
+
+
+                    var temp5 = (Distance * double.Parse(File.ReadAllText($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Json Files\PricePer-KM.json")));
+                    //1.521878123
+
+                    //   (0.5*10)=5.21878123
+                    //   convert int 5
+                    //   5/10=0.5
+                    //   1+0.5=1.5
+
+
+                    PriceText = $"{(double)((int)temp5)+((double)((int)((((temp5-(int)(temp5))*10))/10)))} Manat Tuttu baslamaq Ucun Start basin";
                 }
 
             }

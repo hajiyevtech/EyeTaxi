@@ -1,43 +1,37 @@
-﻿using System;
+﻿using EyeTaxi.ViewModels;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using Esri.ArcGISRuntime.Geometry;
-using Esri.ArcGISRuntime.Location;
-using Esri.ArcGISRuntime.Mapping;
-using Esri.ArcGISRuntime.Navigation;
-using Esri.ArcGISRuntime.Symbology;
-using Esri.ArcGISRuntime.Tasks.NetworkAnalysis;
-using Esri.ArcGISRuntime.UI;
-using Color = System.Drawing.Color;
-using System.Speech.Synthesis;
-using Esri.ArcGISRuntime.Portal;
-using EyeTaxi.ViewModels;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace EyeTaxi.Views
 {
     /// <summary>
-    /// Interaction logic for NavigateRoute.xaml
+    /// Interaction logic for NavigateRouteView.xaml
     /// </summary>
-
-    public partial class NavigateRouteView : Page
+    public partial class NavigateRouteView : Window
     {
-        // Variables for tracking the navigation route.
         public static bool IsNagivateStart { get; set; } = true;
         public NavigateRouteView()
         {
             InitializeComponent();
             MyMapView.LocationDisplay.IsEnabled = true;
-            
+
             //NavigateRouteViewModel.CommandCreatedObject.PointTwo = mapPoint;
             //NavigateRouteViewModel.CommandCreatedObject.View = this;
             //new MapPoint(5549147.485435362, 4921203.933289913, SpatialReferences.WebMercator);
             //NavigateRouteViewModel.CommandCreatedObject._secondPoint = new MapPoint(5549603.62447322, 4924224.8532453, SpatialReferences.WebMercator);
 
         }
-
         private void MyMapView_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (IsNagivateStart)
