@@ -12,46 +12,18 @@ using System.Windows.Threading;
 
 namespace EyeTaxi.ViewModels
 {
-    public  class MainViewModel
+    public class MainViewModel
     {
-        public RelayCommand NavigateCommand { get; set; }
-        public RelayCommand LeftButtonCommand { get; set; }
         public RelayCommand GetMapGridCommand { get; set; }
-        public RelayCommand GetMapGridFrameCommand { get; set; }
-        public Grid Mapo { get; set; }
-        public Frame Frame { get; set; }
         public MainViewModel()
         {
-
-
-
-
-
             GetMapGridCommand = new RelayCommand(s =>
             {
-                Mapo = s as Grid;
-            }, e => { return true; });
-
-
-            GetMapGridFrameCommand = new RelayCommand(s =>
-            {
-                Frame = s as Frame;
-            }, e => { return true; });
-
-            NavigateCommand = new RelayCommand(a =>
-            {
                 NavigateRouteView navigateRoute = new NavigateRouteView();
+                var frame = s as Frame;
 
-
-
-                //Burdan pramoy Kordinatlari vere bilirik!!Gorursen Mestan Dagidiram buralari
-                //NavigateRouteViewModel.CommandCreatedObject._firstPoint;
-                //NavigateRouteViewModel.CommandCreatedObject._secondPoint;
-
-                //Mapo.Children.Add(navigateRoute);
-                Frame.Content = navigateRoute;
-            }, p => true);
-
+                frame.Content = navigateRoute;
+            });
 
 
         }
