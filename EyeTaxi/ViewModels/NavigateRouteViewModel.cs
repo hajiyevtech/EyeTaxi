@@ -136,7 +136,7 @@ namespace EyeTaxi.ViewModels
         public ObservableCollection<Driver> Drivers { get; set; } = JsonSerializer.Deserialize<ObservableCollection<Driver>>(File.ReadAllText($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Json Files\Drivers.json"));
 
         private LocatorTask _geocoder;
-        public async void InitTaxies()
+        public async void InitTaxies(Driver DoNotShowThisDriver = null)
         {
 
             Assembly currentAssembly = GetType().GetTypeInfo().Assembly;
@@ -147,27 +147,39 @@ namespace EyeTaxi.ViewModels
 
             PictureMarkerSymbol CabSymbol = new PictureMarkerSymbol(new Uri(converted));
             if (MyMapView.GraphicsOverlays == null) return;
-            MyMapView.GraphicsOverlays.Add(new GraphicsOverlay());
             CabSymbol.Width = 65;
             CabSymbol.Height = 65;
 
             foreach (var d in Drivers)
             {
-                MyMapView.GraphicsOverlays[0].Graphics.Add(new Graphic(
-                    new MapPoint(d.Location.X, d.Location.Y, SpatialReferences.Wgs84),
-                    CabSymbol));
+                if (DoNotShowThisDriver is null)
+                    MyMapView.GraphicsOverlays[1].Graphics.Add(new Graphic(
+                        new MapPoint(d.Location.X, d.Location.Y, SpatialReferences.Wgs84),
+                        CabSymbol));
+                else if (!(DoNotShowThisDriver is null))
+                {
+                    if (DoNotShowThisDriver != d)
+                        MyMapView.GraphicsOverlays[1].Graphics.Add(new Graphic(
+                            new MapPoint(d.Location.X, d.Location.Y, SpatialReferences.Wgs84),
+                            CabSymbol));
+                }
+
             }
         }
         public double Distance { get; set; }
         public NavigateRouteViewModel()
         {
-            
+
 
             MapViewCommand = new RelayCommand(s =>
             {
                 MyMapView = s as MapView;
+                MyMapView.GraphicsOverlays.Add(new GraphicsOverlay());
+                MyMapView.GraphicsOverlays.Add(new GraphicsOverlay());
                 Initialize();
                 InitTaxies();
+                //for (int i = 0; i < MyMapView.GraphicsOverlays[0].Graphics.Count; i++)
+                //Taxies.Add(MyMapView.GraphicsOverlays[0].Graphics[i]);
                 PointTwo = new MapPoint(MyMapView.LocationDisplay.Location.Position.X, MyMapView.LocationDisplay.Location.Position.Y, SpatialReferences.Wgs84);
                 //MyMapView.LocationDisplay.IsEnabled = true;
                 //PointTwo = MyMapView.LocationDisplay.;
@@ -200,67 +212,14 @@ namespace EyeTaxi.ViewModels
                     PriceText = "";
                     MyMapView.GraphicsOverlays.Clear();
                     Temp(); //calculate 2 difrent location route
-                    InitTaxies();
                 }
             });
 
             CommandCreatedObject = this;
 
         }
-        public async void CalculateRoute()
-        {
-            // Create the route task, using the online routing service.
-            RouteTask routeTask = await RouteTask.CreateAsync(_routingUri);
 
-            // Get the default route parameters.
-            RouteParameters routeParams = await routeTask.CreateDefaultParametersAsync();
-
-            // Explicitly set values for parameters.
-            routeParams.ReturnDirections = true;
-            routeParams.ReturnStops = true;
-            routeParams.ReturnRoutes = true;
-            routeParams.OutputSpatialReference = SpatialReferences.Wgs84;
-
-            // Create stops for each location.
-            Stop stop = new Stop(PointOne);
-            Stop stop1 = new Stop(PointTwo);
-            Stop stop2 = new Stop(PointThree);
-
-            // Assign the stops to the route parameters.
-            List<Stop> stopPoints = new List<Stop> { stop, stop1, stop2 };
-            routeParams.SetStops(stopPoints);
-
-            // Get the route results.
-            _routeResult = await routeTask.SolveRouteAsync(routeParams);
-            _route = _routeResult.Routes[0];
-
-            Distance = _route.TotalLength / 1000;
-
-
-            // Add a graphics overlay for the route graphics.
-            MyMapView.GraphicsOverlays.Add(new GraphicsOverlay());
-
-            // Add graphics for the stops.
-            SimpleMarkerSymbol stopSymbol = new SimpleMarkerSymbol(SimpleMarkerSymbolStyle.Diamond, Color.OrangeRed, 20);
-            MyMapView.GraphicsOverlays[0].Graphics.Add(new Graphic(PointTwo, stopSymbol));
-            MyMapView.GraphicsOverlays[0].Graphics.Add(new Graphic(PointThree, stopSymbol));
-
-            // Create a graphic (with a dashed line symbol) to represent the route.
-            _routeAheadGraphic = new Graphic(_route.RouteGeometry) { Symbol = new SimpleLineSymbol(SimpleLineSymbolStyle.Solid, Color.FromArgb(71, 96, 243), 5) };
-
-            // Create a graphic (solid) to represent the route that's been traveled (initially empty).
-            _routeTraveledGraphic = new Graphic { Symbol = new SimpleLineSymbol(SimpleLineSymbolStyle.Solid, Color.FromArgb(163, 175, 249), 3) };
-
-            // Add the route graphics to the map view.
-            MyMapView.GraphicsOverlays[0].Graphics.Add(_routeAheadGraphic);
-            MyMapView.GraphicsOverlays[0].Graphics.Add(_routeTraveledGraphic);
-
-            // Set the map viewpoint to show the entire route.
-            await MyMapView.SetViewpointGeometryAsync(_route.RouteGeometry, 100);
-
-            // Enable the navigation button.
-            StartNavigationButtonIsEnabled = true;
-        }
+        public string CurrentPlaceName { get; set; } = "Any Problem";
         public async void GetCurrentPointAddressName()
         {
             Uri Link = new Uri("https://geocode-api.arcgis.com/arcgis/rest/services/World/GeocodeServer");
@@ -272,6 +231,7 @@ namespace EyeTaxi.ViewModels
                 IReadOnlyList<GeocodeResult> addresses = await _geocoder.ReverseGeocodeAsync(PointTwo);
                 GeocodeResult address = addresses.First();
                 PointOneText = address.Attributes["Address"].ToString();
+                CurrentPlaceName = address.Attributes["Address"].ToString();
                 if (string.IsNullOrWhiteSpace(PointOneText))
                     PointOneText = "   ";
             }
@@ -281,6 +241,7 @@ namespace EyeTaxi.ViewModels
             }
         }
         public Driver SelectedDriver { get; set; }
+        public List<Graphic> Taxies { get; set; } = new List<Graphic>();
         public async void Temp()
         {
             try
@@ -295,15 +256,16 @@ namespace EyeTaxi.ViewModels
                     _geocoder = await LocatorTask.CreateAsync(Link);
 
 
-                    if (!string.IsNullOrWhiteSpace(PointOneText))
+                    if (CurrentPlaceName != PointOneText)
                     {
-
                         IReadOnlyList<SuggestResult> suggestionsOne = await _geocoder.SuggestAsync(PointOneText);
                         SuggestResult firstSuggestion = suggestionsOne.First();
                         var addressesOne = await _geocoder.GeocodeAsync(firstSuggestion.Label);
                         var mapPointOne = addressesOne.First().DisplayLocation;
                         PointTwo = mapPointOne;
                     }
+                    else
+                        GetCurrentPointAddressName();
                     IReadOnlyList<SuggestResult> suggestionsTwo = await _geocoder.SuggestAsync(PointTwoText);
 
                     SuggestResult SecondSuggestion = suggestionsTwo.First();
@@ -345,6 +307,7 @@ namespace EyeTaxi.ViewModels
 
                     }
                     var Min = driversdistance[0];
+                    SelectedDriver = Drivers[0];
                     for (int i = 0; i < driversdistance.Count; i++)
                     {
                         if (driversdistance[i] < Min)
@@ -392,6 +355,8 @@ namespace EyeTaxi.ViewModels
 
 
                     // Add a graphics overlay for the route graphics.
+                    MyMapView.GraphicsOverlays.Clear();
+                    MyMapView.GraphicsOverlays.Add(new GraphicsOverlay());
                     MyMapView.GraphicsOverlays.Add(new GraphicsOverlay());
 
                     // Add graphics for the stops.
@@ -428,7 +393,8 @@ namespace EyeTaxi.ViewModels
                     //   1+0.5=1.5
 
 
-                    PriceText = $"{(double)((int)temp5)+((double)((int)((((temp5-(int)(temp5))*10))/10)))} Manat Tuttu baslamaq Ucun Start basin";
+                    PriceText = $"{(double)((int)temp5) + ((double)((int)((((temp5 - (int)(temp5)) * 10)) / 10)))} Manat Tuttu baslamaq Ucun Start basin";
+                    InitTaxies();
                 }
 
             }
@@ -471,6 +437,14 @@ namespace EyeTaxi.ViewModels
 
         private void StartNavigation(object sender)
         {
+            //InitTaxies(SelectedDriver);
+            //MyMapView.GraphicsOverlays[0].Graphics.Remove(new Graphic(
+            //            new MapPoint(SelectedDriver.Location.X, SelectedDriver.Location.Y, SpatialReferences.Wgs84),
+            //            CabSymbol);
+
+            MyMapView.GraphicsOverlays[1].Graphics.Clear();
+            InitTaxies(SelectedDriver);
+
             NavigateRouteView.IsNagivateStart = false;
             // Disable the start navigation button.
             StartNavigationButtonIsEnabled = false;
@@ -491,7 +465,8 @@ namespace EyeTaxi.ViewModels
             MyMapView.LocationDisplay.AutoPanModeChanged += AutoPanModeChanged;
 
             // Add a data source for the location display.
-            var simulationParameters = new SimulationParameters(DateTimeOffset.Now, 40);
+            // Speed
+            var simulationParameters = new SimulationParameters(DateTimeOffset.Now, 200);
             var simulatedDataSource = new SimulatedLocationDataSource();
             simulatedDataSource.SetLocationsWithPolyline(_route.RouteGeometry, simulationParameters);
             MyMapView.LocationDisplay.DataSource = new RouteTrackerDisplayLocationDataSource(simulatedDataSource, _tracker);
@@ -502,7 +477,7 @@ namespace EyeTaxi.ViewModels
             // Enable the location display (this wil start the location data source).
             MyMapView.LocationDisplay.IsEnabled = true;
         }
-
+        public int DestinationCounter { get; set; } = 0;
         private void TrackingStatusUpdated(object sender, RouteTrackerTrackingStatusChangedEventArgs e)
         {
             TrackingStatus status = e.TrackingStatus;
@@ -536,6 +511,16 @@ namespace EyeTaxi.ViewModels
             {
                 statusMessageBuilder.AppendLine("Destination reached.");
                 SearchNavigationButtonIsEnabled = true;
+
+                DestinationCounter += 1;
+
+                if (DestinationCounter == 2)
+                {
+                    SelectedDriver.Location = new Point(PointThree.X, PointThree.Y);
+                    var TextJson = JsonSerializer.Serialize(Drivers, new JsonSerializerOptions { WriteIndented = true });
+                    File.WriteAllText($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Json Files\Drivers.json", TextJson);
+
+                }
 
                 // Set the route geometries to reflect the completed route.
                 _routeAheadGraphic.Geometry = null;
