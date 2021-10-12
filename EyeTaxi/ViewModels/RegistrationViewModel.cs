@@ -83,18 +83,8 @@ namespace EyeTaxi.ViewModels
 
         private string _regPassText = "";
 
-        public string RegPassText
-        {
-            get { return _regPassText; }
-            set { _regPassText = value; OnPropertyRaised(); }
-        }
-        private string _regConfirmPassText = "";
 
-        public string RegConfirmPassText
-        {
-            get { return _regConfirmPassText; }
-            set { _regConfirmPassText = value; OnPropertyRaised(); }
-        }
+
         public HandyControl.Controls.PasswordBox RegPasswordBox { get; set; }
         public HandyControl.Controls.PasswordBox RegConfirmPasswordBox { get; set; }
 
@@ -138,17 +128,6 @@ namespace EyeTaxi.ViewModels
                 RegViewVisibility = Visibility.Visible;
                 LogViewVisibility = Visibility.Collapsed;
             });
-
-            RegPassChangedCommand = new RelayCommand(s =>
-            {
-                RegPassText = (s as PasswordBox).Password;
-            });
-
-            RegConfirmPassChangedCommand = new RelayCommand(s =>
-            {
-                RegConfirmPassText = (s as PasswordBox).Password;
-            });
-
             RegConfirmPasswordLoadedCommand = new RelayCommand(s =>
             {
                 RegConfirmPasswordBox = s as PasswordBox;
@@ -161,11 +140,11 @@ namespace EyeTaxi.ViewModels
 
             RegisterButtonClickedCommand = new RelayCommand(s =>
             {
-                if (RegUsernameText.Length > 5)
+                if (RegUsernameText.Length >= 5)
                 {
-                    if (RegPassText.Length > 5)
+                    if (RegPasswordBox.Password.Length >= 5)
                     {
-                        if (RegConfirmPassText == RegPassText)
+                        if (RegConfirmPasswordBox.Password == RegPasswordBox.Password)
                         {
                             if (MailAddress(EmailText))
                             {
@@ -184,7 +163,7 @@ namespace EyeTaxi.ViewModels
 
                                 if (!UserNameAlReadyHave)
                                 {
-                                    var NewUser = new User(RegUsernameText, RegPassText, EmailText);
+                                    var NewUser = new User(RegUsernameText, RegPasswordBox.Password, EmailText);
                                     Users.Add(NewUser);
 
                                     var TextJson = JsonSerializer.Serialize(Users, new JsonSerializerOptions() { WriteIndented = true });
@@ -194,8 +173,8 @@ namespace EyeTaxi.ViewModels
                                     LogPasswordBox.Password = "";
 
                                     RegUsernameText = "";
-                                    RegPassText = "";
-                                    RegConfirmPassText = "";
+                                    RegPasswordBox.Password = "";
+                                    RegConfirmPasswordBox.Password = "";
 
                                     RegConfirmPasswordBox.Password = "";
                                     RegPasswordBox.Password = "";

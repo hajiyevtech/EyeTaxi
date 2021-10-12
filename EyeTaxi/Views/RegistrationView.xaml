@@ -168,13 +168,11 @@ HorizontalAlignment="Right"
                         <hc:PasswordBox
                             Grid.Row="3"
                             Margin="10"
+                            Name="RegPass"
                             hc:InfoElement.Placeholder="Password"
                             ShowClearButton="True"
                             ShowEyeButton="True">
                             <b:Interaction.Triggers>
-                                <b:EventTrigger EventName="PasswordChanged">
-                                    <b:InvokeCommandAction Command="{Binding RegPassChangedCommand}" CommandParameter="{Binding ElementName=RegPass}" />
-                                </b:EventTrigger>
                                 <b:EventTrigger EventName="Loaded">
                                     <b:InvokeCommandAction Command="{Binding RegPasswordLoadedCommand}" CommandParameter="{Binding ElementName=RegPass}" />
                                 </b:EventTrigger>
@@ -202,11 +200,9 @@ HorizontalAlignment="Right"
                             Margin="10"
                             hc:InfoElement.Placeholder="Confirm password"
                             ShowClearButton="True"
-                            ShowEyeButton="True">
+                            ShowEyeButton="True"
+                            >
                             <b:Interaction.Triggers>
-                                <b:EventTrigger EventName="PasswordChanged">
-                                    <b:InvokeCommandAction Command="{Binding RegConfirmPassChangedCommand}" CommandParameter="{Binding ElementName=RegConfirmPass}" />
-                                </b:EventTrigger>
                                 <b:EventTrigger EventName="Loaded">
                                     <b:InvokeCommandAction Command="{Binding RegConfirmPasswordLoadedCommand}" CommandParameter="{Binding ElementName=RegConfirmPass}" />
                                 </b:EventTrigger>

@@ -208,6 +208,10 @@ namespace EyeTaxi.ViewModels
             {
                 if (!(MyMapView is null))
                 {
+                    MyMapView.GraphicsOverlays.Clear();
+                    MyMapView.GraphicsOverlays.Add(new GraphicsOverlay());
+                    MyMapView.GraphicsOverlays.Add(new GraphicsOverlay());
+
                     StartNavigationButtonIsEnabled = false;
                     PriceText = "";
                     MyMapView.GraphicsOverlays.Clear();
@@ -401,6 +405,10 @@ namespace EyeTaxi.ViewModels
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MyMapView.GraphicsOverlays.Clear();
+                MyMapView.GraphicsOverlays.Add(new GraphicsOverlay());
+                MyMapView.GraphicsOverlays.Add(new GraphicsOverlay());
+                InitTaxies();
             }
         }
 
@@ -466,7 +474,7 @@ namespace EyeTaxi.ViewModels
 
             // Add a data source for the location display.
             // Speed
-            var simulationParameters = new SimulationParameters(DateTimeOffset.Now, 200);
+            var simulationParameters = new SimulationParameters(DateTimeOffset.Now, 350);
             var simulatedDataSource = new SimulatedLocationDataSource();
             simulatedDataSource.SetLocationsWithPolyline(_route.RouteGeometry, simulationParameters);
             MyMapView.LocationDisplay.DataSource = new RouteTrackerDisplayLocationDataSource(simulatedDataSource, _tracker);
@@ -517,10 +525,13 @@ namespace EyeTaxi.ViewModels
                 if (DestinationCounter == 2)
                 {
                     SelectedDriver.Location = new Point(PointThree.X, PointThree.Y);
+                    SelectedDriver.Balance += double.Parse(PriceText.Split(' ')[0]);
                     var TextJson = JsonSerializer.Serialize(Drivers, new JsonSerializerOptions { WriteIndented = true });
                     File.WriteAllText($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Json Files\Drivers.json", TextJson);
 
+                    InitTaxies();
                 }
+
 
                 // Set the route geometries to reflect the completed route.
                 _routeAheadGraphic.Geometry = null;

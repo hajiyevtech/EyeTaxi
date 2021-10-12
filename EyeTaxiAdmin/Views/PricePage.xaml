@@ -26,8 +26,9 @@
         Background="White"
         UniformCornerRadius="5">
         <Grid>
-            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 0 0 200" Text="{Binding PriceText,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></TextBlock>
-            <TextBox Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 0 0 100" Text="{Binding TextBoxText,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" ></TextBox>
+            <TextBlock FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 0 0 300" Text="Price Per KM"></TextBlock>
+            <TextBlock FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 0 0 200" Text="{Binding PriceText,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></TextBlock>
+            <TextBox FontSize="30" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 0 0 100" Text="{Binding TextBoxText,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" ></TextBox>
             <Button Content="Update">
                 <b:Interaction.Triggers>
                     <b:EventTrigger EventName="PreviewMouseLeftButtonDown">

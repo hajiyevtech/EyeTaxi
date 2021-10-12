@@ -48,5 +48,15 @@
     "Username": "filankes",
     "Password": "filankes",
     "Email": "filankes@gmail.com"
+  },
+  {
+    "Username": "Login",
+    "Password": "Login",
+    "Email": "Loginn@gmail.com"
+  },
+  {
+    "Username": "MyLogin",
+    "Password": "MyLoginn",
+    "Email": "MyLogin@gmail.com"
   }
 ]
