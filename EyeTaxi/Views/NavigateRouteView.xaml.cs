@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Esri.ArcGISRuntime.Symbology;
 
 namespace EyeTaxi.Views
 {
@@ -24,6 +25,12 @@ namespace EyeTaxi.Views
         public NavigateRouteView()
         {
             InitializeComponent();
+            var uri = new Uri($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Assets\cab.png");
+            var converted = uri.AbsoluteUri;
+            PictureMarkerSymbol CabSymbol = new PictureMarkerSymbol(new Uri(converted));
+            MyMapView.LocationDisplay.CourseSymbol = CabSymbol;
+            CabSymbol.Width = 65;
+            CabSymbol.Height = 65;
             MyMapView.LocationDisplay.IsEnabled = true;
 
             //NavigateRouteViewModel.CommandCreatedObject.PointTwo = mapPoint;

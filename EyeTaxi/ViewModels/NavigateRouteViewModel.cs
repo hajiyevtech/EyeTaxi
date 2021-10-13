@@ -141,11 +141,10 @@ namespace EyeTaxi.ViewModels
 
             Assembly currentAssembly = GetType().GetTypeInfo().Assembly;
 
-            var uri = new System.Uri($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Assets\cab.png");
+            var uri = new Uri($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Assets\cab.png");
             var converted = uri.AbsoluteUri;
-
-
             PictureMarkerSymbol CabSymbol = new PictureMarkerSymbol(new Uri(converted));
+
             if (MyMapView.GraphicsOverlays == null) return;
             CabSymbol.Width = 65;
             CabSymbol.Height = 65;

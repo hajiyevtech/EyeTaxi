@@ -25,10 +25,10 @@
     "CarNumber": "50-CY-340",
     "CarColor": "#FF210EF7",
     "Location": {
-      "X": 49.807500000000061,
-      "Y": 40.403590000000065
+      "X": 50.052530000000047,
+      "Y": 40.460710000000063
     },
-    "Balance": 0,
+    "Balance": 14,
     "Rating": 0,
     "CountTravel": 0,
     "TotalRating": 0
