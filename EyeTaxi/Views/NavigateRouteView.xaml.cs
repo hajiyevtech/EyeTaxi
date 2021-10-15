@@ -25,10 +25,18 @@ namespace EyeTaxi.Views
         public NavigateRouteView()
         {
             InitializeComponent();
-            var uri = new Uri($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Assets\cab.png");
-            var converted = uri.AbsoluteUri;
+            var cab = new Uri($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Assets\cab.png");
+            var converted = cab.AbsoluteUri;
             PictureMarkerSymbol CabSymbol = new PictureMarkerSymbol(new Uri(converted));
+
+            var user = new Uri($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Assets\user.png");
+            var converted2 = user.AbsoluteUri;
+            PictureMarkerSymbol UserSymbol = new PictureMarkerSymbol(new Uri(converted2));
+
             MyMapView.LocationDisplay.CourseSymbol = CabSymbol;
+            MyMapView.LocationDisplay.DefaultSymbol = UserSymbol;
+            UserSymbol.Width = 40;
+            UserSymbol.Height = 40;
             CabSymbol.Width = 65;
             CabSymbol.Height = 65;
             MyMapView.LocationDisplay.IsEnabled = true;

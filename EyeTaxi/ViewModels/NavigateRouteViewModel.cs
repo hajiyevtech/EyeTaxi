@@ -33,6 +33,7 @@ namespace EyeTaxi.ViewModels
 
         private RouteTracker _tracker;
 
+        public TestLoading TestLoading;
 
         private RouteResult _routeResult;
         private Route _route;
@@ -166,20 +167,44 @@ namespace EyeTaxi.ViewModels
             }
         }
         public double Distance { get; set; }
+
+        public async void GpsResponse()
+        {
+            PointTwo = new MapPoint(MyMapView.LocationDisplay.Location.Position.X, MyMapView.LocationDisplay.Location.Position.Y, SpatialReferences.Wgs84);
+        }
+
         public NavigateRouteViewModel()
         {
-
-
             MapViewCommand = new RelayCommand(s =>
             {
                 MyMapView = s as MapView;
                 MyMapView.GraphicsOverlays.Add(new GraphicsOverlay());
                 MyMapView.GraphicsOverlays.Add(new GraphicsOverlay());
+
                 Initialize();
+
+                MyMapView.LocationDisplay.IsEnabled = true;
+
+                System.Threading.Thread.Sleep(10000);
+                while (MyMapView.LocationDisplay.Started == false)
+                {
+                    TestLoading.Visibility = Visibility.Visible;
+                }
+                if (MyMapView.LocationDisplay.Started)
+                {
+                    PointTwo = new MapPoint(MyMapView.LocationDisplay.Location.Position.X, MyMapView.LocationDisplay.Location.Position.Y, SpatialReferences.Wgs84);
+                }
+                else
+                {
+                    MessageBox.Show("Please enable your location settings to show current location or enter manually");
+                }
+
                 InitTaxies();
                 //for (int i = 0; i < MyMapView.GraphicsOverlays[0].Graphics.Count; i++)
                 //Taxies.Add(MyMapView.GraphicsOverlays[0].Graphics[i]);
-                PointTwo = new MapPoint(MyMapView.LocationDisplay.Location.Position.X, MyMapView.LocationDisplay.Location.Position.Y, SpatialReferences.Wgs84);
+                //PointTwo = new MapPoint(MyMapView.LocationDisplay.Location.Position.X, MyMapView.LocationDisplay.Location.Position.Y, SpatialReferences.Wgs84);
+                //MyMapView.LocationDisplay.IsEnabled = true;
+
                 //MyMapView.LocationDisplay.IsEnabled = true;
                 //PointTwo = MyMapView.LocationDisplay.;
 
@@ -240,7 +265,7 @@ namespace EyeTaxi.ViewModels
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.ToString(), "Error");
+                //MessageBox.Show(e.ToString(), "Error");
             }
         }
         public Driver SelectedDriver { get; set; }
