@@ -185,7 +185,7 @@ namespace EyeTaxi.ViewModels
 
                 MyMapView.LocationDisplay.IsEnabled = true;
 
-                System.Threading.Thread.Sleep(10000);
+                System.Threading.Thread.Sleep(5000);
                 while (MyMapView.LocationDisplay.Started == false)
                 {
                     TestLoading.Visibility = Visibility.Visible;
@@ -232,10 +232,6 @@ namespace EyeTaxi.ViewModels
             {
                 if (!(MyMapView is null))
                 {
-                    MyMapView.GraphicsOverlays.Clear();
-                    MyMapView.GraphicsOverlays.Add(new GraphicsOverlay());
-                    MyMapView.GraphicsOverlays.Add(new GraphicsOverlay());
-
                     StartNavigationButtonIsEnabled = false;
                     PriceText = "";
                     MyMapView.GraphicsOverlays.Clear();
@@ -386,6 +382,7 @@ namespace EyeTaxi.ViewModels
                     MyMapView.GraphicsOverlays.Clear();
                     MyMapView.GraphicsOverlays.Add(new GraphicsOverlay());
                     MyMapView.GraphicsOverlays.Add(new GraphicsOverlay());
+
 
                     // Add graphics for the stops.
                     SimpleMarkerSymbol stopSymbol = new SimpleMarkerSymbol(SimpleMarkerSymbolStyle.Diamond, Color.OrangeRed, 20);
@@ -549,11 +546,19 @@ namespace EyeTaxi.ViewModels
                 if (DestinationCounter == 2)
                 {
                     SelectedDriver.Location = new Point(PointThree.X, PointThree.Y);
-                    SelectedDriver.Balance += double.Parse(PriceText.Split(' ')[0]);
+                    if (!string.IsNullOrWhiteSpace(PriceText))
+                    {
+                        SelectedDriver.Balance += double.Parse(PriceText.Split(' ')[0]);
+                    }
+
                     var TextJson = JsonSerializer.Serialize(Drivers, new JsonSerializerOptions { WriteIndented = true });
                     File.WriteAllText($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Json Files\Drivers.json", TextJson);
-
-                    InitTaxies();
+                    DestinationCounter = 0;
+                    _tracker.TrackingStatusChanged -= TrackingStatusUpdated;
+                    View.Dispatcher.Invoke(()=>
+                    {
+                        InitTaxies();
+                    });
                 }
 
 
