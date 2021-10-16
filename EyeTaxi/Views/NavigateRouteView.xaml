@@ -25,6 +25,9 @@
         <b:EventTrigger EventName="Loaded">
             <b:InvokeCommandAction Command="{Binding ViewLoadCommand}" CommandParameter="{Binding ElementName=Screen}" />
         </b:EventTrigger>
+        <b:EventTrigger EventName="Closing">
+            <b:InvokeCommandAction Command="{Binding WindowClosingCommand}" CommandParameter="{Binding ElementName=Window}" />
+        </b:EventTrigger>
     </b:Interaction.Triggers>
     <Window.DataContext>
         <viewModels:NavigateRouteViewModel />
