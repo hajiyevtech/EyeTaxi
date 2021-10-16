@@ -1,29 +1,185 @@
-﻿<Window x:Class="EyeTaxi.Views.DriverInfo"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:EyeTaxi.Views"
-        xmlns:hc="https://handyorg.github.io/handycontrol"
-        xmlns:system="clr-namespace:System;assembly=mscorlib"
-        mc:Ignorable="d"
-        Title="DriverInfo" Height="450" Width="800">
-    <hc:DialogContainer>
-        <hc:TransitioningContentControl>
-            <hc:SimplePanel>
-                <StackPanel Margin="32" VerticalAlignment="Center">
-                    <Button  Command="{Binding ShowTextCmd}" />
-                    <Button Margin="0,32,0,0"  Command="{Binding ShowTextCmd}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType=UserControl}}"/>
-                    <Button Margin="0,32,0,0"  Command="{Binding ShowInteractiveDialogCmd}">
-                        <Button.CommandParameter>
-                            <system:Boolean>True</system:Boolean>
-                        </Button.CommandParameter>
-                    </Button>
-                    <TextBox Margin="0,32,0,0" Text="{Binding DialogResult,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxExtend}" />
-                    <Button Margin="0,10,0,0"  Command="{Binding ShowInteractiveDialogCmd}"/>
-                    <Button Margin="0,32,0,0"  Command="{Binding NewWindowCmd}"/>
-                </StackPanel>
-            </hc:SimplePanel>
-        </hc:TransitioningContentControl>
-    </hc:DialogContainer>
+﻿<Window
+    x:Class="EyeTaxi.Views.DriverInfo"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:esri="http://schemas.esri.com/arcgis/runtime/2013"
+    xmlns:hc="https://handyorg.github.io/handycontrol"
+    xmlns:local="clr-namespace:EyeTaxi.Views"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
+    Title="DriverInfo"
+    Width="450"
+    Height="550"
+    AllowsTransparency="True"
+    Background="Transparent"
+    FontFamily="Product Sans"
+    ResizeMode="NoResize"
+    SizeToContent="WidthAndHeight"
+    TextElement.FontSize="13"
+    TextElement.FontWeight="Regular"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <materialDesign:Card
+        Name="Border"
+        Width="350"
+        Margin="40"
+        materialDesign:ShadowAssist.ShadowDepth="Depth5"
+        materialDesign:ShadowAssist.ShadowEdges="All"
+        Background="White"
+        UniformCornerRadius="5">
+        <StackPanel>
+            <TextBlock
+                Grid.Column="0"
+                Margin="10,0,0,0"
+                VerticalAlignment="Center"
+                FontFamily="Product Sans"
+                FontSize="40"
+                FontWeight="Bold"
+                Text="Trip Details" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <TextBox
+                    Height="60"
+                    Margin="10"
+                    hc:InfoElement.Placeholder="Salam"
+                    hc:InfoElement.Title="Driver Name"
+                    Focusable="False"
+                    Foreground="#B8B8B8"
+                    IsHitTestVisible="False"
+                    IsReadOnly="True"
+                    Style="{StaticResource TextBoxExtend}" />
+                <hc:TextBox
+                    Grid.Column="1"
+                    Height="60"
+                    Margin="10"
+                    hc:InfoElement.Placeholder="Surname"
+                    hc:InfoElement.Title="Driver Surname"
+                    Focusable="False"
+                    Foreground="#B8B8B8"
+                    IsHitTestVisible="False"
+                    IsReadOnly="True"
+                    Style="{StaticResource TextBoxExtend}" />
+            </Grid>
+            <hc:TextBox
+                Height="60"
+                Margin="10"
+                hc:InfoElement.Placeholder="Phone number"
+                hc:InfoElement.Title="Driver's Phone Number"
+                Focusable="False"
+                Foreground="#B8B8B8"
+                IsHitTestVisible="False"
+                IsReadOnly="True"
+                Style="{StaticResource TextBoxExtend}" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <hc:TextBox
+                    Height="60"
+                    Margin="10"
+                    hc:InfoElement.Placeholder="Car vendor"
+                    hc:InfoElement.Title="Car Vendor"
+                    Focusable="False"
+                    Foreground="#B8B8B8"
+                    IsHitTestVisible="False"
+                    IsReadOnly="True"
+                    Style="{StaticResource TextBoxExtend}" />
+                <hc:TextBox
+                    Grid.Column="1"
+                    Height="60"
+                    Margin="10"
+                    hc:InfoElement.Placeholder="Car model"
+                    hc:InfoElement.Title="Car Model"
+                    Focusable="False"
+                    Foreground="#B8B8B8"
+                    IsHitTestVisible="False"
+                    IsReadOnly="True"
+                    Style="{StaticResource TextBoxExtend}" />
+                <hc:TextBox
+                    Grid.Column="2"
+                    Height="60"
+                    Margin="10"
+                    hc:InfoElement.Title="Car Color"
+                    Background="Red"
+                    Focusable="False"
+                    Foreground="#B8B8B8"
+                    IsHitTestVisible="False"
+                    IsReadOnly="True"
+                    Style="{StaticResource TextBoxExtend}" />
+            </Grid>
+            <hc:TextBox
+                Height="60"
+                Margin="10"
+                hc:InfoElement.Placeholder="Car plate number"
+                hc:InfoElement.Title="Car Plate Number"
+                Focusable="False"
+                Foreground="#B8B8B8"
+                IsHitTestVisible="False"
+                IsReadOnly="True"
+                Style="{StaticResource TextBoxExtend}" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Label
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Content="Price"
+                    FontSize="24"
+                    FontWeight="Bold" />
+                <Label
+                    Grid.Column="1"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="15.20"
+                    FontSize="24"
+                    FontWeight="Bold" />
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button
+                    Margin="10"
+                    materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                    Content="Accept">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:InvokeCommandAction Command="{Binding AddButtonClickCommand}" CommandParameter="{Binding ElementName=AddWindow}" />
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+                <Button
+                    Grid.Column="1"
+                    Margin="10"
+                    hc:BackgroundSwitchElement.MouseDownBackground="PaleVioletRed"
+                    hc:BackgroundSwitchElement.MouseHoverBackground="Red"
+                    hc:BorderElement.CornerRadius="2"
+                    Background="#4760F3"
+                    Content="Reject"
+                    Foreground="White"
+                    Style="{StaticResource ButtonCustom}">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:InvokeCommandAction Command="{Binding AddButtonClickCommand}" CommandParameter="{Binding ElementName=AddWindow}" />
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </Button>
+
+            </Grid>
+        </StackPanel>
+    </materialDesign:Card>
 </Window>

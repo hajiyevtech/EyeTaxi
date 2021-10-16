@@ -177,12 +177,17 @@ namespace EyeTaxiAdmin.ViewModel
                                     {
                                         if (TaxiPoint != new Point(-1, -1))
                                         {
+                                            StringBuilder color = new StringBuilder();
+                                            for (int i = 2; i < carColor.Length; i++)
+                                            {
+                                                carColor.Append(carColor[i]);
+                                            }
                                             //MapPoint PointTwo = new MapPoint(5571783.59037844, 4933881.61886646, SpatialReferences.WebMercator);
 
                                             var temp = MyMap.ScreenToLocation(TaxiPoint);
                                             var ConvertWGS84 = MetersToLatLon(new Point(temp.X, temp.Y));
 
-                                            var NewDriver = new Driver(NameText, SurnameText, PhoneText, CarModelText, CarVendorText, CarPlateText, CarColor, ConvertWGS84);
+                                            var NewDriver = new Driver(NameText, SurnameText, PhoneText, CarModelText, CarVendorText, CarPlateText, color.ToString(), ConvertWGS84);
 
                                             Drivers.Add(NewDriver);
                                             //Json Serialize

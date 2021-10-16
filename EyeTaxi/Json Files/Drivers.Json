@@ -6,7 +6,7 @@
     "CarModel": "E60",
     "CarVendor": "BMW",
     "CarNumber": "50-CX-810",
-    "CarColor": "#FF8C2727",
+    "CarColor": "#8C2727",
     "Location": {
       "X": 49.879320000000064,
       "Y": 40.41408000000007
@@ -23,7 +23,7 @@
     "CarModel": "2107",
     "CarVendor": "Vaz",
     "CarNumber": "50-CY-340",
-    "CarColor": "#FF210EF7",
+    "CarColor": "#210EF7",
     "Location": {
       "X": 49.847330000000056,
       "Y": 40.379620000000045
@@ -40,7 +40,7 @@
     "CarModel": "Rio",
     "CarVendor": "Kia",
     "CarNumber": "90-KX-560",
-    "CarColor": "#FF35FB03",
+    "CarColor": "#35FB03",
     "Location": {
       "X": 49.796940000000063,
       "Y": 40.39775000000003

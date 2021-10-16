@@ -73,6 +73,7 @@ Text="{Binding PointTwoText,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                     hc:InfoElement.Placeholder="Location B"
                     ShowClearButton="True" />
                 <hc:ProgressButton
+                    Progress="50"
                     Style="{StaticResource ProgressButtonPrimary}"
 IsEnabled="{Binding SearchNavigationButtonIsEnabled,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                     Grid.Row="0"
