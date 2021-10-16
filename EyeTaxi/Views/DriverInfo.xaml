@@ -9,10 +9,12 @@
     xmlns:local="clr-namespace:EyeTaxi.Views"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:system="clr-namespace:System;assembly=mscorlib" xmlns:viewModels="clr-namespace:EyeTaxi.ViewModels"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
+    xmlns:viewModels="clr-namespace:EyeTaxi.ViewModels"
+    Name="Window"
     Title="DriverInfo"
     Width="450"
-    Height="550"
+    Height="630"
     AllowsTransparency="True"
     Background="Transparent"
     FontFamily="Product Sans"
@@ -24,9 +26,7 @@
     TextOptions.TextRenderingMode="Auto"
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
-    mc:Ignorable="d"
-    Name="Window"
-    >
+    mc:Ignorable="d">
     <Window.Resources>
         <Geometry x:Key="Taxi">
             M612,309.593v116.561c0,8.06-6.536,14.596-14.596,14.596H495.439v101.965c0,8.06-6.536,14.596-14.596,14.596H364.282c-8.06,0-14.596-6.536-14.596-14.596V440.75h-87.373v101.965c0,8.06-6.536,14.596-14.596,14.596H131.157c-8.06,0-14.596-6.536-14.596-14.596V440.75H14.596C6.536,440.75,0,434.214,0,426.155V309.593c0-8.06,6.536-14.596,14.596-14.596
@@ -59,7 +59,7 @@
         <b:EventTrigger EventName="Loaded">
             <b:InvokeCommandAction Command="{Binding ViewLoadCommand}" CommandParameter="{Binding ElementName=Window}" />
         </b:EventTrigger>
-       
+
     </b:Interaction.Triggers>
     <Window.DataContext>
         <viewModels:DriverInfoViewModel />
@@ -72,35 +72,33 @@
         materialDesign:ShadowAssist.ShadowEdges="All"
         Background="White"
         UniformCornerRadius="5">
-        <StackPanel
-            >
+        <StackPanel>
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <TextBlock
-
-    PreviewMouseDown="window_MouseDown"
-                Grid.Column="0"
-                Margin="10,0,0,0"
-                VerticalAlignment="Center"
-                FontFamily="Product Sans"
-                FontSize="40"
-                FontWeight="Bold"
-                Text="Trip Details" />
+                    Grid.Column="0"
+                    Margin="10,0,0,0"
+                    VerticalAlignment="Center"
+                    FontFamily="Product Sans"
+                    FontSize="40"
+                    FontWeight="Bold"
+                    PreviewMouseDown="window_MouseDown"
+                    Text="Trip Details" />
                 <Viewbox
-                                Grid.Column="1"
-                                Width="50"
-                                Margin="0,5,10,5"
-                                HorizontalAlignment="Right">
+                    Grid.Column="1"
+                    Width="50"
+                    Margin="0,5,10,5"
+                    HorizontalAlignment="Right">
                     <hc:AnimationPath
-                                    VerticalAlignment="Center"
-                                    Data="{StaticResource Taxi}"
-                                    PathLength="40"
-                                    Stroke="#FFB626"
-                                    StrokeThickness="20"
-                                    Duration="00:00:3" />
+                        VerticalAlignment="Center"
+                        Data="{StaticResource Taxi}"
+                        PathLength="40"
+                        Stroke="#FFB626"
+                        StrokeThickness="20"
+                        Duration="00:00:3" />
                 </Viewbox>
             </Grid>
             <Grid>
@@ -109,39 +107,40 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <TextBox
- Text="{Binding NameText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     Height="60"
                     Margin="10"
+                    hc:InfoElement.Placeholder="Name"
                     hc:InfoElement.Title="Driver Name"
                     Focusable="False"
-                    Foreground="#B8B8B8"
+                    Foreground="DarkSlateGray"
                     IsHitTestVisible="False"
                     IsReadOnly="True"
-                    Style="{StaticResource TextBoxExtend}" />
+                    Style="{StaticResource TextBoxExtend}"
+                    Text="{Binding NameText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <hc:TextBox
                     Grid.Column="1"
- Text="{Binding SurnameText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     Height="60"
                     Margin="10"
                     hc:InfoElement.Placeholder="Surname"
                     hc:InfoElement.Title="Driver Surname"
                     Focusable="False"
-                    Foreground="#B8B8B8"
+                    Foreground="DarkSlateGray"
                     IsHitTestVisible="False"
                     IsReadOnly="True"
-                    Style="{StaticResource TextBoxExtend}" />
+                    Style="{StaticResource TextBoxExtend}"
+                    Text="{Binding SurnameText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             </Grid>
             <hc:TextBox
- Text="{Binding PhoneText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 Height="60"
                 Margin="10"
                 hc:InfoElement.Placeholder="Phone number"
                 hc:InfoElement.Title="Driver's Phone Number"
                 Focusable="False"
-                Foreground="#B8B8B8"
+                Foreground="DarkSlateGray"
                 IsHitTestVisible="False"
                 IsReadOnly="True"
-                Style="{StaticResource TextBoxExtend}" />
+                Style="{StaticResource TextBoxExtend}"
+                Text="{Binding PhoneText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -151,34 +150,34 @@
                 <hc:TextBox
                     Height="60"
                     Margin="10"
- Text="{Binding CarVendorText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     hc:InfoElement.Placeholder="Car vendor"
                     hc:InfoElement.Title="Car Vendor"
                     Focusable="False"
-                    Foreground="#B8B8B8"
+                    Foreground="DarkSlateGray"
                     IsHitTestVisible="False"
                     IsReadOnly="True"
-                    Style="{StaticResource TextBoxExtend}" />
+                    Style="{StaticResource TextBoxExtend}"
+                    Text="{Binding CarVendorText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <hc:TextBox
                     Grid.Column="1"
                     Height="60"
                     Margin="10"
                     hc:InfoElement.Placeholder="Car model"
- Text="{Binding CarModelText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     hc:InfoElement.Title="Car Model"
                     Focusable="False"
-                    Foreground="#B8B8B8"
+                    Foreground="DarkSlateGray"
                     IsHitTestVisible="False"
                     IsReadOnly="True"
-                    Style="{StaticResource TextBoxExtend}" />
+                    Style="{StaticResource TextBoxExtend}"
+                    Text="{Binding CarModelText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <hc:TextBox
                     Grid.Column="2"
                     Height="60"
                     Margin="10"
                     hc:InfoElement.Title="Car Color"
- Background="{Binding CarColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Background="{Binding CarColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     Focusable="False"
-                    Foreground="#B8B8B8"
+                    Foreground="DarkSlateGray"
                     IsHitTestVisible="False"
                     IsReadOnly="True"
                     Style="{StaticResource TextBoxExtend}" />
@@ -187,29 +186,46 @@
                 Height="60"
                 Margin="10"
                 hc:InfoElement.Placeholder="Car plate number"
- Text="{Binding CarPlateText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 hc:InfoElement.Title="Car Plate Number"
                 Focusable="False"
-                Foreground="#B8B8B8"
+                Foreground="DarkSlateGray"
                 IsHitTestVisible="False"
                 IsReadOnly="True"
-                Style="{StaticResource TextBoxExtend}" />
-            <Grid>
+                Style="{StaticResource TextBoxExtend}"
+                Text="{Binding CarPlateText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <Grid Margin="10,10,10,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <Label
+                <Label Content="Driver rating" Foreground="DarkSlateGray" />
+                <materialDesign:RatingBar
+                    x:Name="BasicRatingBar"
+                    Value="4"
+                    Grid.Column="1"
                     HorizontalAlignment="Right"
-                    VerticalAlignment="Center"
+                    VerticalAlignment="Center" IsHitTestVisible="False" Focusable="False" />
+            </Grid>
+            <hc:Divider
+                MaxWidth="320"
+                LineStroke="{DynamicResource DarkPrimaryBrush}"
+                LineStrokeThickness="2"
+                Orientation="Horizontal" />
+            <Grid HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Label
+                    Margin="-5,0,0,0"
+                    HorizontalAlignment="Right"
                     Content="Price"
                     FontSize="24"
                     FontWeight="Bold" />
                 <Label
- Content="{Binding PriceText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     Grid.Column="1"
                     HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
+                    Content="{Binding PriceText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     FontSize="24"
                     FontWeight="Bold" />
             </Grid>
@@ -229,7 +245,6 @@
                     </b:Interaction.Triggers>
                 </Button>
                 <Button
-Cursor="Hand"
                     Grid.Column="1"
                     Margin="10"
                     hc:BackgroundSwitchElement.MouseDownBackground="PaleVioletRed"
@@ -237,6 +252,7 @@ Cursor="Hand"
                     hc:BorderElement.CornerRadius="2"
                     Background="#4760F3"
                     Content="Reject"
+                    Cursor="Hand"
                     Foreground="White"
                     Style="{StaticResource ButtonCustom}">
                     <b:Interaction.Triggers>
