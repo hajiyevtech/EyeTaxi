@@ -22,6 +22,8 @@ namespace EyeTaxi.Models
             CarNumber = carNumber;
             CarColor = carColor;
             Location = location;
+            Rating = 0;
+            CountTravel = 0;
         }
         public Driver()
         {
@@ -37,10 +39,14 @@ namespace EyeTaxi.Models
         public Point Location { get; set; }
 
 
+        private double FindAverage() => TotalRating / CountTravel;
 
         public double Balance { get; set; }
         public double Rating { get; set; }
-        public int CountTravel { get; set; }
+        public int CountTravel { get; set; } = 0;
         public double TotalRating { get; set; }
+
+
+
     }
 }

@@ -523,7 +523,7 @@ namespace EyeTaxi.ViewModels
 
             // Add a data source for the location display.
             // Speed
-            var simulationParameters = new SimulationParameters(DateTimeOffset.Now, 350);
+            var simulationParameters = new SimulationParameters(DateTimeOffset.Now, 40);
             var simulatedDataSource = new SimulatedLocationDataSource();
             simulatedDataSource.SetLocationsWithPolyline(_route.RouteGeometry, simulationParameters);
             MyMapView.LocationDisplay.DataSource = new RouteTrackerDisplayLocationDataSource(simulatedDataSource, _tracker);
@@ -587,8 +587,6 @@ namespace EyeTaxi.ViewModels
                     }
                     SelectedDriver.CountTravel += 1;
 
-                    var TextJson = JsonSerializer.Serialize(Drivers, new JsonSerializerOptions { WriteIndented = true });
-                    File.WriteAllText($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Json Files\Drivers.json", TextJson);
                     DestinationCounter = 0;
                     _tracker.TrackingStatusChanged -= TrackingStatusUpdated;
                     View.Dispatcher.Invoke(()=>
@@ -596,6 +594,14 @@ namespace EyeTaxi.ViewModels
                         MyMapView.GraphicsOverlays[1].Graphics.Clear();
                         InitTaxies();
                         MyMapView.SetViewpointRotationAsync(0);
+
+                        RatingViewModel.SelectedDriver = SelectedDriver;
+                        var temp = new RatingView();
+                        temp.ShowDialog();
+                        temp.Close();
+
+                    var TextJson = JsonSerializer.Serialize(Drivers, new JsonSerializerOptions { WriteIndented = true });
+                    File.WriteAllText($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Json Files\Drivers.json", TextJson);
                     });
                 }
 

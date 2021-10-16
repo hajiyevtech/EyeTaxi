@@ -6,11 +6,12 @@
     xmlns:hc="https://handyorg.github.io/handycontrol"
     xmlns:local="clr-namespace:EyeTaxi.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:b="http://schemas.microsoft.com/xaml/behaviors" xmlns:viewModels="clr-namespace:EyeTaxi.ViewModels"
     Title="RatingView"
     Width="450"
     Height="450"
     AllowsTransparency="True"
+    Name="Window"
     Background="Transparent"
     FontFamily="Product Sans"
     ResizeMode="NoResize"
@@ -21,6 +22,9 @@
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
     mc:Ignorable="d">
+    <Window.DataContext>
+        <viewModels:RatingViewModel />
+    </Window.DataContext>
     <md:Card
         Name="Border"
         Width="350"
@@ -28,7 +32,8 @@
         md:ShadowAssist.ShadowDepth="Depth5"
         md:ShadowAssist.ShadowEdges="All"
         Background="White"
-        UniformCornerRadius="10">
+        UniformCornerRadius="10"
+        >
         <StackPanel>
             <TextBlock
                 Margin="0,20,0,40"
@@ -36,7 +41,9 @@
                 VerticalAlignment="Center"
                 FontSize="48"
                 FontWeight="Bold"
-                Text="Eye Taxi" />
+                Text="Eye Taxi"
+        PreviewMouseLeftButtonDown="window_MouseDown"
+                />
             <TextBlock
                 Margin="0,0,0,5"
                 HorizontalAlignment="Center"
@@ -49,7 +56,8 @@
                 Margin="0,10,0,40"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                RenderTransformOrigin="0.5,0.5">
+                RenderTransformOrigin="0.5,0.5"
+                Value="{Binding RatingValue,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                 <md:RatingBar.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
@@ -85,6 +93,11 @@
                 Margin="0,40,0,0"
                 md:ButtonAssist.CornerRadius="25"
                 md:ShadowAssist.ShadowDepth="Depth0">
+                <b:Interaction.Triggers>
+                    <b:EventTrigger EventName="Click">
+                        <b:InvokeCommandAction Command="{Binding DoneButtonCommand}" CommandParameter="{Binding ElementName=Window}" />
+                    </b:EventTrigger>
+                </b:Interaction.Triggers>
                 <Button.Effect>
                     <DropShadowEffect
                         BlurRadius="49.9"

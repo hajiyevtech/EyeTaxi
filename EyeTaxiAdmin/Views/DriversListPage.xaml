@@ -43,7 +43,7 @@
                         <GridViewColumn Header="Car vendor"  DisplayMemberBinding="{Binding CarVendor}"/>
                         <GridViewColumn Header="Car model" DisplayMemberBinding="{Binding CarModel}"/>
                         <GridViewColumn Header="Car number" DisplayMemberBinding="{Binding CarNumber}"/>
-                        <GridViewColumn Header="Car color" DisplayMemberBinding="{Binding CarColor}"/>
+                        <GridViewColumn Header="Rating"  DisplayMemberBinding="{Binding Rating}"/>
                     </GridView>
                 </ListView.View>
             </ListView>
