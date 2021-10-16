@@ -73,6 +73,7 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <TextBox
+Text="{Binding CommentText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                     x:Name="CommentTextBox"
                     Grid.Column="1"
                     Margin="5,0,0,0"

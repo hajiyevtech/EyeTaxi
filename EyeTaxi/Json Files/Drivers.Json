@@ -42,12 +42,12 @@
     "CarNumber": "90-KX-560",
     "CarColor": "#35FB03",
     "Location": {
-      "X": 49.807500000000061,
-      "Y": 40.403590000000065
+      "X": 49.796940000000063,
+      "Y": 40.39775000000003
     },
-    "Balance": 0,
-    "Rating": 0,
-    "CountTravel": 0,
-    "TotalRating": 0
+    "Balance": 5,
+    "Rating": 4.5,
+    "CountTravel": 2,
+    "TotalRating": 9
   }
 ]

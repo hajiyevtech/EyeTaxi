@@ -89,6 +89,14 @@ namespace EyeTaxi.ViewModels
             set { priceText = value; OnPropertyRaised(); }
         }
 
+        private int _rating;
+
+        public int Rating
+        {
+            get { return _rating; }
+            set { _rating = value; OnPropertyRaised(); }
+        }
+
         static public Driver MyDriver { get; set; }
         public DriverInfoViewModel()
         {
@@ -118,6 +126,8 @@ namespace EyeTaxi.ViewModels
                 CarPlateText = MyDriver.CarNumber;
 
                 CarColor = MyDriver.CarColor;
+
+                Rating = (int)MyDriver.Rating;
 
                 var temp= double.Parse(DriverInfo.RoutePriceText);
                 //1.55636

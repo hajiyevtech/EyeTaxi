@@ -179,6 +179,7 @@ namespace EyeTaxi.ViewModels
             WindowClosingCommand = new RelayCommand(s =>
             {
                 DriverInfoWindow.Close();
+                ratingView.Close();
             });
 
             MapViewCommand = new RelayCommand(s =>
@@ -283,6 +284,7 @@ namespace EyeTaxi.ViewModels
         }
         public Driver SelectedDriver { get; set; }
         public List<Graphic> Taxies { get; set; } = new List<Graphic>();
+        public RatingView ratingView { get; set; }
         public async void Temp()
         {
             try
@@ -523,7 +525,7 @@ namespace EyeTaxi.ViewModels
 
             // Add a data source for the location display.
             // Speed
-            var simulationParameters = new SimulationParameters(DateTimeOffset.Now, 40);
+            var simulationParameters = new SimulationParameters(DateTimeOffset.Now, 300);
             var simulatedDataSource = new SimulatedLocationDataSource();
             simulatedDataSource.SetLocationsWithPolyline(_route.RouteGeometry, simulationParameters);
             MyMapView.LocationDisplay.DataSource = new RouteTrackerDisplayLocationDataSource(simulatedDataSource, _tracker);
@@ -596,11 +598,10 @@ namespace EyeTaxi.ViewModels
                         MyMapView.SetViewpointRotationAsync(0);
 
                         RatingViewModel.SelectedDriver = SelectedDriver;
-                        var temp = new RatingView();
-                        temp.ShowDialog();
-                        temp.Close();
+                        ratingView = new RatingView();
+                        ratingView.ShowDialog();
 
-                    var TextJson = JsonSerializer.Serialize(Drivers, new JsonSerializerOptions { WriteIndented = true });
+                        var TextJson = JsonSerializer.Serialize(Drivers, new JsonSerializerOptions { WriteIndented = true });
                     File.WriteAllText($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Json Files\Drivers.json", TextJson);
                     });
                 }

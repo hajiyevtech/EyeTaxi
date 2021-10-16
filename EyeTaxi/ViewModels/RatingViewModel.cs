@@ -26,6 +26,18 @@ namespace EyeTaxi.ViewModels
             DependencyProperty.Register("RatingValue", typeof(int), typeof(RatingViewModel));
 
 
+
+        public string CommentText
+        {
+            get { return (string)GetValue(CommentTextProperty); }
+            set { SetValue(CommentTextProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for CommentText.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CommentTextProperty =
+            DependencyProperty.Register("CommentText", typeof(string), typeof(RatingViewModel) );
+
+
         public RatingViewModel()
         {
             DoneButtonCommand = new RelayCommand(s =>
@@ -34,8 +46,11 @@ namespace EyeTaxi.ViewModels
                 SelectedDriver.Rating = SelectedDriver.TotalRating / SelectedDriver.CountTravel;
                 if (s is Window window)
                 {
-                    window.Close();
+                    window.Hide();
+                    RatingValue = 0;
+                    CommentText = "";
                 }
+
             });
         }
 

@@ -201,7 +201,7 @@
                 <Label Content="Driver rating" Foreground="DarkSlateGray" />
                 <materialDesign:RatingBar
                     x:Name="BasicRatingBar"
-                    Value="4"
+                    Value="{Binding Rating,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                     Grid.Column="1"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center" IsHitTestVisible="False" Focusable="False" />
