@@ -119,7 +119,24 @@ namespace EyeTaxi.ViewModels
 
                 CarColor = MyDriver.CarColor;
 
-                PriceText = DriverInfo.RoutePriceText;
+                var temp= double.Parse(DriverInfo.RoutePriceText);
+                //1.55636
+                var temp2 = temp - (int)temp;
+                //0.55636
+                temp2 = temp2 * 100;
+                //55.5636
+                temp2= (int)temp2;
+                //55
+                temp2 = temp2 / 100;
+                //0.55
+
+                temp = (int)temp;
+                //1
+
+                double temp3 = temp + temp2;
+                
+                PriceText=temp3.ToString();
+                PriceText += " Manat";
             });
 
         }
