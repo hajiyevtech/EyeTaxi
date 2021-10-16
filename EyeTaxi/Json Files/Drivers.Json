@@ -8,10 +8,10 @@
     "CarNumber": "50-CX-810",
     "CarColor": "#FF8C2727",
     "Location": {
-      "X": 49.847330000000056,
-      "Y": 40.379620000000045
+      "X": 49.879320000000064,
+      "Y": 40.41408000000007
     },
-    "Balance": 6,
+    "Balance": 10,
     "Rating": 0,
     "CountTravel": 0,
     "TotalRating": 0
@@ -25,10 +25,10 @@
     "CarNumber": "50-CY-340",
     "CarColor": "#FF210EF7",
     "Location": {
-      "X": 49.846480000000042,
-      "Y": 40.382460000000037
+      "X": 49.847330000000056,
+      "Y": 40.379620000000045
     },
-    "Balance": 37,
+    "Balance": 69,
     "Rating": 0,
     "CountTravel": 0,
     "TotalRating": 0

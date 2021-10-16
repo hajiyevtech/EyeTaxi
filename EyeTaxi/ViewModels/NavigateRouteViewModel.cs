@@ -557,7 +557,9 @@ namespace EyeTaxi.ViewModels
                     _tracker.TrackingStatusChanged -= TrackingStatusUpdated;
                     View.Dispatcher.Invoke(()=>
                     {
+                        MyMapView.GraphicsOverlays[1].Graphics.Clear();
                         InitTaxies();
+                        MyMapView.SetViewpointRotationAsync(0);
                     });
                 }
 

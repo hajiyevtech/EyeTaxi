@@ -72,7 +72,8 @@ Text="{Binding PointTwoText,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                     HorizontalAlignment="Left"
                     hc:InfoElement.Placeholder="Location B"
                     ShowClearButton="True" />
-                <Button
+                <hc:ProgressButton
+                    Style="{StaticResource ProgressButtonPrimary}"
 IsEnabled="{Binding SearchNavigationButtonIsEnabled,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                     Grid.Row="0"
                     Grid.Column="1"
@@ -85,7 +86,7 @@ IsEnabled="{Binding SearchNavigationButtonIsEnabled,Mode=TwoWay,UpdateSourceTrig
                             <b:InvokeCommandAction Command="{Binding SearchBtnClickCommand}" />
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
-                </Button>
+                </hc:ProgressButton>
                 <Button
                     Grid.Row="1"
                     Grid.Column="1"
