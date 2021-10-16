@@ -490,6 +490,9 @@ namespace EyeTaxi.ViewModels
 
         private void StartNavigation()
         {
+            try
+            {
+
             //InitTaxies(SelectedDriver);
             //MyMapView.GraphicsOverlays[0].Graphics.Remove(new Graphic(
             //            new MapPoint(SelectedDriver.Location.X, SelectedDriver.Location.Y, SpatialReferences.Wgs84),
@@ -530,6 +533,13 @@ namespace EyeTaxi.ViewModels
 
             // Enable the location display (this wil start the location data source).
             MyMapView.LocationDisplay.IsEnabled = true;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"ERROR MESSAGE:{e.Message}\nYou cannot reach to this location", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                TripDetailsButtonIsEnabled = true;
+                SearchNavigationButtonIsEnabled = true;
+            }
         }
         public int DestinationCounter { get; set; } = 0;
         private void TrackingStatusUpdated(object sender, RouteTrackerTrackingStatusChangedEventArgs e)
