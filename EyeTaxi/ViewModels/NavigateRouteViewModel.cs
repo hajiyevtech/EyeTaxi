@@ -137,7 +137,7 @@ namespace EyeTaxi.ViewModels
         public ObservableCollection<Driver> Drivers { get; set; } = JsonSerializer.Deserialize<ObservableCollection<Driver>>(File.ReadAllText($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Json Files\Drivers.json"));
 
         private LocatorTask _geocoder;
-        public async void InitTaxies(Driver DoNotShowThisDriver = null)
+        public  void InitTaxies(Driver DoNotShowThisDriver = null)
         {
 
             Assembly currentAssembly = GetType().GetTypeInfo().Assembly;
@@ -168,7 +168,7 @@ namespace EyeTaxi.ViewModels
         }
         public double Distance { get; set; }
 
-        public async void GpsResponse()
+        public  void GpsResponse()
         {
             PointTwo = new MapPoint(MyMapView.LocationDisplay.Location.Position.X, MyMapView.LocationDisplay.Location.Position.Y, SpatialReferences.Wgs84);
         }
@@ -257,7 +257,10 @@ namespace EyeTaxi.ViewModels
                 PointOneText = address.Attributes["Address"].ToString();
                 CurrentPlaceName = address.Attributes["Address"].ToString();
                 if (string.IsNullOrWhiteSpace(PointOneText))
+                {
                     PointOneText = "   ";
+                    CurrentPlaceName = "   ";
+                }
             }
             catch (Exception e)
             {
@@ -543,7 +546,7 @@ namespace EyeTaxi.ViewModels
 
                 DestinationCounter += 1;
 
-                if (DestinationCounter == 2)
+                if (DestinationCounter >= 2)
                 {
                     SelectedDriver.Location = new Point(PointThree.X, PointThree.Y);
                     if (!string.IsNullOrWhiteSpace(PriceText))
