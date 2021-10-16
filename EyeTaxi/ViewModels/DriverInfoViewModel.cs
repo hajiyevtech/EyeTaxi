@@ -98,13 +98,13 @@ namespace EyeTaxi.ViewModels
             {
                 DriverInfo.IsAccept = true;
                 if (s is Window window)
-                    window.Close();
+                    window.Hide();
             });
             RejectCommand = new RelayCommand(s =>
             {
                 DriverInfo.IsAccept = false;
                 if (s is Window window)
-                    window.Close();
+                    window.Hide();
             });
 
             ViewLoadCommand = new RelayCommand(s =>

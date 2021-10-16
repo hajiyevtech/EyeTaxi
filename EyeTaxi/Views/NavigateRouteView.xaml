@@ -79,7 +79,7 @@ Cursor="Hand"
 IsEnabled="{Binding SearchNavigationButtonIsEnabled,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                     Grid.Row="0"
                     Grid.Column="1"
-                    Width="90"
+                    Width="120"
                     Margin="5"
                     HorizontalAlignment="Left"
                     Content="Search">
@@ -90,15 +90,15 @@ IsEnabled="{Binding SearchNavigationButtonIsEnabled,Mode=TwoWay,UpdateSourceTrig
                     </b:Interaction.Triggers>
                 </hc:ProgressButton>
                 <Button
-Cursor="Hand"
+                    Cursor="Hand"
                     Grid.Row="1"
                     Grid.Column="1"
-                    Width="90"
+                    Width="120"
                     Margin="5"
                     HorizontalAlignment="Left"
-                    Command="{Binding StartNavigationButtonCommand}"
-                    Content="Start"
-                    IsEnabled="{Binding StartNavigationButtonIsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    Command="{Binding TripDetailsButtonIsCommand}"
+                    Content="Trip Details"
+                    IsEnabled="{Binding TripDetailsButtonIsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             </Grid>
             <Grid Grid.Row="1" Background="Transparent">
                 <Grid.ColumnDefinitions>

@@ -74,7 +74,7 @@ namespace EyeTaxi.ViewModels
 
         private bool _StartNavigationButtonIsEnabled;
 
-        public bool StartNavigationButtonIsEnabled
+        public bool TripDetailsButtonIsEnabled
         {
             get { return _StartNavigationButtonIsEnabled; }
             set { _StartNavigationButtonIsEnabled = value; OnPropertyRaised(); }
@@ -131,7 +131,7 @@ namespace EyeTaxi.ViewModels
 
         public RelayCommand MapViewCommand { get; set; }
         public RelayCommand SearchBtnClickCommand { get; set; }
-        public RelayCommand StartNavigationButtonCommand { get; set; }
+        public RelayCommand TripDetailsButtonIsCommand { get; set; }
         public RelayCommand RecenterButtonCommand { get; set; }
         public RelayCommand ViewLoadCommand { get; set; }
         public ObservableCollection<Driver> Drivers { get; set; } = JsonSerializer.Deserialize<ObservableCollection<Driver>>(File.ReadAllText($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Json Files\Drivers.json"));
@@ -172,7 +172,7 @@ namespace EyeTaxi.ViewModels
         {
             PointTwo = new MapPoint(MyMapView.LocationDisplay.Location.Position.X, MyMapView.LocationDisplay.Location.Position.Y, SpatialReferences.Wgs84);
         }
-
+        public DriverInfo DriverInfoWindow { get; set; }
         public NavigateRouteViewModel()
         {
             MapViewCommand = new RelayCommand(s =>
@@ -221,7 +221,15 @@ namespace EyeTaxi.ViewModels
                 MyMapView.LocationDisplay.AutoPanMode = LocationDisplayAutoPanMode.Navigation;
             });
 
-            StartNavigationButtonCommand = new RelayCommand(StartNavigation);
+            TripDetailsButtonIsCommand = new RelayCommand(s =>
+            {
+                DriverInfoWindow.ShowDialog();
+                if (DriverInfo.IsAccept)
+                {
+                    DriverInfo.IsAccept = false;
+                    StartNavigation();
+                }
+            });
 
             ViewLoadCommand = new RelayCommand(s =>
             {
@@ -232,7 +240,7 @@ namespace EyeTaxi.ViewModels
             {
                 if (!(MyMapView is null))
                 {
-                    StartNavigationButtonIsEnabled = false;
+                    TripDetailsButtonIsEnabled = false;
                     PriceText = "";
                     MyMapView.GraphicsOverlays.Clear();
                     Temp(); //calculate 2 difrent location route
@@ -273,7 +281,6 @@ namespace EyeTaxi.ViewModels
         {
             try
             {
-
                 if (!string.IsNullOrWhiteSpace(PointTwoText))
                 {
 
@@ -406,13 +413,11 @@ namespace EyeTaxi.ViewModels
                     await MyMapView.SetViewpointGeometryAsync(_route.RouteGeometry, 100);
 
                     // Enable the navigation button.
-                    StartNavigationButtonIsEnabled = true;
+                    TripDetailsButtonIsEnabled = true;
 
 
-                    //
 
 
-                    var temp5 = (Distance * double.Parse(File.ReadAllText($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Json Files\PricePer-KM.json")));
                     //1.521878123
 
                     //   (0.5*10)=5.21878123
@@ -420,21 +425,18 @@ namespace EyeTaxi.ViewModels
                     //   5/10=0.5
                     //   1+0.5=1.5
 
+                    var temp5 = (Distance * double.Parse(File.ReadAllText($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Json Files\PricePer-KM.json")));
 
                     PriceText = $"{(double)((int)temp5) + ((double)((int)((((temp5 - (int)(temp5)) * 10)) / 10)))} Manat Tuttu baslamaq Ucun Start basin";
                     InitTaxies();
 
                     DriverInfoViewModel.MyDriver = SelectedDriver;
-                    var temp = new DriverInfo(temp5.ToString());
-                    temp.ShowDialog();
+                    DriverInfoWindow = new DriverInfo(temp5.ToString());
+                    DriverInfoWindow.ShowDialog();
                     if (DriverInfo.IsAccept)
                     {
                         DriverInfo.IsAccept = false;
-                        StartNavigation(temp);
-                    }
-                    else
-                    {
-
+                        StartNavigation();
                     }
                 }
 
@@ -480,7 +482,7 @@ namespace EyeTaxi.ViewModels
             }
         }
 
-        private void StartNavigation(object sender)
+        private void StartNavigation()
         {
             //InitTaxies(SelectedDriver);
             //MyMapView.GraphicsOverlays[0].Graphics.Remove(new Graphic(
@@ -492,7 +494,8 @@ namespace EyeTaxi.ViewModels
 
             NavigateRouteView.IsNagivateStart = false;
             // Disable the start navigation button.
-            StartNavigationButtonIsEnabled = false;
+
+            TripDetailsButtonIsEnabled = false;
             SearchNavigationButtonIsEnabled = false;
 
             // Get the directions for the route.
@@ -566,6 +569,7 @@ namespace EyeTaxi.ViewModels
                     {
                         SelectedDriver.Balance += double.Parse(PriceText.Split(' ')[0]);
                     }
+                    SelectedDriver.CountTravel += 1;
 
                     var TextJson = JsonSerializer.Serialize(Drivers, new JsonSerializerOptions { WriteIndented = true });
                     File.WriteAllText($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Json Files\Drivers.json", TextJson);

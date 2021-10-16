@@ -57,7 +57,7 @@
     </Window.Resources>
     <b:Interaction.Triggers>
         <b:EventTrigger EventName="Loaded">
-            <b:InvokeCommandAction Command="{Binding ViewLoadCommand}" CommandParameter="{Binding ElementName=Screen}" />
+            <b:InvokeCommandAction Command="{Binding ViewLoadCommand}" CommandParameter="{Binding ElementName=Window}" />
         </b:EventTrigger>
     </b:Interaction.Triggers>
     <Window.DataContext>
@@ -111,7 +111,6 @@
  Text="{Binding NameText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     Height="60"
                     Margin="10"
-                    hc:InfoElement.Placeholder="Salam"
                     hc:InfoElement.Title="Driver Name"
                     Focusable="False"
                     Foreground="#B8B8B8"
