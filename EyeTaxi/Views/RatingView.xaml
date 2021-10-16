@@ -1,33 +1,101 @@
-﻿<Window x:Class="EyeTaxi.Views.RatingView"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:EyeTaxi.Views"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:hc="https://handyorg.github.io/handycontrol"
-        mc:Ignorable="d"
-        Title="RatingView"
-        Width="450"
-        Height="550"
-        AllowsTransparency="True"
-        Background="Transparent"
-        FontFamily="Product Sans"
-        ResizeMode="NoResize"
-        SizeToContent="WidthAndHeight"
-        TextElement.FontSize="13"
-        TextElement.FontWeight="Regular"
-        TextOptions.TextFormattingMode="Ideal"
-        TextOptions.TextRenderingMode="Auto"
-        WindowStartupLocation="CenterScreen"
-        WindowStyle="None">
-    <materialDesign:Card
+﻿<Window
+    x:Class="EyeTaxi.Views.RatingView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:hc="https://handyorg.github.io/handycontrol"
+    xmlns:local="clr-namespace:EyeTaxi.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+    Title="RatingView"
+    Width="450"
+    Height="450"
+    AllowsTransparency="True"
+    Background="Transparent"
+    FontFamily="Product Sans"
+    ResizeMode="NoResize"
+    TextElement.FontSize="13"
+    TextElement.FontWeight="Regular"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <md:Card
         Name="Border"
         Width="350"
         Margin="40"
-        materialDesign:ShadowAssist.ShadowDepth="Depth5"
-        materialDesign:ShadowAssist.ShadowEdges="All"
+        md:ShadowAssist.ShadowDepth="Depth5"
+        md:ShadowAssist.ShadowEdges="All"
         Background="White"
-        UniformCornerRadius="5">
-    </materialDesign:Card>
+        UniformCornerRadius="10">
+        <StackPanel>
+            <TextBlock
+                Margin="0,20,0,40"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="48"
+                FontWeight="Bold"
+                Text="Eye Taxi" />
+            <TextBlock
+                Margin="0,0,0,5"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="24"
+                FontWeight="Regular"
+                Text="How was your ride?" />
+            <md:RatingBar
+                x:Name="BasicRatingBar"
+                Margin="0,10,0,40"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                RenderTransformOrigin="0.5,0.5">
+                <md:RatingBar.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                        <SkewTransform />
+                        <RotateTransform />
+                        <TranslateTransform />
+                    </TransformGroup>
+                </md:RatingBar.RenderTransform>
+            </md:RatingBar>
+            <Grid Margin="40,0,40,0" VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <TextBox
+                    x:Name="CommentTextBox"
+                    Grid.Column="1"
+                    Margin="5,0,0,0"
+                    VerticalAlignment="Center"
+                    md:HintAssist.Hint="Comment"
+                    md:TextFieldAssist.TrailingIcon="Comment"
+                    FontSize="18" />
+                <md:PackIcon
+                    Grid.Column="0"
+                    VerticalAlignment="Center"
+                    Foreground="{Binding ElementName=CommentTextBox, Path=BorderBrush}"
+                    Kind="Comment" />
+
+            </Grid>
+            <Button
+                Width="200"
+                Height="45"
+                Margin="0,40,0,0"
+                md:ButtonAssist.CornerRadius="25"
+                md:ShadowAssist.ShadowDepth="Depth0">
+                <Button.Effect>
+                    <DropShadowEffect
+                        BlurRadius="49.9"
+                        Direction="270"
+                        Opacity="0.75"
+                        RenderingBias="Quality"
+                        ShadowDepth="5"
+                        Color="#FFA1AFFD" />
+                </Button.Effect>
+                <TextBlock Text="Done" />
+            </Button>
+        </StackPanel>
+    </md:Card>
 </Window>
