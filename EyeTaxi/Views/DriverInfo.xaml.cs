@@ -19,9 +19,17 @@ namespace EyeTaxi.Views
     /// </summary>
     public partial class DriverInfo : Window
     {
-        public DriverInfo()
+       static public string RoutePriceText { get; set; }
+        static public bool IsAccept { get; set; } = false;
+        public DriverInfo(string PriceTexxt)
         {
             InitializeComponent();
+            RoutePriceText = PriceTexxt;
+        }
+        private void window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+                DragMove();
         }
     }
 }

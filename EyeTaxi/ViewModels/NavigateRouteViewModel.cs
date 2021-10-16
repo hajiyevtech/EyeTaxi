@@ -423,6 +423,19 @@ namespace EyeTaxi.ViewModels
 
                     PriceText = $"{(double)((int)temp5) + ((double)((int)((((temp5 - (int)(temp5)) * 10)) / 10)))} Manat Tuttu baslamaq Ucun Start basin";
                     InitTaxies();
+
+                    DriverInfoViewModel.MyDriver = SelectedDriver;
+                    var temp = new DriverInfo(temp5.ToString());
+                    temp.ShowDialog();
+                    if (DriverInfo.IsAccept)
+                    {
+                        DriverInfo.IsAccept = false;
+                        StartNavigation(temp);
+                    }
+                    else
+                    {
+
+                    }
                 }
 
             }

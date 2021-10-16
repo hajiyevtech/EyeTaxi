@@ -278,6 +278,8 @@ HorizontalAlignment="Right"
                                     Duration="00:00:3" />
                             </Viewbox>
                             <Button
+Cursor="Hand"
+
                                 Grid.Column="1"
 VerticalAlignment="Center"
                     Width="25"
@@ -309,6 +311,8 @@ HorizontalAlignment="Right"
                             <Button
                                 Margin="10"
                                 HorizontalAlignment="Left"
+Cursor="Hand"
+
                                 Content="Registration"
                                 Style="{StaticResource MaterialDesignFlatButton}">
                                 <b:Interaction.Triggers>
@@ -319,6 +323,8 @@ HorizontalAlignment="Right"
                             </Button>
                             <Button
                                 Margin="10"
+Cursor="Hand"
+
                                 HorizontalAlignment="Right"
                                 Content="Login">
                                 <b:Interaction.Triggers>
@@ -349,6 +355,8 @@ HorizontalAlignment="Right"
                         </hc:PasswordBox>
                         <Button
                             Grid.Row="4"
+Cursor="Hand"
+
                             Margin="10,20,10,20"
                             Content="Login">
                             <b:Interaction.Triggers>

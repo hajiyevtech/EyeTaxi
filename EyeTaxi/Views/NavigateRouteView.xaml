@@ -73,6 +73,7 @@ Text="{Binding PointTwoText,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                     hc:InfoElement.Placeholder="Location B"
                     ShowClearButton="True" />
                 <hc:ProgressButton
+Cursor="Hand"
                     Progress="50"
                     Style="{StaticResource ProgressButtonPrimary}"
 IsEnabled="{Binding SearchNavigationButtonIsEnabled,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
@@ -89,6 +90,7 @@ IsEnabled="{Binding SearchNavigationButtonIsEnabled,Mode=TwoWay,UpdateSourceTrig
                     </b:Interaction.Triggers>
                 </hc:ProgressButton>
                 <Button
+Cursor="Hand"
                     Grid.Row="1"
                     Grid.Column="1"
                     Width="90"
@@ -132,6 +134,8 @@ IsEnabled="{Binding SearchNavigationButtonIsEnabled,Mode=TwoWay,UpdateSourceTrig
                     </b:Interaction.Triggers>-->
                     <materialDesign:PackIcon
                         Width="35"
+Cursor="Hand"
+
                         Height="35"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
