@@ -131,6 +131,7 @@ namespace EyeTaxi.ViewModels
 
         public RelayCommand MapViewCommand { get; set; }
         public RelayCommand SearchBtnClickCommand { get; set; }
+        public RelayCommand WindowClosingCommand { get; set; }
         public RelayCommand TripDetailsButtonIsCommand { get; set; }
         public RelayCommand RecenterButtonCommand { get; set; }
         public RelayCommand ViewLoadCommand { get; set; }
@@ -175,6 +176,11 @@ namespace EyeTaxi.ViewModels
         public DriverInfo DriverInfoWindow { get; set; }
         public NavigateRouteViewModel()
         {
+            WindowClosingCommand = new RelayCommand(s =>
+            {
+                DriverInfoWindow.Close();
+            });
+
             MapViewCommand = new RelayCommand(s =>
             {
                 MyMapView = s as MapView;

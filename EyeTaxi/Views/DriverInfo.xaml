@@ -26,6 +26,7 @@
     WindowStyle="None"
     mc:Ignorable="d"
     Name="Window"
+    
     >
     <Window.Resources>
         <Geometry x:Key="Taxi">
@@ -59,6 +60,7 @@
         <b:EventTrigger EventName="Loaded">
             <b:InvokeCommandAction Command="{Binding ViewLoadCommand}" CommandParameter="{Binding ElementName=Window}" />
         </b:EventTrigger>
+       
     </b:Interaction.Triggers>
     <Window.DataContext>
         <viewModels:DriverInfoViewModel />
