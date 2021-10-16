@@ -26,7 +26,6 @@
     WindowStyle="None"
     mc:Ignorable="d"
     Name="Window"
-    
     >
     <Window.Resources>
         <Geometry x:Key="Taxi">

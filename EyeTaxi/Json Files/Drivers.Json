@@ -8,12 +8,12 @@
     "CarNumber": "50-CX-810",
     "CarColor": "#8C2727",
     "Location": {
-      "X": 49.879320000000064,
-      "Y": 40.41408000000007
+      "X": 50.052530000000047,
+      "Y": 40.460710000000063
     },
-    "Balance": 0,
+    "Balance": 21,
     "Rating": 0,
-    "CountTravel": 0,
+    "CountTravel": 1,
     "TotalRating": 0
   },
   {

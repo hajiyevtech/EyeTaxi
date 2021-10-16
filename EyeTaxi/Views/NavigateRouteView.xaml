@@ -118,7 +118,7 @@ IsEnabled="{Binding SearchNavigationButtonIsEnabled,Mode=TwoWay,UpdateSourceTrig
                     VerticalAlignment="Stretch"
                     Text="{Binding MessagesTextBlockText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     TextWrapping="Wrap" />
-                <TextBlock TextWrapping="Wrap" Text="{Binding PriceText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="20"></TextBlock>
+                <!--<TextBlock TextWrapping="Wrap" Text="{Binding PriceText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="20"></TextBlock>-->
                 <Button
                     Grid.Column="3"
                     Width="50"
