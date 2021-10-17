@@ -64,6 +64,13 @@
                                 </b:EventTrigger>
                             </b:Interaction.Triggers>
                         </Button>
+                        <Button Content="Statistics">
+                            <b:Interaction.Triggers>
+                                <b:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                    <b:InvokeCommandAction Command="{Binding StatisticsPageButtonClickCommand}"  CommandParameter="{Binding ElementName=AdminPanelViewFrame}" />
+                                </b:EventTrigger>
+                            </b:Interaction.Triggers>
+                        </Button>
                     </ListBox>
                 </DockPanel>
             </materialDesign:DrawerHost.LeftDrawerContent>

@@ -29,6 +29,7 @@ namespace EyeTaxiAdmin.ViewModel
         public RelayCommand AdminPanelViewFrameLoad { get; set; }
         public RelayCommand DriversListPageButtonClickCommand { get; set; }
         public RelayCommand PricePageButtonClickCommand { get; set; }
+        public RelayCommand StatisticsPageButtonClickCommand { get; set; }
      
 
         public RelayCommand CloseButtonClickCommand { get; set; }
@@ -70,6 +71,18 @@ namespace EyeTaxiAdmin.ViewModel
                 var Content = new DriversListPage();
 
                
+
+                frame.Content = Content;
+
+            });
+
+            StatisticsPageButtonClickCommand = new RelayCommand(s =>
+            {
+                var frame = s as Frame;
+
+                var Content = new StatisticsView();
+
+
 
                 frame.Content = Content;
 
