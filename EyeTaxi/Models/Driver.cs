@@ -45,6 +45,8 @@ namespace EyeTaxi.Models
         public int CountTravel { get; set; }
         public double TotalRating { get; set; }
 
+        public double DriverBenefit { get; set; }
+        public double CompanyBenefit{ get; set; }
 
 
     }

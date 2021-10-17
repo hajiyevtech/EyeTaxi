@@ -23,6 +23,11 @@
     mc:Ignorable="d"
     Name="Window"
     MouseDown="window_MouseDown">
+    <b:Interaction.Triggers>
+        <b:EventTrigger EventName="Closing">
+            <b:InvokeCommandAction Command="{Binding ClosingCommand}" CommandParameter="{Binding ElementName=Window}"/>
+        </b:EventTrigger>
+    </b:Interaction.Triggers>
     <Window.DataContext>
         <ViewModel:AdminLoginViewModel/>
     </Window.DataContext>

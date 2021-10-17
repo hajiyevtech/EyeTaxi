@@ -121,6 +121,7 @@
     <Compile Include="ViewModel\DriversAddViewModel.cs" />
     <Compile Include="ViewModel\DriversEditViewModel.cs" />
     <Compile Include="ViewModel\PricePageViewModel.cs" />
+    <Compile Include="ViewModel\StatisticsViewModel.cs" />
     <Compile Include="Views\AdminPanelView.xaml.cs">
       <DependentUpon>AdminPanelView.xaml</DependentUpon>
     </Compile>

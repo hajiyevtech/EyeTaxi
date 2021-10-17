@@ -587,7 +587,24 @@ namespace EyeTaxi.ViewModels
                     SelectedDriver.Location = new Point(PointThree.X, PointThree.Y);
                     if (!string.IsNullOrWhiteSpace(PriceText))
                     {
-                        SelectedDriver.Balance += double.Parse(PriceText.Split(' ')[0]);
+                        var temp = (Distance * double.Parse(File.ReadAllText($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Json Files\PricePer-KM.json")));
+                        //1.55636
+                        var temp2 = temp - (int)temp;
+                        //0.55636
+                        temp2 = temp2 * 100;
+                        //55.5636
+                        temp2 = (int)temp2;
+                        //55
+                        temp2 = temp2 / 100;
+                        //0.55
+
+                        temp = (int)temp;
+                        //1
+                        SelectedDriver.Balance += temp + temp2;
+
+                        SelectedDriver.CompanyBenefit = SelectedDriver.Balance * 15 / 100;
+
+                        SelectedDriver.DriverBenefit = SelectedDriver.Balance - SelectedDriver.CompanyBenefit;
                     }
                     SelectedDriver.CountTravel += 1;
 

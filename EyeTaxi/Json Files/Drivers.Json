@@ -14,7 +14,9 @@
     "Balance": 0,
     "Rating": 0,
     "CountTravel": 0,
-    "TotalRating": 0
+    "TotalRating": 0,
+    "DriverBenefit": 0,
+    "CompanyBenefit": 0
   },
   {
     "Name": "Azer",
@@ -25,13 +27,15 @@
     "CarNumber": "50-CY-340",
     "CarColor": "#210EF7",
     "Location": {
-      "X": 49.847330000000056,
-      "Y": 40.379620000000045
+      "X": 49.807500000000061,
+      "Y": 40.403590000000065
     },
-    "Balance": 0,
-    "Rating": 0,
-    "CountTravel": 0,
-    "TotalRating": 0
+    "Balance": 5.3200000000000003,
+    "Rating": 5,
+    "CountTravel": 1,
+    "TotalRating": 5,
+    "DriverBenefit": 4.5220000000000002,
+    "CompanyBenefit": 0.79800000000000015
   },
   {
     "Name": "Ilham",
@@ -42,12 +46,14 @@
     "CarNumber": "90-KX-560",
     "CarColor": "#35FB03",
     "Location": {
-      "X": 49.812360000000069,
-      "Y": 40.37522000000007
+      "X": 49.879320000000064,
+      "Y": 40.41408000000007
     },
-    "Balance": 11,
-    "Rating": 2.7999999999999998,
-    "CountTravel": 5,
-    "TotalRating": 14
+    "Balance": 0,
+    "Rating": 0,
+    "CountTravel": 0,
+    "TotalRating": 0,
+    "DriverBenefit": 0,
+    "CompanyBenefit": 0
   }
 ]

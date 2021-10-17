@@ -39,10 +39,16 @@ namespace EyeTaxiAdmin.ViewModel
 
         public RelayCommand CloseButtonClickCommand { get; set; }
         public RelayCommand LoadPasswordBox { get; set; }
+        public RelayCommand ClosingCommand { get; set; }
         public RelayCommand LoginBtnClickCommand { get; set; }
 
         public AdminLoginViewModel()
         {
+
+            ClosingCommand = new RelayCommand(s =>
+            {
+                System.Environment.Exit(0);
+            });
 
             CloseButtonClickCommand = new RelayCommand(s =>
             {

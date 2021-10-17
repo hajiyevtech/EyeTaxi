@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:EyeTaxiAdmin.Views"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:ViewModel="clr-namespace:EyeTaxiAdmin.ViewModel"
     Title="StatisticsView"
     MinWidth="650"
     MinHeight="150"
@@ -21,6 +21,9 @@
     TextOptions.TextFormattingMode="Ideal"
     TextOptions.TextRenderingMode="Auto"
     mc:Ignorable="d">
+    <Page.DataContext>
+        <ViewModel:StatisticsViewModel/>
+    </Page.DataContext>
     <materialDesign:Card Background="White" UniformCornerRadius="5">
         <Grid>
             <Grid.RowDefinitions>
@@ -36,9 +39,9 @@
                     <GridView>
                         <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Name" />
                         <GridViewColumn DisplayMemberBinding="{Binding Surname}" Header="Surname" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Phone}" Header="Driver's income" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Phone}" Header="Driver's gross profit" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Phone}" Header="Company's net profit" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Balance}" Header="Driver's income" />
+                        <GridViewColumn DisplayMemberBinding="{Binding DriverBenefit}" Header="Driver's gross profit" />
+                        <GridViewColumn DisplayMemberBinding="{Binding CompanyBenefit}" Header="Company's net profit" />
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -58,8 +61,9 @@
                     <Label
                         HorizontalAlignment="Center"
                         FontSize="18"
-                        FontWeight="Bold">
-                        256.78 AZN
+                        FontWeight="Bold"
+                        Content="{Binding AllIncomeDrivers,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                        >
                     </Label>
                 </StackPanel>
                 <StackPanel
@@ -75,8 +79,9 @@
                     <Label
                         HorizontalAlignment="Center"
                         FontSize="18"
-                        FontWeight="Bold">
-                        256.78 AZN
+                        FontWeight="Bold"
+                        Content="{Binding AllBenefitDriver,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                        >
                     </Label>
                 </StackPanel>
                 <StackPanel
@@ -94,8 +99,9 @@
                     <Label
                         HorizontalAlignment="Center"
                         FontSize="18"
-                        FontWeight="Bold">
-                        256.78 AZN
+                        FontWeight="Bold"
+                        Content="{Binding AllBenefitCompany,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                        >
                     </Label>
                 </StackPanel>
             </Grid>
