@@ -36,8 +36,6 @@
             BorderThickness="0"
             BottomDrawerBackground="{DynamicResource SecondaryHueLightBrush}"
             BottomDrawerCornerRadius="20 20 0 0">
-
-
             <materialDesign:DrawerHost.LeftDrawerContent>
                 <DockPanel MinWidth="250">
                     <!--<ToggleButton 

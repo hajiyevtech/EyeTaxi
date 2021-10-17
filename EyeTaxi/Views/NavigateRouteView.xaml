@@ -40,6 +40,38 @@
                 </b:EventTrigger>
             </b:Interaction.Triggers>
         </esri:MapView>
+        <ToggleButton
+                                x:Name="MenuToggleButton"
+                                Style="{StaticResource MaterialDesignHamburgerToggleButton}"
+                                IsChecked="False"
+                                AutomationProperties.Name="HamburgerToggleButton" Panel.ZIndex="10"/>
+            <materialDesign:DrawerHost  IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}"
+            x:Name="DrawerHost"
+            OpenMode="Standard"
+            BorderBrush="{DynamicResource MaterialDesignDivider}"
+            BorderThickness="0"
+            BottomDrawerBackground="{DynamicResource SecondaryHueLightBrush}"
+            BottomDrawerCornerRadius="20 20 0 0">
+                <materialDesign:DrawerHost.LeftDrawerContent>
+                    <DockPanel MinWidth="250">
+                        <ToggleButton 
+                        Style="{StaticResource MaterialDesignHamburgerToggleButton}" 
+                        DockPanel.Dock="Top"
+                        HorizontalAlignment="Right" 
+                        Margin="10 0 0 0"
+                        IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"/>
+                        <ListBox 
+                        Margin="0 5 0 5"
+                        Style="{StaticResource MaterialDesignNavigationPrimaryListBox}">
+                            <ListBox.Resources>
+                                <Style TargetType="ScrollBar" BasedOn="{StaticResource MaterialDesignScrollBarMinimal}"/>
+                            </ListBox.Resources>
+
+                        </ListBox>
+                    </DockPanel>
+                </materialDesign:DrawerHost.LeftDrawerContent>
+            </materialDesign:DrawerHost>
+
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition />
