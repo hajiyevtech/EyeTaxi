@@ -138,7 +138,7 @@ namespace EyeTaxi.ViewModels
         public ObservableCollection<Driver> Drivers { get; set; } = JsonSerializer.Deserialize<ObservableCollection<Driver>>(File.ReadAllText($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Json Files\Drivers.json"));
 
         private LocatorTask _geocoder;
-        public  void InitTaxies(Driver DoNotShowThisDriver = null)
+        public void InitTaxies(Driver DoNotShowThisDriver = null)
         {
 
             Assembly currentAssembly = GetType().GetTypeInfo().Assembly;
@@ -169,7 +169,7 @@ namespace EyeTaxi.ViewModels
         }
         public double Distance { get; set; }
 
-        public  void GpsResponse()
+        public void GpsResponse()
         {
             PointTwo = new MapPoint(MyMapView.LocationDisplay.Location.Position.X, MyMapView.LocationDisplay.Location.Position.Y, SpatialReferences.Wgs84);
         }
@@ -178,8 +178,10 @@ namespace EyeTaxi.ViewModels
         {
             WindowClosingCommand = new RelayCommand(s =>
             {
-                DriverInfoWindow.Close();
-                ratingView.Close();
+                System.Environment.Exit(0);
+                if (!(DriverInfoWindow is null))
+                    DriverInfoWindow.Close();
+                //ratingView.Close();
             });
 
             MapViewCommand = new RelayCommand(s =>
@@ -279,7 +281,7 @@ namespace EyeTaxi.ViewModels
             }
             catch (Exception e)
             {
-                //MessageBox.Show(e.ToString(), "Error");
+                MessageBox.Show(e.ToString(), "Error");
             }
         }
         public Driver SelectedDriver { get; set; }
@@ -495,46 +497,46 @@ namespace EyeTaxi.ViewModels
             try
             {
 
-            //InitTaxies(SelectedDriver);
-            //MyMapView.GraphicsOverlays[0].Graphics.Remove(new Graphic(
-            //            new MapPoint(SelectedDriver.Location.X, SelectedDriver.Location.Y, SpatialReferences.Wgs84),
-            //            CabSymbol);
+                //InitTaxies(SelectedDriver);
+                //MyMapView.GraphicsOverlays[0].Graphics.Remove(new Graphic(
+                //            new MapPoint(SelectedDriver.Location.X, SelectedDriver.Location.Y, SpatialReferences.Wgs84),
+                //            CabSymbol);
 
-            MyMapView.GraphicsOverlays[1].Graphics.Clear();
-            InitTaxies(SelectedDriver);
+                MyMapView.GraphicsOverlays[1].Graphics.Clear();
+                InitTaxies(SelectedDriver);
 
-            NavigateRouteView.IsNagivateStart = false;
-            // Disable the start navigation button.
+                NavigateRouteView.IsNagivateStart = false;
+                // Disable the start navigation button.
 
-            TripDetailsButtonIsEnabled = false;
-            SearchNavigationButtonIsEnabled = false;
+                TripDetailsButtonIsEnabled = false;
+                SearchNavigationButtonIsEnabled = false;
 
-            // Get the directions for the route.
-            _directionsList = _route.DirectionManeuvers;
+                // Get the directions for the route.
+                _directionsList = _route.DirectionManeuvers;
 
-            // Create a route tracker.
-            _tracker = new RouteTracker(_routeResult, 0, true);
-            _tracker.NewVoiceGuidance += SpeakDirection;
+                // Create a route tracker.
+                _tracker = new RouteTracker(_routeResult, 0, true);
+                _tracker.NewVoiceGuidance += SpeakDirection;
 
-            // Handle route tracking status changes.
-            _tracker.TrackingStatusChanged += TrackingStatusUpdated;
+                // Handle route tracking status changes.
+                _tracker.TrackingStatusChanged += TrackingStatusUpdated;
 
-            // Turn on navigation mode for the map view.
-            MyMapView.LocationDisplay.AutoPanMode = LocationDisplayAutoPanMode.Navigation;
-            MyMapView.LocationDisplay.AutoPanModeChanged += AutoPanModeChanged;
+                // Turn on navigation mode for the map view.
+                MyMapView.LocationDisplay.AutoPanMode = LocationDisplayAutoPanMode.Navigation;
+                MyMapView.LocationDisplay.AutoPanModeChanged += AutoPanModeChanged;
 
-            // Add a data source for the location display.
-            // Speed
-            var simulationParameters = new SimulationParameters(DateTimeOffset.Now, 300);
-            var simulatedDataSource = new SimulatedLocationDataSource();
-            simulatedDataSource.SetLocationsWithPolyline(_route.RouteGeometry, simulationParameters);
-            MyMapView.LocationDisplay.DataSource = new RouteTrackerDisplayLocationDataSource(simulatedDataSource, _tracker);
+                // Add a data source for the location display.
+                // Speed
+                var simulationParameters = new SimulationParameters(DateTimeOffset.Now, 300);
+                var simulatedDataSource = new SimulatedLocationDataSource();
+                simulatedDataSource.SetLocationsWithPolyline(_route.RouteGeometry, simulationParameters);
+                MyMapView.LocationDisplay.DataSource = new RouteTrackerDisplayLocationDataSource(simulatedDataSource, _tracker);
 
-            // Use this instead if you want real location:
-            // MyMapView.LocationDisplay.DataSource = new RouteTrackerLocationDataSource(new SystemLocationDataSource(), _tracker);
+                // Use this instead if you want real location:
+                // MyMapView.LocationDisplay.DataSource = new RouteTrackerLocationDataSource(new SystemLocationDataSource(), _tracker);
 
-            // Enable the location display (this wil start the location data source).
-            MyMapView.LocationDisplay.IsEnabled = true;
+                // Enable the location display (this wil start the location data source).
+                MyMapView.LocationDisplay.IsEnabled = true;
             }
             catch (Exception e)
             {
@@ -591,7 +593,7 @@ namespace EyeTaxi.ViewModels
 
                     DestinationCounter = 0;
                     _tracker.TrackingStatusChanged -= TrackingStatusUpdated;
-                    View.Dispatcher.Invoke(()=>
+                    View.Dispatcher.Invoke(() =>
                     {
                         MyMapView.GraphicsOverlays[1].Graphics.Clear();
                         InitTaxies();
@@ -602,7 +604,7 @@ namespace EyeTaxi.ViewModels
                         ratingView.ShowDialog();
 
                         var TextJson = JsonSerializer.Serialize(Drivers, new JsonSerializerOptions { WriteIndented = true });
-                    File.WriteAllText($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Json Files\Drivers.json", TextJson);
+                        File.WriteAllText($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Json Files\Drivers.json", TextJson);
                     });
                 }
 

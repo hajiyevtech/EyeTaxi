@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace EyeTaxi.ViewModels
 {
-    public class RatingViewModel:Window
+    public class RatingViewModel : Window
     {
         public RelayCommand DoneButtonCommand { get; set; }
         static public Driver SelectedDriver { get; set; }
@@ -35,20 +35,20 @@ namespace EyeTaxi.ViewModels
 
         // Using a DependencyProperty as the backing store for CommentText.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CommentTextProperty =
-            DependencyProperty.Register("CommentText", typeof(string), typeof(RatingViewModel) );
+            DependencyProperty.Register("CommentText", typeof(string), typeof(RatingViewModel));
 
 
         public RatingViewModel()
         {
             DoneButtonCommand = new RelayCommand(s =>
             {
-                SelectedDriver.TotalRating = SelectedDriver.TotalRating + RatingValue;
-                SelectedDriver.Rating = SelectedDriver.TotalRating / SelectedDriver.CountTravel;
                 if (s is Window window)
                 {
-                    window.Hide();
+                    SelectedDriver.TotalRating = SelectedDriver.TotalRating + RatingValue;
+                    SelectedDriver.Rating = SelectedDriver.TotalRating / SelectedDriver.CountTravel;
                     RatingValue = 0;
                     CommentText = "";
+                    window.Close();
                 }
 
             });
