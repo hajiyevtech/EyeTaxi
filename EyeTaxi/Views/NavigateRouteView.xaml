@@ -165,7 +165,7 @@
                         Kind="Target" />
                 </Button>
             </Grid>
-            <Grid MouseEnter="Grid_MouseEnter" Grid.Row="0" Grid.Column="0" Background="Transparent"></Grid>
+            <Grid MouseEnter="Grid_MouseEnter" Grid.Row="0" Grid.Column="0" Background="Transparent" Width="15"></Grid>
         </Grid>
         <materialDesign:DrawerHost
             x:Name="DrawerHost"

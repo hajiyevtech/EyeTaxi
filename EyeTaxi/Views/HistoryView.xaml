@@ -21,7 +21,6 @@
     <materialDesign:Card Background="White" UniformCornerRadius="5">
         <Grid>
             <ListView
-                Name=""
                 Grid.Row="0"
                 ItemsSource="{Binding Drivers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 SelectionMode="Multiple">

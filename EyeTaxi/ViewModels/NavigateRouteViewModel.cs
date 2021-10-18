@@ -216,7 +216,7 @@ namespace EyeTaxi.ViewModels
 
                 MyMapView.LocationDisplay.IsEnabled = true;
 
-                System.Threading.Thread.Sleep(5000);
+                //System.Threading.Thread.Sleep(5000);
                 while (MyMapView.LocationDisplay.Started == false)
                 {
                     TestLoading.Visibility = Visibility.Visible;
