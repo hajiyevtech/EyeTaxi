@@ -46,15 +46,15 @@
     "CarNumber": "90-KX-560",
     "CarColor": "#35FB03",
     "Location": {
-      "X": 49.852310000000045,
-      "Y": 40.400580000000048
+      "X": 49.847330000000056,
+      "Y": 40.379620000000045
     },
-    "Balance": 18.829999999999998,
-    "Rating": 4.666666666666667,
-    "CountTravel": 3,
-    "TotalRating": 14,
-    "DriverBenefit": 16.005499999999998,
-    "CompanyBenefit": 2.8245
+    "Balance": 36.489999999999995,
+    "Rating": 4.5999999999999996,
+    "CountTravel": 5,
+    "TotalRating": 23,
+    "DriverBenefit": 31.016499999999997,
+    "CompanyBenefit": 5.4734999999999987
   },
   {
     "Name": "Edbul",

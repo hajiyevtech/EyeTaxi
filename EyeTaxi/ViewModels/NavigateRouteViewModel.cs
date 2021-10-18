@@ -206,7 +206,7 @@ namespace EyeTaxi.ViewModels
             HistoryButton = new RelayCommand(s =>
             {
                 var temp2 = CurrentUser;
-                var temp=new HistoryView(temp2);
+                var temp = new HistoryView(temp2);
                 temp.ShowDialog();
             });
 
@@ -554,7 +554,7 @@ namespace EyeTaxi.ViewModels
 
                 // Add a data source for the location display.
                 // Speed
-                var simulationParameters = new SimulationParameters(DateTimeOffset.Now, 100);
+                var simulationParameters = new SimulationParameters(DateTimeOffset.Now, 300);
                 var simulatedDataSource = new SimulatedLocationDataSource();
                 simulatedDataSource.SetLocationsWithPolyline(_route.RouteGeometry, simulationParameters);
                 MyMapView.LocationDisplay.DataSource = new RouteTrackerDisplayLocationDataSource(simulatedDataSource, _tracker);
@@ -654,13 +654,13 @@ namespace EyeTaxi.ViewModels
                                 PointOneText = PointOneText,
                                 PointTwoText = PointTwoText
                             });
-
-                            var TextJson = JsonSerializer.Serialize(Users, new JsonSerializerOptions() { WriteIndented = true });
-                            File.WriteAllText($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Json Files\Users.json", TextJson);
-
+                            CurrentUser = item;
                             break;
                         }
                     }
+
+                    var TextJso1n = JsonSerializer.Serialize(Users, new JsonSerializerOptions() { WriteIndented = true });
+                    File.WriteAllText($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Json Files\Users.json", TextJso1n);
 
 
                     View.Dispatcher.Invoke(() =>
