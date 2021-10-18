@@ -156,6 +156,9 @@
     <Compile Include="Views\DriverInfo.xaml.cs">
       <DependentUpon>DriverInfo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\HistoryView.xaml.cs">
+      <DependentUpon>HistoryView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
@@ -205,6 +208,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\DriverInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\HistoryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
