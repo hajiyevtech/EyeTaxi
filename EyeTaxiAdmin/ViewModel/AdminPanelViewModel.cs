@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 
 namespace EyeTaxiAdmin.ViewModel
 {
@@ -30,8 +31,7 @@ namespace EyeTaxiAdmin.ViewModel
         public RelayCommand DriversListPageButtonClickCommand { get; set; }
         public RelayCommand PricePageButtonClickCommand { get; set; }
         public RelayCommand StatisticsPageButtonClickCommand { get; set; }
-     
-
+        public RelayCommand DrawerCloseCommand { get; set; }
         public RelayCommand CloseButtonClickCommand { get; set; }
         public AdminPanelViewModel()
         {
@@ -50,8 +50,8 @@ namespace EyeTaxiAdmin.ViewModel
 
                 var Content = new PricePage();
 
-
                 frame.Content = Content;
+
             });
 
             DriversListPageButtonClickCommand = new RelayCommand(s =>
@@ -82,10 +82,15 @@ namespace EyeTaxiAdmin.ViewModel
 
                 var Content = new StatisticsView();
 
-
-
                 frame.Content = Content;
+                
 
+            });
+
+            DrawerCloseCommand = new RelayCommand(s =>
+            {
+                var temp = s as ToggleButton;
+                temp.IsChecked = false;
             });
 
         }

@@ -25,8 +25,9 @@ namespace EyeTaxiAdmin.Views
         }
         private void window_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.LeftButton== MouseButtonState.Pressed)
-                DragMove();
+            if (e.LeftButton != MouseButtonState.Pressed) return;
+            DragMove();
         }
+
     }
 }
