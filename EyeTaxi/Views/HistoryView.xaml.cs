@@ -20,6 +20,8 @@ namespace EyeTaxi.Views
     /// Interaction logic for HistoryView.xaml
 
     /// </summary>
+    public ob MyProperty { get; set; }
+
     public partial class HistoryView : Window
     {
         public HistoryView()

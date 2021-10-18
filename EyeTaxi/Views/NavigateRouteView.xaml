@@ -190,7 +190,7 @@
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             IsHitTestVisible="False"
-                            Source="/Assets/cab.png" />
+                            Source="/Assets/Avatar.png" />
                         <TextBox
                             Height="60"
                             Margin="10"

@@ -546,7 +546,7 @@ namespace EyeTaxi.ViewModels
 
                 // Add a data source for the location display.
                 // Speed
-                var simulationParameters = new SimulationParameters(DateTimeOffset.Now, 300);
+                var simulationParameters = new SimulationParameters(DateTimeOffset.Now, 100);
                 var simulatedDataSource = new SimulatedLocationDataSource();
                 simulatedDataSource.SetLocationsWithPolyline(_route.RouteGeometry, simulationParameters);
                 MyMapView.LocationDisplay.DataSource = new RouteTrackerDisplayLocationDataSource(simulatedDataSource, _tracker);

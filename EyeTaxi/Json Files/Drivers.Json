@@ -46,14 +46,33 @@
     "CarNumber": "90-KX-560",
     "CarColor": "#35FB03",
     "Location": {
-      "X": 49.879320000000064,
-      "Y": 40.41408000000007
+      "X": 49.852310000000045,
+      "Y": 40.400580000000048
     },
-    "Balance": 10.109999999999999,
-    "Rating": 4.5,
-    "CountTravel": 2,
-    "TotalRating": 9,
-    "DriverBenefit": 8.5934999999999988,
-    "CompanyBenefit": 1.5164999999999997
+    "Balance": 18.829999999999998,
+    "Rating": 4.666666666666667,
+    "CountTravel": 3,
+    "TotalRating": 14,
+    "DriverBenefit": 16.005499999999998,
+    "CompanyBenefit": 2.8245
+  },
+  {
+    "Name": "Edbul",
+    "Surname": "Hajiyev",
+    "Phone": "\u002B994558448831",
+    "CarModel": "F10",
+    "CarVendor": "Bmw",
+    "CarNumber": "90-FF-100",
+    "CarColor": "",
+    "Location": {
+      "X": 49.832137972878151,
+      "Y": 40.376643412606249
+    },
+    "Balance": 0,
+    "Rating": 0,
+    "CountTravel": 0,
+    "TotalRating": 0,
+    "DriverBenefit": 0,
+    "CompanyBenefit": 0
   }
 ]

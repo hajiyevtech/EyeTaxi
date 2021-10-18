@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:EyeTaxi.Views"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:ViewModel="clr-namespace:EyeTaxi.ViewModels"
     Title="HistoryView"
     Width="800"
     Height="450"
@@ -15,9 +15,9 @@
     TextOptions.TextFormattingMode="Ideal"
     TextOptions.TextRenderingMode="Auto"
     mc:Ignorable="d">
-    <!--<Window.DataContext>
-        <ViewModel:StatisticsViewModel/>
-    </Window.DataContext>-->
+    <Window.DataContext>
+        <ViewModel:HistoryViewModel/>
+    </Window.DataContext>
     <materialDesign:Card Background="White" UniformCornerRadius="5">
         <Grid>
             <ListView

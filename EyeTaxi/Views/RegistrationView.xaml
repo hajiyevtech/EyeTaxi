@@ -157,6 +157,7 @@ HorizontalAlignment="Right"
                         <hc:TextBox
                             Grid.Row="2"
                             Margin="10"
+Foreground="Black"
                             hc:InfoElement.Placeholder="Username"
                             Text="{Binding RegUsernameText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         <!--<TextBox
@@ -166,6 +167,7 @@ HorizontalAlignment="Right"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             Text="{Binding RegUsernameText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />-->
                         <hc:PasswordBox
+Foreground="Black"
                             Grid.Row="3"
                             Margin="10"
                             Name="RegPass"
@@ -197,6 +199,7 @@ HorizontalAlignment="Right"
                         <hc:PasswordBox
                             Name="RegConfirmPass"
                             Grid.Row="4"
+Foreground="Black"
                             Margin="10"
                             hc:InfoElement.Placeholder="Confirm password"
                             ShowClearButton="True"
@@ -226,6 +229,7 @@ HorizontalAlignment="Right"
                         </PasswordBox>-->
                         <hc:TextBox
                             Grid.Row="5"
+Foreground="Black"
                             Margin="10"
                             hc:InfoElement.Placeholder="Email"
                             Text="{Binding EmailText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
@@ -338,8 +342,10 @@ Cursor="Hand"
                             Grid.Row="2"
                             Margin="10"
                             hc:InfoElement.Placeholder="Username"
+                            Foreground="Black"
                             Text="{Binding LogUsernameText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         <hc:PasswordBox
+                            Foreground="Black"
                             Name="LogPass"
                             Grid.Row="3"
                             Margin="10"
