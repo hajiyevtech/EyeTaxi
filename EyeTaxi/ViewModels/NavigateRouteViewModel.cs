@@ -131,6 +131,7 @@ namespace EyeTaxi.ViewModels
 
         public RelayCommand MapViewCommand { get; set; }
         public RelayCommand SearchBtnClickCommand { get; set; }
+        public RelayCommand HistoryButton { get; set; }
         public RelayCommand WindowClosingCommand { get; set; }
         public RelayCommand TripDetailsButtonIsCommand { get; set; }
         public RelayCommand RecenterButtonCommand { get; set; }
@@ -200,6 +201,13 @@ namespace EyeTaxi.ViewModels
                 if (!(DriverInfoWindow is null))
                     DriverInfoWindow.Close();
                 //ratingView.Close();
+            });
+
+            HistoryButton = new RelayCommand(s =>
+            {
+                var temp2 = CurrentUser;
+                var temp=new HistoryView(temp2);
+                temp.ShowDialog();
             });
 
             MapViewCommand = new RelayCommand(s =>

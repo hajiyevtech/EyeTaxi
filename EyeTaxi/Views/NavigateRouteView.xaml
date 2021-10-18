@@ -214,6 +214,13 @@
                             IsHitTestVisible="False"
                             IsReadOnly="True"
                             Style="{StaticResource TextBoxExtend}" />
+                        <Button Content="Histories">
+                            <b:Interaction.Triggers>
+                                <b:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                    <b:InvokeCommandAction Command="{Binding HistoryButton}" />
+                                </b:EventTrigger>
+                            </b:Interaction.Triggers>
+                        </Button>
                         <!--  Text="{Binding NameText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  -->
                     </ListBox>
                 </DockPanel>

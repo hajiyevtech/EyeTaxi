@@ -1,4 +1,5 @@
 ﻿using EyeTaxi.Models;
+using EyeTaxi.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -20,13 +21,18 @@ namespace EyeTaxi.Views
     /// Interaction logic for HistoryView.xaml
 
     /// </summary>
-    public ob MyProperty { get; set; }
 
     public partial class HistoryView : Window
     {
-        public HistoryView()
+
+        public ObservableCollection<History> Histories { get; set; }
+        public HistoryView(User temp)
         {
+
             InitializeComponent();
+            DataContext = this;
+            Histories= new ObservableCollection<History>(temp.History);
+
         }
     }
 }

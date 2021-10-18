@@ -15,25 +15,19 @@
     TextOptions.TextFormattingMode="Ideal"
     TextOptions.TextRenderingMode="Auto"
     mc:Ignorable="d">
-    <Window.DataContext>
-        <ViewModel:HistoryViewModel/>
-    </Window.DataContext>
-    <materialDesign:Card Background="White" UniformCornerRadius="5">
         <Grid>
             <ListView
-                Grid.Row="0"
-                ItemsSource="{Binding Drivers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                ItemsSource="{Binding Histories, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 SelectionMode="Multiple">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Name" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Surname}" Header="Surname" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Balance}" Header="Driver's income" />
-                        <GridViewColumn DisplayMemberBinding="{Binding DriverBenefit}" Header="Driver's gross profit" />
-                        <GridViewColumn DisplayMemberBinding="{Binding CompanyBenefit}" Header="Company's net profit" />
+                        <GridViewColumn DisplayMemberBinding="{Binding DriverName}" Header="Driver name" />
+                    <GridViewColumn DisplayMemberBinding="{Binding DriverSurname}" Header="Driver Surname" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Price}" Header="Price " />
+                        <GridViewColumn DisplayMemberBinding="{Binding PointOneText}" Header="Point One" />
+                    <GridViewColumn DisplayMemberBinding="{Binding PointTwoText}" Header="Point Two" />
                     </GridView>
                 </ListView.View>
             </ListView>
         </Grid>
-    </materialDesign:Card>
 </Window>
