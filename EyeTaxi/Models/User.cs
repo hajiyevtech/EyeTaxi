@@ -13,8 +13,9 @@ namespace EyeTaxi.Models
             Username = username;
             Password = password;
             Email = email;
+            History= new List<History>();
         }
-
+        public List<History> History { get; set; }
         public string Username { get; set; }
         public string Password {  get; set; }
         public string Email {  get; set; }

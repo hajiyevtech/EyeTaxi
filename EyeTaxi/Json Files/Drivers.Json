@@ -49,11 +49,11 @@
       "X": 49.879320000000064,
       "Y": 40.41408000000007
     },
-    "Balance": 0,
-    "Rating": 0,
-    "CountTravel": 0,
-    "TotalRating": 0,
-    "DriverBenefit": 0,
-    "CompanyBenefit": 0
+    "Balance": 10.109999999999999,
+    "Rating": 4.5,
+    "CountTravel": 2,
+    "TotalRating": 9,
+    "DriverBenefit": 8.5934999999999988,
+    "CompanyBenefit": 1.5164999999999997
   }
 ]
