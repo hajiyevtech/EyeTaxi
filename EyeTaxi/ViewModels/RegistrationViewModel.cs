@@ -241,6 +241,7 @@ namespace EyeTaxi.ViewModels
                                 HandyControl.Controls.Growl.SuccessGlobal($"Welcome {Users[IndexHolder].Username}");
                                 //Create here New Window Example
                                 CurrentUserLoggedIn = Users[IndexHolder];
+                                NavigateRouteViewModel.CurrentUser=CurrentUserLoggedIn;
                                 var NewWindow = new NavigateRouteView();
 
                                 MyView.Hide();

@@ -200,8 +200,8 @@
                             Foreground="DarkSlateGray"
                             IsHitTestVisible="False"
                             IsReadOnly="True"
+                          Text="{Binding UserUsername, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  
                             Style="{StaticResource TextBoxExtend}" />
-                        <!--  Text="{Binding NameText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  -->
                         <TextBox
                             Height="60"
                             Margin="10"
@@ -209,6 +209,8 @@
                             hc:InfoElement.Title="Email"
                             Focusable="False"
                             Foreground="DarkSlateGray"
+                          Text="{Binding UserEmail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  
+                            
                             IsHitTestVisible="False"
                             IsReadOnly="True"
                             Style="{StaticResource TextBoxExtend}" />

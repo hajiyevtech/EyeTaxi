@@ -1,62 +1,16 @@
 [
   {
-    "Username": "NejatJafarli",
-    "Password": "Parol12345",
-    "Email": "Mega.ceferli@gmail.com"
-  },
-  {
-    "Username": "NejatJafarli1",
-    "Password": "nicat12345",
+    "History": [
+      {
+        "PointOneText": "Ziya B\u00FCnyadov Prospekti",
+        "PointTwoText": "Metro-bakmil",
+        "Price": 4.6500000000000004,
+        "DriverName": "Ilham",
+        "DriverSurname": "Mustafazade"
+      }
+    ],
+    "Username": "Nicat",
+    "Password": "Nicat",
     "Email": "mega.ceferli@gmail.com"
-  },
-  {
-    "Username": "NejatJafarli2",
-    "Password": "nicat12345",
-    "Email": "mega.ceferli@gmail.com"
-  },
-  {
-    "Username": "NejatJafarli3",
-    "Password": "nicat12345",
-    "Email": "mega.ceferli@gmail.com"
-  },
-  {
-    "Username": "NejatJafarli4",
-    "Password": "NejatJafarli3",
-    "Email": "mega.ceferli@gmail.com"
-  },
-  {
-    "Username": "NejatJafarli5",
-    "Password": "NejatJafarli5",
-    "Email": "mega.ceferli@gmail.com"
-  },
-  {
-    "Username": "New User register",
-    "Password": "1234567",
-    "Email": "mega.ceferli@gmail.com"
-  },
-  {
-    "Username": "eqweeqwqwe",
-    "Password": "mestan123",
-    "Email": "meska@gmail.com"
-  },
-  {
-    "Username": "dqwewqeqweqw",
-    "Password": "wwwwww",
-    "Email": "dddd@gmail.com"
-  },
-  {
-    "Username": "filankes",
-    "Password": "filankes",
-    "Email": "filankes@gmail.com"
-  },
-  {
-    "Username": "Login",
-    "Password": "Login",
-    "Email": "Loginn@gmail.com"
-  },
-  {
-    "Username": "MyLogin",
-    "Password": "MyLoginn",
-    "Email": "MyLogin@gmail.com"
   }
 ]
