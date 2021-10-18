@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Esri.ArcGISRuntime.Symbology;
+using EyeTaxi.Models;
 
 namespace EyeTaxi.Views
 {
@@ -25,6 +26,7 @@ namespace EyeTaxi.Views
         public NavigateRouteView()
         {
             InitializeComponent();
+
             var cab = new Uri($@"C:\Users\{Environment.UserName}\source\repos\EyeTaxi\EyeTaxi\Assets\cab.png");
             var converted = cab.AbsoluteUri;
             PictureMarkerSymbol CabSymbol = new PictureMarkerSymbol(new Uri(converted));

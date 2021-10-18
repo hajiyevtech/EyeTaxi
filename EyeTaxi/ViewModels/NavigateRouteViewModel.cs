@@ -174,6 +174,24 @@ namespace EyeTaxi.ViewModels
             PointTwo = new MapPoint(MyMapView.LocationDisplay.Location.Position.X, MyMapView.LocationDisplay.Location.Position.Y, SpatialReferences.Wgs84);
         }
         public DriverInfo DriverInfoWindow { get; set; }
+        public static User CurrentUser { get; set; }
+
+        private string userUsername;
+
+        public string UserUsername
+        {
+            get { return userUsername; }
+            set { userUsername = value; OnPropertyRaised(); }
+        }
+
+        private string userEmail;
+
+        public string UserEmail
+        {
+            get { return userEmail; }
+            set { userEmail = value; OnPropertyRaised(); }
+        }
+
         public NavigateRouteViewModel()
         {
             WindowClosingCommand = new RelayCommand(s =>
@@ -189,6 +207,10 @@ namespace EyeTaxi.ViewModels
                 MyMapView = s as MapView;
                 MyMapView.GraphicsOverlays.Add(new GraphicsOverlay());
                 MyMapView.GraphicsOverlays.Add(new GraphicsOverlay());
+
+
+                UserUsername = CurrentUser.Username;
+                UserEmail = CurrentUser.Email;
 
                 Initialize();
 

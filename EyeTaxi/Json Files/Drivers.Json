@@ -27,15 +27,15 @@
     "CarNumber": "50-CY-340",
     "CarColor": "#210EF7",
     "Location": {
-      "X": 49.807500000000061,
-      "Y": 40.403590000000065
+      "X": 49.796940000000063,
+      "Y": 40.39775000000003
     },
-    "Balance": 5.3200000000000003,
-    "Rating": 5,
-    "CountTravel": 1,
-    "TotalRating": 5,
-    "DriverBenefit": 4.5220000000000002,
-    "CompanyBenefit": 0.79800000000000015
+    "Balance": 11.09,
+    "Rating": 3.5,
+    "CountTravel": 2,
+    "TotalRating": 7,
+    "DriverBenefit": 9.4265000000000008,
+    "CompanyBenefit": 1.6635
   },
   {
     "Name": "Ilham",
