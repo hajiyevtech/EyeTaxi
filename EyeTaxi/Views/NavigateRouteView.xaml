@@ -42,17 +42,22 @@
             </b:Interaction.Triggers>
         </esri:MapView>
         <ToggleButton
+            Visibility="Hidden"
             x:Name="MenuToggleButton"
             Panel.ZIndex="10"
             AutomationProperties.Name="HamburgerToggleButton"
             IsChecked="False"
             Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
         <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
+            <Grid Grid.Row="0" Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -110,7 +115,7 @@
                     Cursor="Hand"
                     IsEnabled="{Binding TripDetailsButtonIsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             </Grid>
-            <Grid Grid.Row="1" Background="Transparent">
+            <Grid Grid.Column="1"  Grid.Row="1" Background="Transparent">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
@@ -160,6 +165,7 @@
                         Kind="Target" />
                 </Button>
             </Grid>
+            <Grid MouseEnter="Grid_MouseEnter" Grid.Row="0" Grid.Column="0" Background="Transparent"></Grid>
         </Grid>
         <materialDesign:DrawerHost
             x:Name="DrawerHost"
@@ -170,7 +176,7 @@
             IsLeftDrawerOpen="{Binding IsChecked, ElementName=MenuToggleButton}"
             OpenMode="Default">
             <materialDesign:DrawerHost.LeftDrawerContent>
-                <DockPanel MinWidth="250">
+                <DockPanel MinWidth="250" MouseLeave="DrawerHost_MouseLeave">
                     <ListBox Margin="0,5,0,5" HorizontalContentAlignment="Center">
                         <ListBox.Resources>
                             <Style BasedOn="{StaticResource MaterialDesignScrollBarMinimal}" TargetType="{x:Type ScrollBar}" />

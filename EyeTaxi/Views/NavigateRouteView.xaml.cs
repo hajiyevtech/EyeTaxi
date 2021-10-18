@@ -59,5 +59,15 @@ namespace EyeTaxi.Views
                 NavigateRouteViewModel.CommandCreatedObject.Initialize();
             }
         }
+
+        private void Grid_MouseEnter(object sender, MouseEventArgs e)
+        {
+            MenuToggleButton.IsChecked = true;
+        }
+
+        private void DrawerHost_MouseLeave(object sender, MouseEventArgs e)
+        {
+            MenuToggleButton.IsChecked = false;
+        }
     }
 }
